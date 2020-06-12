@@ -1,12 +1,16 @@
 package com.company.user;
 
+import com.company.archives.JsonFunctions;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class User {
+public class User extends JsonFunctions {
 
 
     private String name;
@@ -88,21 +92,19 @@ public class User {
     }
 
 
-    public List<User> readFile(){
-      //  File myfile = new File(path);
-        return null;
-    }
+
 
     public boolean writeFile(User element){
-        File file = new File("archives\\Users.json");
+        File file = new File("archives\\"+"Users.json");
+        ObjectMapper mapper = new ObjectMapper();
 
         try{
             if (file.createNewFile()){ //Crea el archivo si no existe
                 ArrayList<User> usersRead = new ArrayList<>();
                 usersRead.add(element);
+                mapper.writeValue(file,usersRead);
             }else{
-                ArrayList<User> usersRead = new ArrayList<User>(readFile()); //creo usersRead con los usuarios existentes en el archivo
-                usersRead.add(element);
+              //
             }
             return true;
         } catch (IOException e) {
@@ -112,15 +114,16 @@ public class User {
     }
 
     public boolean writeArrayToFile(List<User> elements) {
-        File file = new File("archives\\Users.json");
+        File file = new File("archives\\"+"Users.json");
+        ObjectMapper mapper = new ObjectMapper();
 
         try {
             if(file.createNewFile()){//Crea el archivo si no existe
                 ArrayList<User> usersArrayList = new ArrayList<>();
                 usersArrayList.addAll(elements);
+                mapper.writeValue(file,usersArrayList);
             }else{
-                ArrayList<User> readedValues = new ArrayList<User>(readFile());
-                readedValues.addAll(elements);
+            //
             }
             return true;
         } catch (IOException e) {
