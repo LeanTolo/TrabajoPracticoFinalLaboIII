@@ -1,6 +1,6 @@
 package com.company.airplane;
 
-public abstract class Airplanes {
+public abstract class Airplane {
 
 
     private double fuelCapacity;
@@ -10,13 +10,17 @@ public abstract class Airplanes {
     private MotorType motorType;
     private int fixedFee;
 
-    protected Airplanes(double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType, int fixedFee) {
+    protected Airplane(double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType, int fixedFee) {
         this.fuelCapacity = fuelCapacity;
         this.costPerKm = costPerKm;
         this.maxPassengers = maxPassengers;
         this.maxVelocity = maxVelocity;
         this.motorType = motorType;
         this.fixedFee = fixedFee;
+    }
+
+    public double getCostPerKm() {
+        return costPerKm;
     }
 
     @Override
