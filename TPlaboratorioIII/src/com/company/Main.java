@@ -16,6 +16,6 @@ public class Main {
         testUSUARIO2.addUserToFile(testUSUARIO2);
         testUSUARIO3.addUserToFile(testUSUARIO3);
 
-       // testUSUARIO3.readFile();
+        testUSUARIO3.readFile();
     }
 }
