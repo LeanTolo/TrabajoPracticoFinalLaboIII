@@ -10,7 +10,7 @@ public class Main {
 
         User testUSUARIO = new User("Lean", "Tolo", 111111, 22, "123456");
 
-        testUSUARIO.writeFile(testUSUARIO);
+       // testUSUARIO.writeFile(testUSUARIO);
 
 
     }
