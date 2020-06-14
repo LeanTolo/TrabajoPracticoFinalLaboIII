@@ -99,8 +99,10 @@ public class User extends JsonFunctions {
         ObjectMapper mapper = new ObjectMapper();
         if (file.exists()) {
             try {
+                ArrayList<User> userArrayList = new ArrayList<>();
+                userArrayList.add(element);
+                mapper.writeValue(file,userArrayList);
                 System.out.println("--- Imprimiento en archivo ---\n");
-                mapper.writeValue(file, element);
             } catch (IOException e) {
                 e.printStackTrace();
             }
