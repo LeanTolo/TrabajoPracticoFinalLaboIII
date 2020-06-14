@@ -5,15 +5,22 @@ import com.company.airplane.type.Silver;
 import com.company.user.User;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jdk.internal.org.objectweb.asm.TypeReference;
+//import jdk.internal.org.objectweb.asm.TypeReference;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
+
+
+
+
+
+
 public class JsonFunctions<G> {
     private Class<G> gClass;
+
 
     public List<G> readFile(Class className) throws ClassNotFoundException {
         String fileName = "archives\\";

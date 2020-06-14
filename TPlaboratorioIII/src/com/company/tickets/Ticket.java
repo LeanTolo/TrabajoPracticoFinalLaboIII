@@ -54,7 +54,6 @@ public class Ticket {
     }
 
     private void setPrice() {
-        this.price =
-        ;
+        this.price = 12;
     }
 }

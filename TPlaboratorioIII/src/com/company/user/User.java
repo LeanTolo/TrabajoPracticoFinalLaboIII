@@ -94,22 +94,36 @@ public class User extends JsonFunctions {
 
 
 
-    public boolean writeFile(User element){
-        File file = new File("archives\\"+"Users.json");
+    public void writeFile(User element)      {
+        //String path = "C:\\Users\\Lnieves\\IdeaProjects\\TrabajoPracticoFinalLaboIII\\TPlaboratorioIII\\archives\\users.txt";
+        File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
 
-        try{
-            if (file.createNewFile()){ //Crea el archivo si no existe
-                ArrayList<User> usersRead = new ArrayList<>();
-                usersRead.add(element);
-                mapper.writeValue(file,usersRead);
-            }else{
-              //
+        if (file.exists()) {
+            try {
+                System.out.println("--- Imprimiento en archivo ---\n" + element);
+                mapper.writeValue(file, element);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+        }else{
+            System.out.println("El archivo no existe, crealo papu");
+        }
+    }
+
+    public void readFile ()  {
+        File file = new File("Users.json");
+        ObjectMapper mapper = new ObjectMapper();
+        if(file.exists()) {
+            System.out.println("--- Contenido del Archivo ---");
+            try {
+                User usuario = mapper.readValue(file, User.class);
+                System.out.println("" + usuario.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            System.out.println("Archivo vacio");
         }
     }
 
@@ -118,6 +132,7 @@ public class User extends JsonFunctions {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
+
             if(file.createNewFile()){//Crea el archivo si no existe
                 ArrayList<User> usersArrayList = new ArrayList<>();
                 usersArrayList.addAll(elements);

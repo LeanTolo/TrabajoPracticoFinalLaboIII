@@ -12,6 +12,6 @@ public class Main {
 
         testUSUARIO.writeFile(testUSUARIO);
 
-
+        testUSUARIO.readFile();
     }
 }
