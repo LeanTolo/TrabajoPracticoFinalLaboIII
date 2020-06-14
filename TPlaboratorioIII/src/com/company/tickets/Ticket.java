@@ -18,7 +18,6 @@ public class Ticket {
     private Airplane airplane;
 
 
-
     public Ticket(LocalDate date, City origin, City destination, int passengers, Airplane airplane) {
         this.date = date;
         this.origin = origin;
@@ -28,29 +27,28 @@ public class Ticket {
         this.airplane = airplane;
     }
 
-    private void setDistance(){
+    private void setDistance() {
         HashSet<City> originDestination = null;
         originDestination.add(origin);
         originDestination.add(destination);
-        if(originDestination.contains(City.BUENOSAIRES)){
-            if(originDestination.contains(City.MONTEVIDEO)) {
+        if (originDestination.contains(City.BUENOSAIRES)) {
+            if (originDestination.contains(City.MONTEVIDEO)) {
                 distance = 950;
-            }else if(originDestination.contains(City.CORDOBA)){
+            } else if (originDestination.contains(City.CORDOBA)) {
                 distance = 695;
-            }else{
+            } else {
                 distance = 1400;
             }
-        }else if(originDestination.contains(City.MONTEVIDEO)){
-            if(originDestination.contains(City.CORDOBA)){
+        } else if (originDestination.contains(City.MONTEVIDEO)) {
+            if (originDestination.contains(City.CORDOBA)) {
                 distance = 1190;
-            }else{
+            } else {
                 distance = 2100;
             }
-        }else{
+        } else {
             distance = 1050;
         }
-
-
     }
+}
 
 
