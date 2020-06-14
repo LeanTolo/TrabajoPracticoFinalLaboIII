@@ -19,6 +19,7 @@ import java.util.List;
 
 
 public class JsonFunctions<G> {
+    /*
     private Class<G> gClass;
 
 
@@ -59,6 +60,6 @@ public class JsonFunctions<G> {
             return null;
     }
 
-
+*/
 
 }

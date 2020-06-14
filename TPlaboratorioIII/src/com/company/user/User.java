@@ -1,7 +1,9 @@
 package com.company.user;
 
 import com.company.archives.JsonFunctions;
+import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -97,15 +99,19 @@ public class User extends JsonFunctions {
     public void addUserToFile(User element){
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
-        if (file.exists()) {
-            try {
+        try {
+            if (file.createNewFile()) {
+                ArrayList<User> userArrayList = new ArrayList<>();
+                userArrayList.add(element);
+                mapper.writeValue(file, userArrayList);
                 System.out.println("--- Imprimiento en archivo ---\n");
-                mapper.writeValue(file, element);
-            } catch (IOException e) {
-                e.printStackTrace();
+            } else {
+                //ArrayList<User> userArrayList = new ArrayList<User>(readFile());
+               // userArrayList.add(element);
+                //mapper.writeValue(file, userArrayList);
             }
-        }else{
-            System.out.println("El archivo no existe");
+        }catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -115,8 +121,8 @@ public class User extends JsonFunctions {
         if(file.exists()) {
             System.out.println("--- Contenido del Archivo ---");
             try {
-                User usuario = mapper.readValue(file, User.class);
-                System.out.println("Username: " + usuario.getName()+usuario.getSurName()+"\nPassword: "+usuario.getPassword());
+                User user = mapper.readValue(file, User.class);
+                System.out.println("Username: " + user.getName()+user.getSurName()+"\nPassword: "+user.getPassword());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -124,7 +130,7 @@ public class User extends JsonFunctions {
             System.out.println("Archivo vacio");
         }
     }
-
+/*
     public boolean writeArrayToFile(List<User> elements) {
         File file = new File("archives\\"+"Users.json");
         ObjectMapper mapper = new ObjectMapper();
@@ -143,5 +149,5 @@ public class User extends JsonFunctions {
             e.printStackTrace();
             return false;
         }
-    }
+    }*/
 }

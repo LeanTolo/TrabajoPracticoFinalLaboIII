@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"name":"Pedro","surName":"Vago","dni":333333,"age":22,"id":"3e1e8805-9aa3-4e8c-bd5f-0193714a4279","password":"123789"}
+=======
+[{"name":"Pedro","surName":"Vago","dni":333333,"age":22,"id":"c5548ccb-c9df-41ba-b278-a48476f7da20","password":"123789"}]
+>>>>>>> 1ba44b85eae0ee90cb0ced29f748b35e49d2509f
