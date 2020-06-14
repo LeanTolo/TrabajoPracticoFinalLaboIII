@@ -94,20 +94,18 @@ public class User extends JsonFunctions {
 
 
 
-    public void writeFile(User element)      {
-        //String path = "C:\\Users\\Lnieves\\IdeaProjects\\TrabajoPracticoFinalLaboIII\\TPlaboratorioIII\\archives\\users.txt";
+    public void addUserToFile(User element){
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
-
         if (file.exists()) {
             try {
-                System.out.println("--- Imprimiento en archivo ---\n" + element);
+                System.out.println("--- Imprimiento en archivo ---\n");
                 mapper.writeValue(file, element);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }else{
-            System.out.println("El archivo no existe, crealo papu");
+            System.out.println("El archivo no existe");
         }
     }
 
@@ -118,7 +116,7 @@ public class User extends JsonFunctions {
             System.out.println("--- Contenido del Archivo ---");
             try {
                 User usuario = mapper.readValue(file, User.class);
-                System.out.println("" + usuario.toString());
+                System.out.println("Username: " + usuario.getName()+usuario.getSurName()+"\nPassword: "+usuario.getPassword());
             } catch (IOException e) {
                 e.printStackTrace();
             }
