@@ -7,6 +7,7 @@ import com.company.tickets.Ticket;
 import com.company.user.User;
 
 import java.time.LocalDate;
+import java.util.TreeSet;
 
 public class Main {
 
@@ -27,7 +28,20 @@ public class Main {
          */
         Gold avion = new Gold(15,15,5,450, MotorType.HELICE);
         Ticket ticket = new Ticket(LocalDate.now(), City.MONTEVIDEO,City.SANTIAGO,2,avion);
-        System.out.println(ticket.getDistance());
-        System.out.println(ticket.getPrice());
+        Ticket ticket2 = new Ticket(LocalDate.of(2020,12,6), City.MONTEVIDEO,City.SANTIAGO,2,avion);
+        Ticket ticket3 = new Ticket(LocalDate.of(2020,12,3), City.MONTEVIDEO,City.SANTIAGO,2,avion);
+        Ticket ticket4 = new Ticket(LocalDate.of(2020,6,7), City.MONTEVIDEO,City.SANTIAGO,2,avion);
+        Ticket ticket5 = new Ticket(LocalDate.of(2019,1,1), City.MONTEVIDEO,City.SANTIAGO,2,avion);
+        Request request = new Request();
+        TreeSet<Ticket> treeSet = new TreeSet<>();
+        treeSet.add(ticket);
+        treeSet.add(ticket2);
+        treeSet.add(ticket3);
+        treeSet.add(ticket4);
+        treeSet.add(ticket5);
+        treeSet.forEach(ticket1 -> System.out.println(ticket1.toString()));
+
+
+
     }
 }

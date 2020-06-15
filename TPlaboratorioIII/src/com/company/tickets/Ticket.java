@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Ticket {
+public class Ticket implements Comparable{
     private LocalDate date;
     private City origin;
     private City destination;
@@ -18,6 +18,7 @@ public class Ticket {
     private Airplane airplane;
 
 
+    public Ticket(){};
     public Ticket(LocalDate date, City origin, City destination, int passengers, Airplane airplane) {
         this.date = date;
         this.origin = origin;
@@ -65,6 +66,29 @@ public class Ticket {
 
     public int getDistance() {
         return distance;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        int rta = this.date.compareTo(((Ticket) o).date);
+        return rta;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "date=" + date +
+                ", origin=" + origin +
+                ", destination=" + destination +
+                ", passengers=" + passengers +
+                ", price=" + price +
+                ", distance=" + distance +
+                ", airplane=" + airplane +
+                '}';
     }
 }
 

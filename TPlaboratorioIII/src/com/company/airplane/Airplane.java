@@ -1,6 +1,8 @@
 package com.company.airplane;
 
-public abstract class Airplane {
+import com.company.tickets.Ticket;
+
+public abstract class Airplane{
 
 
     private double fuelCapacity;
