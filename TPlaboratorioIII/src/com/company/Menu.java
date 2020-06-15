@@ -68,8 +68,7 @@ public class Menu {
         newUser.setAge(data.nextInt());
         System.out.println("\nInsert Password: \n");
         newUser.setPassword(data.nextLine());
-        //add newUser
-
+        newUser.addToFile(newUser);
         printMenuOptions();
     }
 
