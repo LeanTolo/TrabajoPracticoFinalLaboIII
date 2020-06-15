@@ -31,7 +31,6 @@ public class Main {
 
 
 
-        testUSUARIO3.showFile();
 
 /*
         Gold avion = new Gold(15,15,5,450, MotorType.HELICE);
