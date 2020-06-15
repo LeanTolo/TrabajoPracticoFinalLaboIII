@@ -1,18 +1,16 @@
 package com.company.user;
 
-import com.company.archives.JsonFunctions;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.company.IjsonManagement.IjsonManagement;
+import com.company.airplane.Bronze;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javax.jws.soap.SOAPBinding;
-import javax.xml.stream.Location;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-public class User extends JsonFunctions {
+public class User implements IjsonManagement<User> {
 
 
     private String name;
@@ -96,7 +94,29 @@ public class User extends JsonFunctions {
 
 
 
-    public void addUserToFile(User element){
+
+    @Override
+    public List<User> readFile () throws IOException {
+
+        List<User> usersFromJson = null;
+        File file = new File("Users.json");
+        ObjectMapper mapper = new ObjectMapper();
+
+        if(file.exists()) {
+            try {
+                User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
+                usersFromJson = Arrays.asList(mapper.readValue(file, User[].class)); // convert JSON array to List of objects
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            System.out.println("File is Empty");
+        }
+        return usersFromJson;
+    }
+
+    @Override
+    public void addToFile(User element) {
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -115,25 +135,7 @@ public class User extends JsonFunctions {
         }
     }
 
-    public List<User> readFile () throws IOException {
-
-        List<User> usersFromJson = null;
-        File file = new File("Users.json");
-        ObjectMapper mapper = new ObjectMapper();
-
-        if(file.exists()) {
-            try {
-                User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
-                usersFromJson = Arrays.asList(mapper.readValue(file, User[].class)); // convert JSON array to List of objects
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }else{
-            System.out.println("Archivo vacio");
-        }
-        return usersFromJson;
-    }
-
+    @Override
     public void showFile () throws IOException {
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
@@ -154,24 +156,4 @@ public class User extends JsonFunctions {
         }
     }
 
-/*
-    public boolean writeArrayToFile(List<User> elements) {
-        File file = new File("archives\\"+"Users.json");
-        ObjectMapper mapper = new ObjectMapper();
-
-        try {
-
-            if(file.createNewFile()){//Crea el archivo si no existe
-                ArrayList<User> usersArrayList = new ArrayList<>();
-                usersArrayList.addAll(elements);
-                mapper.writeValue(file,usersArrayList);
-            }else{
-            //
-            }
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }*/
 }

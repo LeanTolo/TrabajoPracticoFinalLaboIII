@@ -1,12 +1,14 @@
 package com.company.tickets;
 
 import com.company.airplane.Airplane;
+import com.company.airplane.Gold;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Ticket implements Comparable{
     private LocalDate date;
@@ -90,6 +92,66 @@ public class Ticket implements Comparable{
                 ", airplane=" + airplane +
                 '}';
     }
+
+    public void addToFile(Ticket element){
+        File file = new File("Ticket.json");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            if (file.createNewFile()) {
+                ArrayList<Ticket> ticketsArrayList = new ArrayList<>();
+                ticketsArrayList.add(element);
+                mapper.writeValue(file, ticketsArrayList);
+                System.out.println("--- Imprimiento en archivo ---\n");
+            } else {
+                ArrayList<Ticket> ticketsArrayList = new ArrayList<Ticket>(readFile());
+                ticketsArrayList.add(element);
+                mapper.writeValue(file, ticketsArrayList);
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Ticket> readFile () throws IOException {
+
+        List<Ticket> ticketsFromJson = null;
+        File file = new File("Ticket.json");
+        ObjectMapper mapper = new ObjectMapper();
+
+        if(file.exists()) {
+            try {
+                Ticket[] ticketsArray = mapper.readValue(file,Ticket[].class); // convert JSON array to Array objects
+                ticketsFromJson = Arrays.asList(mapper.readValue(file, Ticket[].class)); // convert JSON array to List of objects
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            System.out.println("File is Empty");
+        }
+        return ticketsFromJson;
+    }
+
+    public void showFile () throws IOException {
+        File file = new File("Ticket.json");
+        ObjectMapper mapper = new ObjectMapper();
+
+        if(file.exists()) {
+            System.out.println("--- Contenido del Archivo ---");
+            try {
+
+                Ticket[] ticketsArray = mapper.readValue(file,Ticket[].class); // convert JSON array to Array objects
+                List<Ticket> tickets = Arrays.asList(mapper.readValue(file, Ticket[].class)); // convert JSON array to List of objects
+                tickets.stream().forEach(x -> System.out.println(x)); // show lists of objects
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            System.out.println("Archivo vacio");
+        }
+    }
+
+
 }
 
 
