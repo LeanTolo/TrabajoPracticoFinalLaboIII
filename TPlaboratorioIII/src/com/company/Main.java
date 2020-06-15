@@ -1,8 +1,14 @@
 package com.company;
 
+import com.company.airplane.Gold;
+import com.company.airplane.MotorType;
+import com.company.tickets.City;
+import com.company.tickets.Ticket;
 import com.company.user.User;
 
 import java.io.IOException;
+import java.time.LocalDate;
+
 
 public class Main {
 
@@ -19,5 +25,11 @@ public class Main {
         //testUSUARIO3.addUserToFile(testUSUARIO3);
 
         testUSUARIO3.readFile();
+
+
+        Gold avion = new Gold(15,15,5,450, MotorType.HELICE);
+        Ticket ticket = new Ticket(LocalDate.now(), City.MONTEVIDEO,City.SANTIAGO,2,avion);
+        System.out.println(ticket.getDistance());
+        System.out.println(ticket.getPrice());
     }
 }

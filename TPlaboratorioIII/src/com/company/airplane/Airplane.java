@@ -23,6 +23,10 @@ public abstract class Airplane {
         return costPerKm;
     }
 
+    public int getFixedFee() {
+        return fixedFee;
+    }
+
     @Override
     public String toString() {
         return "Airplane[fuelcapacity="+fuelCapacity+" costPerKm="+costPerKm+" maxPassengers="+maxPassengers+

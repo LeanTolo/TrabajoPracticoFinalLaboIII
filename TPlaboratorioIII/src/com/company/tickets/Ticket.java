@@ -23,12 +23,13 @@ public class Ticket {
         this.origin = origin;
         this.destination = destination;
         this.passengers = passengers;
-        //this.price = price;
         this.airplane = airplane;
+        setDistance();
+        setPrice();
     }
 
     private void setDistance() {
-        HashSet<City> originDestination = null;
+        HashSet<City> originDestination = new HashSet<>();
         originDestination.add(origin);
         originDestination.add(destination);
         if (originDestination.contains(City.BUENOSAIRES)) {
@@ -48,6 +49,22 @@ public class Ticket {
         } else {
             distance = 1050;
         }
+    }
+
+    //(Cantidad de kms * Costo del km) + (cantidad de pasajeros * 3500) + (Tarifa del tipo
+    //
+    //de avión)
+
+    private void setPrice() {
+        this.price = distance*airplane.getCostPerKm()+passengers*3500+airplane.getFixedFee();
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getDistance() {
+        return distance;
     }
 }
 
