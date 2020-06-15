@@ -1,17 +1,8 @@
 package com.company;
 
-import com.company.airplane.Gold;
-import com.company.airplane.MotorType;
-import com.company.archives.JsonFunctions;
-import com.company.tickets.City;
-import com.company.tickets.Ticket;
 import com.company.user.User;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
 
 
 public class Main {
@@ -24,14 +15,14 @@ public class Main {
         User testUSUARIO2 = new User("Lau", "Nieves", 222222, 22, "789456");
         User testUSUARIO3 = new User("Pedro", "Vago", 333333, 22, "123789");
 
-        //testUSUARIO.addUserToFile(testUSUARIO);
-       // testUSUARIO2.addUserToFile(testUSUARIO2);
-      //  testUSUARIO3.addUserToFile(testUSUARIO3);
+        //testUSUARIO.addToFile(testUSUARIO);
+       // testUSUARIO2.addToFile(testUSUARIO2);
+      //  testUSUARIO3.addToFile(testUSUARIO3);
 
 
 
 
-        testUSUARIO3.showFile();
+        //testUSUARIO3.showFile();
 
 /*
         Gold avion = new Gold(15,15,5,450, MotorType.HELICE);
