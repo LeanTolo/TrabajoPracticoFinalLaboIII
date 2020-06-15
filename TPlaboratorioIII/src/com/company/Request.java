@@ -38,40 +38,10 @@ public class Request {
         return rta;
     } //3. El usuario debe indicar la cantidad de acompañantes que tendrá en el vuelo.
 
-    public City chooseOrigin(){ //2. Seleccionar el origen de su vuelo y posteriormente el destino.
-        int op;
-        int i = 1;
-        City city = null;
-        for (City value: EnumSet.allOf(City.class)) {
-            System.out.println(i+":"+value);
-            i++;
-        }
-        do{
-            op = enterNumber();
-            switch (op) {
-                case 1:
-                    city = City.BUENOSAIRES;
-                    break;
-                case 2:
-                    city = City.MONTEVIDEO;
-                    break;
-                case 3:
-                    city = City.CORDOBA;
-                    break;
-                case 4:
-                    city = City.SANTIAGO;
-                    break;
-                default:
-                    System.out.println("Ciudad no existente");
-                    break;
-            }
-        }while(op < 1 || op > 4) ;
-        return city;
-    }  //No es el codigo mas lindo que hice en mi vida
     public City chooseDestination(City origin){
         int op;
         int i = 1;
-        City city = null;
+        City city;
         EnumSet<City> enumSet = EnumSet.allOf(City.class);
         enumSet.remove(origin);
         Iterator<City> iterator = enumSet.iterator();
@@ -81,30 +51,36 @@ public class Request {
         }
         do{
             op = enterNumber();
-            switch (op) {
-                case 1:
-                    city = iterator.next();
-                    break;
-                case 2:
-                    iterator.next();
-                    city = iterator.next();
-                    break;
-                case 3:
-                    iterator.next();
-                    iterator.next();
-                    city = iterator.next();
-                    break;
-                default:
-                    System.out.println("Ciudad no existente");
-                    break;
-            }
-            if(op < 1 || op > 3){
+            city = iterateNumberOfTimes(iterator,op);
+            if(city == null){
+                System.out.println("Ciudad no existente");
                 iterator = enumSet.iterator();
             }
-        }while(op < 1 || op > 3) ;
+        }while(city == null) ;
         System.out.println(city);
         return city;
-    }  //Repito, es horrendo, pero funciona, y muy bien...
+    }
+    public City chooseOriginTest(){
+        int op;
+        int i = 1;
+        City city;
+        EnumSet<City> enumSet = EnumSet.allOf(City.class);
+        for (City value: enumSet) {
+            System.out.println(i+":"+value);
+            i++;
+        }
+        Iterator<City> iterator = enumSet.iterator();
+        do{
+            op = enterNumber();
+            city = iterateNumberOfTimes(iterator,op);
+            if(city == null){
+                System.out.println("Ciudad no existente");
+                iterator = enumSet.iterator();
+            }
+        }while(city == null);
+        System.out.println(city.name());
+        return city;
+    } //Evolucion de un codigo horrible a algo hermoso y escalable
 
     public LocalDate chooseDate(){ //1. Inicialmente indicar la fecha deseada para realizar un vuelo.
         int year = pickYear();
@@ -148,5 +124,17 @@ public class Request {
         return option;
     }
 
+    private City iterateNumberOfTimes(Iterator<City> iterator,int n){ //Esta funcion itera en el enumset la cantidad de veces pedida
+        City city = null;                                               //Y retorna la ciudad indicada, o null.
+        for(int i = 0; i<n;i++){
+            if(!iterator.hasNext()){
+                i=n;
+                city = null;
+            }else{
+                city = iterator.next();
+            }
+        }
+        return city;
+    }
 
 }
