@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -19,7 +20,7 @@ import java.util.List;
 
 
 public class JsonFunctions<G> {
-    /*
+/*
     private Class<G> gClass;
 
 
@@ -46,10 +47,12 @@ public class JsonFunctions<G> {
             try {
                 FileInputStream fileInputStream = new FileInputStream(file);
 
-                Class<G> test = (Class<G>) Class.forName(gClass.getName());
-                JavaType type = mapper.getTypeFactory().constructCollectionType(List.class, test);
-                readFileElements = mapper.readValue(fileInputStream, type);
 
+             //   JavaType type = mapper.getTypeFactory().constructCollectionType(List.class, test);
+               // readFileElements = mapper.readValue(fileInputStream, type);
+
+                //User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
+                readFileElements = Arrays.asList(mapper.readValue(file,gClass));
 
             } catch (IOException e) {
                 e.printStackTrace();

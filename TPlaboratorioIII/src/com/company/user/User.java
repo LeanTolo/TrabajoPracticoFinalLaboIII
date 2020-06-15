@@ -106,19 +106,35 @@ public class User extends JsonFunctions {
                 mapper.writeValue(file, userArrayList);
                 System.out.println("--- Imprimiento en archivo ---\n");
             } else {
-                ArrayList<User> userArrayList = new ArrayList<>();
+                ArrayList<User> userArrayList = new ArrayList<User>(readFile());
                 userArrayList.add(element);
                 mapper.writeValue(file, userArrayList);
-                //ArrayList<User> userArrayList = new ArrayList<User>(readFile());
-               // userArrayList.add(element);
-                //mapper.writeValue(file, userArrayList);
             }
         }catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void readFile () throws IOException {
+    public List<User> readFile () throws IOException {
+
+        List<User> usersFromJson = null;
+        File file = new File("Users.json");
+        ObjectMapper mapper = new ObjectMapper();
+
+        if(file.exists()) {
+            try {
+                User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
+                usersFromJson = Arrays.asList(mapper.readValue(file, User[].class)); // convert JSON array to List of objects
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            System.out.println("Archivo vacio");
+        }
+        return usersFromJson;
+    }
+
+    public void showFile () throws IOException {
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
 
@@ -137,7 +153,6 @@ public class User extends JsonFunctions {
             System.out.println("Archivo vacio");
         }
     }
-
 
 /*
     public boolean writeArrayToFile(List<User> elements) {
