@@ -1,14 +1,14 @@
 package com.company.user;
 
 import com.company.archives.JsonFunctions;
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.File;
-import java.io.IOException;
+import javax.jws.soap.SOAPBinding;
+import javax.xml.stream.Location;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -106,6 +106,9 @@ public class User extends JsonFunctions {
                 mapper.writeValue(file, userArrayList);
                 System.out.println("--- Imprimiento en archivo ---\n");
             } else {
+                ArrayList<User> userArrayList = new ArrayList<>();
+                userArrayList.add(element);
+                mapper.writeValue(file, userArrayList);
                 //ArrayList<User> userArrayList = new ArrayList<User>(readFile());
                // userArrayList.add(element);
                 //mapper.writeValue(file, userArrayList);
@@ -115,14 +118,18 @@ public class User extends JsonFunctions {
         }
     }
 
-    public void readFile ()  {
+    public void readFile () throws IOException {
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
+
         if(file.exists()) {
             System.out.println("--- Contenido del Archivo ---");
             try {
-                User user = mapper.readValue(file, User.class);
-                System.out.println("Username: " + user.getName()+user.getSurName()+"\nPassword: "+user.getPassword());
+
+                User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
+                List<User> users = Arrays.asList(mapper.readValue(file, User[].class)); // convert JSON array to List of objects
+                users.stream().forEach(x -> System.out.println(x)); // show lists of objects
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -130,6 +137,8 @@ public class User extends JsonFunctions {
             System.out.println("Archivo vacio");
         }
     }
+
+
 /*
     public boolean writeArrayToFile(List<User> elements) {
         File file = new File("archives\\"+"Users.json");
