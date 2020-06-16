@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Silver extends Airplane implements IjsonManagement<Silver> {
     public Silver(double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
-        super(fuelCapacity, costPerKm, maxPassengers, maxVelocity, motorType, 4000);
+        super(fuelCapacity, costPerKm, maxPassengers, maxVelocity, motorType);
     }
 
 
