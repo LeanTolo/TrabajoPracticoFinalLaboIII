@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.airplane.Airplane;
+import com.company.airplane.Silver;
 import com.company.tickets.City;
 import com.company.tickets.Ticket;
 
@@ -9,24 +11,81 @@ import java.util.concurrent.ExecutionException;
 
 public class Request {
     private TreeSet<Ticket> treeSet;
-    private Ticket ticket;
+    private List<Airplane> airplanesList;
 
     public Request() {
         treeSet = new TreeSet<>();
-        ticket = new Ticket();
+        airplanesList = new ArrayList<>();
     }
 
+    public void addAirplaneToList(Airplane airplane){
+        boolean flag = true;
+        for (Airplane plane:airplanesList) {
+            if(plane == airplane){
+                flag = false;
+            }
+        }
+        if(flag){
+            airplanesList.add(airplane);
+        }else{
+            System.out.println("Airplane already added beforehand");
+        }
+    } //Agrega un avion a la lista
 
+    private void showAvailableAirplanes(LocalDate date){
+        int i = 0;
+        for(Airplane plane : airplanesList){
+            if(!(plane.getDates().contains(date))){
+                System.out.println(i+":"+plane.toString());
+            }
+            i++;
+        }
+    } //Muestra los aviones disponibles en una fecha indicada
 
+    private Airplane chooseAirplane(LocalDate date){
+        showAvailableAirplanes(date);
+        int op;
+        do{
+            op = enterNumber();
+            if(op<0 && op>airplanesList.size()){
+                System.out.println("Ingrese un valor valido");
+            }
+        }while (op<0 && op>airplanesList.size()-1);
+        airplanesList.get(op).addDate(date);
+        return airplanesList.get(op);
+    } //Se elige un avion de la lista, se le asigna la fecha y se retorna ese avion
 
     //4. Ahora el usuario debe seleccionar un avión. El sistema se encargará de
     //mostrar los aviones disponibles para esa fecha y el usuario elige el deseado.
     //5. Por último, el sistema debe mostrar el costo total del vuelo y el usuario
     //deberá confirmar para generar el vuelo.
 
+    public void generateTicket(){
+        LocalDate date = chooseDate();
+        City origin = chooseOriginTest();
+        City destination = chooseDestination(origin);
+        int passengers = choosePassengersQuantity();
+        Airplane airplane = chooseAirplane(date);
+        Ticket ticket = new Ticket(date,origin,destination,passengers,airplane);
+        System.out.println(ticket.toString());
+        System.out.println("GENERATE TICKET?");
+        System.out.println("1: YES \n2:NO");
+        int op;
+        do{
+            op = enterNumber();
+        }while(op<1 && op>2);
+        if(op == 1){
+            this.treeSet.add(ticket);
+        }else{
+            System.out.println("TICKET DISCARDED");
+        }
+    }
 
+    public void showTreeset(){
+        treeSet.forEach(ticket ->System.out.println(ticket.toString()));
+    }
 
-    public int choosePassengersQuantity(){
+    private int choosePassengersQuantity(){
         System.out.println("Ingrese cantidad de pasajeros:");
         int rta;
         do{
@@ -38,7 +97,7 @@ public class Request {
         return rta;
     } //3. El usuario debe indicar la cantidad de acompañantes que tendrá en el vuelo.
 
-    public City chooseDestination(City origin){
+    private City chooseDestination(City origin){
         int op;
         int i = 1;
         City city;
@@ -60,7 +119,7 @@ public class Request {
         System.out.println(city);
         return city;
     }
-    public City chooseOriginTest(){
+    private City chooseOriginTest(){
         int op;
         int i = 1;
         City city;
@@ -82,7 +141,7 @@ public class Request {
         return city;
     } //Evolucion de un codigo horrible a algo hermoso y escalable
 
-    public LocalDate chooseDate(){ //1. Inicialmente indicar la fecha deseada para realizar un vuelo.
+    private LocalDate chooseDate(){ //1. Inicialmente indicar la fecha deseada para realizar un vuelo.
         int year = pickYear();
         int month = pickMonth();
         int day = pickDay();

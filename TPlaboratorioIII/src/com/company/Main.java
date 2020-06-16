@@ -1,6 +1,11 @@
 package com.company;
 
+import com.company.airplane.Bronze;
+import com.company.airplane.Gold;
+import com.company.airplane.MotorType;
+import com.company.airplane.Silver;
 import com.company.user.User;
+//import org.graalvm.compiler.asm.sparc.SPARCAssembler;
 
 import java.io.IOException;
 
@@ -32,15 +37,18 @@ public class Main {
         Ticket ticket4 = new Ticket(LocalDate.of(2020,6,7), City.MONTEVIDEO,City.SANTIAGO,2,avion);
         Ticket ticket5 = new Ticket(LocalDate.of(2019,1,1), City.MONTEVIDEO,City.SANTIAGO,2,avion);
         Request request = new Request();
-        TreeSet<Ticket> treeSet = new TreeSet<>();
-        treeSet.add(ticket);
-        treeSet.add(ticket2);
-        treeSet.add(ticket3);
-        treeSet.add(ticket4);
-        treeSet.add(ticket5);
-        treeSet.forEach(ticket1 -> System.out.println(ticket1.toString()));
+        System.out.println(avion.toString());
 
 */
 
+        Gold avion = new Gold(0,0,5,0, MotorType.HELICE);
+        Silver avion1 = new Silver(0,0,5,0, MotorType.HELICE);
+        Bronze avion2 = new Bronze(0,0,5,0, MotorType.HELICE);
+        Request request = new Request();
+        request.addAirplaneToList(avion);
+        request.addAirplaneToList(avion1);
+        request.addAirplaneToList(avion2);
+        request.generateTicket();
+        request.showTreeset();
     }
 }

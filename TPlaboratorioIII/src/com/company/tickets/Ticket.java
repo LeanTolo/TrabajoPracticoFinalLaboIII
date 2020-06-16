@@ -74,6 +74,10 @@ public class Ticket implements Comparable{
         return date;
     }
 
+    public Airplane getAirplane() {
+        return airplane;
+    }
+
     @Override
     public int compareTo(Object o) {
         int rta = this.date.compareTo(((Ticket) o).date);
