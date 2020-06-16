@@ -2,21 +2,35 @@ package com.company;
 
 import com.company.user.User;
 
+import java.util.List;
+
 public class AeroTaxiManagement {
 
 
-    public User validateUser(int dni){
-        User user = null;
-        int i =0;
-     //   while(i < LISTA DE USUARIOS DEL ARCHIVO.size() && user == null){
-     //       if(LISTA DE USUARIOS DEL ARCHIVO.get(i).getDni() == dni) user = this.LISTA DE USUARIOS DEL ARCHIVO.get(i);
-    //        i++;
-      //  }
-        if(user == null){
-            System.out.println("El DNI ingresado no se encuentra en el sistema.");
+    public User validateUser(int dni, String pass, List<User> usersData){
+        User userRequest = null;
+        int message = -1;
+        for (User value:usersData) {
+            if(value.getDni()==dni){
+                if(value.getPassword().equals(pass)) {
+                    userRequest = value;
+                    break;
+                }else{
+                    System.out.println("Clave de ingreso erronea, por favor pruebe nuevamente");
+                    message = 0;
+                    break;
+                }
+            }
+
         }
-        return user;
+        if(userRequest == null && message == -1){
+                System.out.println("El Nombre de usuario ingresado no posee ninguna cuenta asociada, por favor registrese para ingresar");
+            //call to register
+        }
+        return userRequest;
     }
 
+    public void RegisterUser(int dni, String password, List<User>Users){
 
+    }
 }

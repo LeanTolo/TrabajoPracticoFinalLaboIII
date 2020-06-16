@@ -8,6 +8,8 @@ import com.company.user.User;
 //import org.graalvm.compiler.asm.sparc.SPARCAssembler;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main {
@@ -27,7 +29,18 @@ public class Main {
 
 
 
+
         //testUSUARIO3.showFile();
+
+        List<User> Usuarios = new ArrayList<>();
+        Usuarios = testUSUARIO3.readFile();
+//        System.out.println("--- Datos del Array ---");
+//        for (User a:Usuarios) {
+//            System.out.println(a);
+//        }
+        AeroTaxiManagement log = new AeroTaxiManagement();
+        User testeo = log.validateUser(222222, "789456",Usuarios);
+        System.out.println(testeo.toString());
 
 /*
         Gold avion = new Gold(15,15,5,450, MotorType.HELICE);
