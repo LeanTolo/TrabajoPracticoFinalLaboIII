@@ -1,11 +1,14 @@
 package com.company;
+import com.company.user.Functions;
 import com.company.user.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-
+    List<User> users = new ArrayList<>();
 
     public void startMenu() {
         Scanner scanner = new Scanner(System.in);
@@ -54,22 +57,52 @@ public class Menu {
     }
 
     public void register() throws IOException {
-
-        Runtime.getRuntime().exec("cls");
         Scanner data = new Scanner(System.in);
         User newUser = new User();
-        System.out.println("\nInsert Name: \n");
+        System.out.println("\nInsert Name: ");
         newUser.setName(data.nextLine());
-        System.out.println("\nInsert SurName: \n");
+        System.out.println("\nInsert SurName: ");
         newUser.setSurName(data.nextLine());
-        System.out.println("\nInsert DNI: \n");
+        System.out.println("\nInsert DNI: ");
         newUser.setDni(data.nextInt());
-        System.out.println("\nInsert Age: \n");
+        System.out.println("\nInsert Password:");
+        newUser.setPassword(data.next());
+        System.out.println("\nInsert Age: ");
         newUser.setAge(data.nextInt());
-        System.out.println("\nInsert Password: \n");
-        newUser.setPassword(data.nextLine());
-        newUser.addToFile(newUser);
-        printMenuOptions();
+        System.out.println("\nLos datos Ingresados son:"+newUser.toString()+"\nIngrese 0  para cambiar los datos, o cualquier numero para continuar:");
+        int input = data.nextInt();
+        if (input != 0) {
+            if (AddNewUSer(newUser)) {
+                printMenuOptions();
+            }
+        } else {
+            register();
+        }
+    }
+
+    public boolean validateNewUSer (User tovalidate) throws IOException {
+        boolean res= true;
+        Functions helper  = new Functions();
+        users = helper.readFile();
+        for (User element:users) {
+            if (element.getDni()==tovalidate.getDni()){
+                res=false;
+                break;
+            }
+        }
+        return res;
+    }
+
+    public boolean AddNewUSer (User toadd) throws IOException {
+      boolean add = false;
+      if(validateNewUSer(toadd)){
+              toadd.addToFile(toadd);
+              add = true;
+              System.out.println("Registrado Correctamente!");
+      }else{
+              System.out.println("El DNI ingresado ya corresponde a una cuenta de Aerotaxi, por favor ingrese otro o recupere su contraseña");
+      }
+        return add;
     }
 
     public void login(){

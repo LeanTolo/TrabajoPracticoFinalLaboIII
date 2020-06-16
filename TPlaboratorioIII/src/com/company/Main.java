@@ -15,32 +15,32 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+//        Menu menu = new Menu();
+//        menu.startMenu();
 
 
-
-        User testUSUARIO = new User("Lean", "Tolo", 111111, 22, "123456");
-        User testUSUARIO2 = new User("Lau", "Nieves", 222222, 22, "789456");
+//        User testUSUARIO = new User("Lean", "Tolo", 111111, 22, "123456");
+//        User testUSUARIO2 = new User("Lau", "Nieves", 222222, 22, "789456");
         User testUSUARIO3 = new User("Pedro", "Vago", 333333, 22, "123789");
-
-        //testUSUARIO.addToFile(testUSUARIO);
-       // testUSUARIO2.addToFile(testUSUARIO2);
-      //  testUSUARIO3.addToFile(testUSUARIO3);
+//
 
 
 
 
 
-        //testUSUARIO3.showFile();
+        testUSUARIO3.showFile();
 
-        List<User> Usuarios = new ArrayList<>();
-        Usuarios = testUSUARIO3.readFile();
-//        System.out.println("--- Datos del Array ---");
-//        for (User a:Usuarios) {
-//            System.out.println(a);
-//        }
-        AeroTaxiManagement log = new AeroTaxiManagement();
-        User testeo = log.validateUser(222222, "789456",Usuarios);
-        System.out.println(testeo.toString());
+//        List<User> Usuarios = new ArrayList<>();
+//        Usuarios = testUSUARIO3.readFile();
+////        System.out.println("--- Datos del Array ---");
+////        for (User a:Usuarios) {
+////            System.out.println(a);
+////        }
+//        AeroTaxiManagement log = new AeroTaxiManagement();
+//        User testeo = log.validateUser(222222, "789456",Usuarios);
+//        System.out.println(testeo.toString());
+
+
 
 /*
         Gold avion = new Gold(15,15,5,450, MotorType.HELICE);
@@ -54,14 +54,14 @@ public class Main {
 
 */
 
-        Gold avion = new Gold(0,0,5,0, MotorType.HELICE);
-        Silver avion1 = new Silver(0,0,5,0, MotorType.HELICE);
-        Bronze avion2 = new Bronze(0,0,5,0, MotorType.HELICE);
-        Request request = new Request();
-        request.addAirplaneToList(avion);
-        request.addAirplaneToList(avion1);
-        request.addAirplaneToList(avion2);
-        request.generateTicket();
-        request.showTreeset();
+//        Gold avion = new Gold(0,0,5,0, MotorType.HELICE);
+//        Silver avion1 = new Silver(0,0,5,0, MotorType.HELICE);
+//        Bronze avion2 = new Bronze(0,0,5,0, MotorType.HELICE);
+//        Request request = new Request();
+//        request.addAirplaneToList(avion);
+//        request.addAirplaneToList(avion1);
+//        request.addAirplaneToList(avion2);
+//        request.generateTicket();
+//        request.showTreeset();
     }
 }
