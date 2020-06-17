@@ -47,6 +47,10 @@ public class User implements IjsonManagement<User> {
         this.surName = surName;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public int getDni() {
         return dni;
     }
@@ -75,9 +79,6 @@ public class User implements IjsonManagement<User> {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public String toString() {

@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.user.User;
+import com.company.user.Functions;
 
 import java.util.List;
 
