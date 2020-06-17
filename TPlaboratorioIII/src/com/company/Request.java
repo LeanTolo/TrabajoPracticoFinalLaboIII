@@ -32,18 +32,18 @@ public class Request {
         }
     } //Agrega un avion a la lista
 
-    private void showAvailableAirplanes(LocalDate date){
+    private void showAvailableAirplanes(int passengers,LocalDate date){
         int i = 0;
         for(Airplane plane : airplanesList){
-            if(!(plane.getDates().contains(date))){
+            if(!(plane.getDates().contains(date)) && plane.getMaxPassengers() >= passengers){
                 System.out.println(i+":"+plane.toString());
             }
             i++;
         }
     } //Muestra los aviones disponibles en una fecha indicada
 
-    private Airplane chooseAirplane(LocalDate date){
-        showAvailableAirplanes(date);
+    private Airplane chooseAirplane(int passengers,LocalDate date){
+        showAvailableAirplanes(passengers,date);
         int op;
         do{
             op = enterNumber();
@@ -65,11 +65,11 @@ public class Request {
         City origin = chooseOriginTest();
         City destination = chooseDestination(origin);
         int passengers = choosePassengersQuantity();
-        Airplane airplane = chooseAirplane(date);
+        Airplane airplane = chooseAirplane(passengers,date);
         Ticket ticket = new Ticket(date,origin,destination,passengers,airplane);
         System.out.println(ticket.toString());
         System.out.println("GENERATE TICKET?");
-        System.out.println("1: YES \n2:NO");
+        System.out.println("1:YES \n2:NO");
         int op;
         do{
             op = enterNumber();

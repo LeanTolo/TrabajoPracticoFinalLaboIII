@@ -35,6 +35,10 @@ public abstract class Airplane{
         return dates;
     }
 
+    public int getMaxPassengers() {
+        return maxPassengers;
+    }
+
     public void addDate(LocalDate date){
         dates.add(date);
     }

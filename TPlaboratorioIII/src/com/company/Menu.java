@@ -54,7 +54,6 @@ public class Menu {
     }
 
     public void register() throws IOException {
-
         Runtime.getRuntime().exec("cls");
         Scanner data = new Scanner(System.in);
         User newUser = new User();

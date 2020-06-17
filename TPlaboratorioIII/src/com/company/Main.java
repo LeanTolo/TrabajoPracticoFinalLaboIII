@@ -31,7 +31,7 @@ public class Main {
 
 
         //testUSUARIO3.showFile();
-
+        /*
         List<User> Usuarios = new ArrayList<>();
         Usuarios = testUSUARIO3.readFile();
 //        System.out.println("--- Datos del Array ---");
@@ -55,12 +55,13 @@ public class Main {
 */
 
         Gold avion = new Gold(0,0,5,0, MotorType.HELICE);
-        Silver avion1 = new Silver(0,0,5,0, MotorType.HELICE);
+        Silver avion1 = new Silver(0,0,3,0, MotorType.HELICE);
         Bronze avion2 = new Bronze(0,0,5,0, MotorType.HELICE);
         Request request = new Request();
         request.addAirplaneToList(avion);
         request.addAirplaneToList(avion1);
         request.addAirplaneToList(avion2);
+        request.generateTicket();
         request.generateTicket();
         request.showTreeset();
     }
