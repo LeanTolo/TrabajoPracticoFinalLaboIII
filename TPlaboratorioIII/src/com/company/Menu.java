@@ -27,7 +27,9 @@ public class Menu {
                         login();
                         break;
                     case 2:
-                      //  loginAdmin();
+                        if (loginAdmin() == 0){
+                            adminMenu();
+                        }
                         break;
                     case 3:
                         register();
@@ -48,6 +50,22 @@ public class Menu {
         }
     }
 
+    public final static void clearScreen() { //no limpia la pantalla
+        try{
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows")) {
+                Runtime.getRuntime().exec("cls");
+            }
+            else {
+                Runtime.getRuntime().exec("clear");
+            }
+        }
+        catch (final Exception e) {
+            //  Handle any exceptions.
+        }
+    }
+
     public void printMenuOptions(){
         System.out.println("************************\nWELCOME TO AEROTAXI® SYSTEM:" +
                 "\n1.- Login" +
@@ -59,20 +77,21 @@ public class Menu {
     public void register() throws IOException {
         Scanner data = new Scanner(System.in);
         User newUser = new User();
-        System.out.println("\nInsert Name: ");
+        System.out.println("\nIngrese su Nombre: ");
         newUser.setName(data.nextLine());
-        System.out.println("\nInsert SurName: ");
+        System.out.println("\nIngrese su Apellido: ");
         newUser.setSurName(data.nextLine());
-        System.out.println("\nInsert DNI: ");
+        System.out.println("\nIngrese su DNI: ");
         newUser.setDni(data.nextInt());
-        System.out.println("\nInsert Password:");
+        System.out.println("\nIngrese su Contraseña:");
         newUser.setPassword(data.next());
-        System.out.println("\nInsert Age: ");
+        System.out.println("\nIngrese su Edad: ");
         newUser.setAge(data.nextInt());
         System.out.println("\nLos datos Ingresados son:"+newUser.toString()+"\nIngrese 0  para cambiar los datos, o cualquier numero para continuar:");
         int input = data.nextInt();
         if (input != 0) {
             if (AddNewUSer(newUser)) {
+                clearScreen();
                 printMenuOptions();
             }
         } else {
@@ -80,7 +99,7 @@ public class Menu {
         }
     }
 
-    public boolean validateNewUSer (User tovalidate) throws IOException {
+    public boolean validateNewUser (User tovalidate) throws IOException {
         boolean res= true;
         Functions helper  = new Functions();
         users = helper.readFile();
@@ -95,7 +114,7 @@ public class Menu {
 
     public boolean AddNewUSer (User toadd) throws IOException {
       boolean add = false;
-      if(validateNewUSer(toadd)){
+      if(validateNewUser(toadd)){
               toadd.addToFile(toadd);
               add = true;
               System.out.println("Registrado Correctamente!");
@@ -119,7 +138,7 @@ public class Menu {
             System.out.println("Ingrese contraseña:");
             pass = scan.nextLine().equals(logUser.getPassword());
             if (!pass)
-                System.out.println("Password Incorrect");
+                System.out.println("Contraseña Incorrecta");
         } while(!pass);
 
        userMenu(logUser);
@@ -144,16 +163,69 @@ public class Menu {
                     // ver reservas
                     break;
             }
-        } while(opt != 4);
+        } while(opt != 0);
     }
 
     public void printUserMenu(){
+        clearScreen();
         System.out.println("*************************************");
-        System.out.println("\n1. Request Flight");
-        System.out.println("2. Cancel Flight");
-        System.out.println("3. See Reservations");
+        System.out.println("\n1. Solicitar Vuelo");
+        System.out.println("2. Cancelar Vuelo");
+        System.out.println("3. Ver Reservas");
         System.out.println("100. Pedro fijate si van mas cosas");
-        System.out.println("4. Exit");
+        System.out.println("0. Salir");
+        System.out.println("*************************************");
+    }
+
+    public int loginAdmin(){ //logueo de administrador: andando 10/10
+        Scanner scan = new Scanner(System.in);
+        String user,pass;
+        int res = -1;
+        System.out.println("Ingrese Usuario Administrador:");
+        user = scan.nextLine();
+        if (user.equals("admin")){
+            System.out.println("Ingrese contraseña:");
+            pass = scan.nextLine();
+            if (pass.equals("admin")) {
+                res = 0;
+            }else{
+                System.out.println("Contraseña incorrecta");
+            }
+        }else{
+            System.out.println("Usuario incorrecta");
+        }
+        return res;
+    }
+
+
+    public void adminMenu() {
+        int opt = 0;
+        do {
+            printAdminMenu();
+            Scanner scan = new Scanner(System.in);
+            opt = scan.nextInt();
+            switch (opt) {
+                case 1:
+                    //Listado de Vuelos
+                    break;
+                case 2:
+                    //Listado de Clientes
+                    break;
+                case 3:
+                    //Ver Destino
+                    break;
+            }
+        } while(opt != 0);
+    }
+
+    public void printAdminMenu(){
+        clearScreen();
+        System.out.println("*************************************");
+        System.out.println("\n1. Listado de Vuelos");
+        System.out.println("2. Listado de Clientes");
+        System.out.println("3. Ver Destinos");
+        System.out.println("100. Pedro fijate si van mas cosas");
+        System.out.println("0. Exit");
         System.out.println("*************************************");
     }
 }

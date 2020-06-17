@@ -18,6 +18,14 @@ public class Request {
         airplanesList = new ArrayList<>();
     }
 
+
+    //Funcion Lista a TreeSet
+    public static TreeSet getSort (ArrayList list){
+        TreeSet set =new TreeSet(list);
+        return set;
+    }
+
+
     public void addAirplaneToList(Airplane airplane){
         boolean flag = true;
         for (Airplane plane:airplanesList) {

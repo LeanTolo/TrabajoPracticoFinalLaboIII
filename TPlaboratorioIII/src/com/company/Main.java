@@ -15,20 +15,20 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-//        Menu menu = new Menu();
-//        menu.startMenu();
+        Menu menu = new Menu();
+        menu.startMenu();
 
 
 //        User testUSUARIO = new User("Lean", "Tolo", 111111, 22, "123456");
 //        User testUSUARIO2 = new User("Lau", "Nieves", 222222, 22, "789456");
-        User testUSUARIO3 = new User("Pedro", "Vago", 333333, 22, "123789");
+      //  User testUSUARIO3 = new User("Pedro", "Vago", 333333, 22, "123789");
 //
 
 
 
 
 
-        testUSUARIO3.showFile();
+      //  testUSUARIO3.showFile();
 
 //        List<User> Usuarios = new ArrayList<>();
 //        Usuarios = testUSUARIO3.readFile();

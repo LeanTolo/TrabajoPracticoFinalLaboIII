@@ -1,5 +1,6 @@
 package com.company.tickets;
 
+import com.company.IjsonManagement.IjsonManagement;
 import com.company.airplane.Airplane;
 import com.company.airplane.Gold;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,7 +11,7 @@ import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.*;
 
-public class Ticket implements Comparable{
+public class Ticket implements Comparable,IjsonManagement<Ticket> {
     private LocalDate date;
     private City origin;
     private City destination;
@@ -97,25 +98,8 @@ public class Ticket implements Comparable{
                 '}';
     }
 
-    public void addToFile(Ticket element){
-        File file = new File("Ticket.json");
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            if (file.createNewFile()) {
-                ArrayList<Ticket> ticketsArrayList = new ArrayList<>();
-                ticketsArrayList.add(element);
-                mapper.writeValue(file, ticketsArrayList);
-                System.out.println("--- Imprimiento en archivo ---\n");
-            } else {
-                ArrayList<Ticket> ticketsArrayList = new ArrayList<Ticket>(readFile());
-                ticketsArrayList.add(element);
-                mapper.writeValue(file, ticketsArrayList);
-            }
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
+    @Override
     public List<Ticket> readFile () throws IOException {
 
         List<Ticket> ticketsFromJson = null;
@@ -135,6 +119,27 @@ public class Ticket implements Comparable{
         return ticketsFromJson;
     }
 
+    @Override
+    public void addToFile(Ticket element) {
+        File file = new File("Ticket.json");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            if (file.createNewFile()) {
+                ArrayList<Ticket> ticketsArrayList = new ArrayList<>();
+                ticketsArrayList.add(element);
+                mapper.writeValue(file, ticketsArrayList);
+                System.out.println("--- Imprimiento en archivo ---\n");
+            } else {
+                ArrayList<Ticket> ticketsArrayList = new ArrayList<Ticket>(readFile());
+                ticketsArrayList.add(element);
+                mapper.writeValue(file, ticketsArrayList);
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void showFile () throws IOException {
         File file = new File("Ticket.json");
         ObjectMapper mapper = new ObjectMapper();

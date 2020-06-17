@@ -22,7 +22,6 @@ public class AeroTaxiManagement {
                     break;
                 }
             }
-
         }
         if(userRequest == null && message == -1){
                 System.out.println("El Nombre de usuario ingresado no posee ninguna cuenta asociada, por favor registrese para ingresar");
