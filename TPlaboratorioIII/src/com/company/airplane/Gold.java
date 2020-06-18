@@ -38,18 +38,18 @@ public class Gold extends Airplane implements IjsonManagement<Gold> {
     }
 
     @Override
-    public void addToFile(Gold element) {
+    public void addToFile() {
         File file = new File("Gold.json");
         ObjectMapper mapper = new ObjectMapper();
         try {
             if (file.createNewFile()) {
                 ArrayList<Gold> goldsArrayList = new ArrayList<>();
-                goldsArrayList.add(element);
+                goldsArrayList.add(this);
                 mapper.writeValue(file, goldsArrayList);
                 System.out.println("--- Imprimiento en archivo ---\n");
             } else {
                 ArrayList<Gold> goldsArrayList = new ArrayList<Gold>(readFile());
-                goldsArrayList.add(element);
+                goldsArrayList.add(this);
                 mapper.writeValue(file, goldsArrayList);
             }
         }catch (IOException e) {

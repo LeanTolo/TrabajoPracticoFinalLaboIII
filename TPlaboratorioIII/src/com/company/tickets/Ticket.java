@@ -22,6 +22,7 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
 
 
     public Ticket(){};
+
     public Ticket(LocalDate date, City origin, City destination, int passengers, Airplane airplane) {
         this.date = date;
         this.origin = origin;
@@ -120,18 +121,18 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
     }
 
     @Override
-    public void addToFile(Ticket element) {
+    public void addToFile() {
         File file = new File("Ticket.json");
         ObjectMapper mapper = new ObjectMapper();
         try {
             if (file.createNewFile()) {
                 ArrayList<Ticket> ticketsArrayList = new ArrayList<>();
-                ticketsArrayList.add(element);
+                ticketsArrayList.add(this);
                 mapper.writeValue(file, ticketsArrayList);
                 System.out.println("--- Imprimiento en archivo ---\n");
             } else {
                 ArrayList<Ticket> ticketsArrayList = new ArrayList<Ticket>(readFile());
-                ticketsArrayList.add(element);
+                ticketsArrayList.add(this);
                 mapper.writeValue(file, ticketsArrayList);
             }
         }catch (IOException e) {

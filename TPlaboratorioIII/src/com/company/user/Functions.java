@@ -30,7 +30,7 @@ public class Functions implements IjsonManagement<Functions> {
     }
 
     @Override
-    public void addToFile(Functions element) {
+    public void addToFile() {
 
     }
 
