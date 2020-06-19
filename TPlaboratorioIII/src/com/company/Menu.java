@@ -115,7 +115,7 @@ public class Menu {
     public boolean AddNewUSer (User toadd) throws IOException {
       boolean add = false;
       if(validateNewUser(toadd)){
-              toadd.addToFile(toadd);
+              toadd.addToFile();
               add = true;
               System.out.println("Registrado Correctamente!");
       }else{
@@ -221,10 +221,11 @@ public class Menu {
     public void printAdminMenu(){
         clearScreen();
         System.out.println("*************************************");
-        System.out.println("\n1. Listado de Vuelos");
-        System.out.println("2. Listado de Clientes");
-        System.out.println("3. Ver Destinos");
-        System.out.println("100. Pedro fijate si van mas cosas");
+        System.out.println("\n1. Listado de Vuelos En Fecha Especifica");
+        System.out.println("2. Listado de Clientes");   //(Todos los datos personales.
+                                                        // La categoría del mejor avión utilizado ( Gold, Silver o Bronze ).
+                                                        //Total gastado de todos sus vuelos.
+        System.out.println("3. Ver Destinos y Distancias");
         System.out.println("0. Exit");
         System.out.println("*************************************");
     }

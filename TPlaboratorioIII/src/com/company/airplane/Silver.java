@@ -37,18 +37,18 @@ public class Silver extends Airplane implements IjsonManagement<Silver> {
     }
 
     @Override
-    public void addToFile(Silver element) {
+    public void addToFile() {
         File file = new File("Silver.json");
         ObjectMapper mapper = new ObjectMapper();
         try {
             if (file.createNewFile()) {
                 ArrayList<Silver> silversArrayList = new ArrayList<>();
-                silversArrayList.add(element);
+                silversArrayList.add(this);
                 mapper.writeValue(file, silversArrayList);
                 System.out.println("--- Imprimiento en archivo ---\n");
             } else {
                 ArrayList<Silver> silversArrayList = new ArrayList<Silver>(readFile());
-                silversArrayList.add(element);
+                silversArrayList.add(this);
                 mapper.writeValue(file, silversArrayList);
             }
         }catch (IOException e) {

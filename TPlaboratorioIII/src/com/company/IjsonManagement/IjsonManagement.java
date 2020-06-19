@@ -8,7 +8,7 @@ import java.util.List;
 public interface IjsonManagement<G> {
 
     List<G> readFile() throws IOException;
-    void addToFile(G element);
+    void addToFile();
 
     void showFile() throws IOException;
 

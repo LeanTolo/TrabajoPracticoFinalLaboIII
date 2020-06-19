@@ -117,18 +117,18 @@ public class User implements IjsonManagement<User> {
     }
 
     @Override
-    public void addToFile(User element) {
+    public void addToFile() {
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
         try {
             if (file.createNewFile()) {
                 ArrayList<User> userArrayList = new ArrayList<>();
-                userArrayList.add(element);
+                userArrayList.add(this);
                 mapper.writeValue(file, userArrayList);
                 System.out.println("--- Imprimiento en archivo ---\n");
             } else {
                 ArrayList<User> userArrayList = new ArrayList<User>(readFile());
-                userArrayList.add(element);
+                userArrayList.add(this);
                 mapper.writeValue(file, userArrayList);
             }
         }catch (IOException e) {

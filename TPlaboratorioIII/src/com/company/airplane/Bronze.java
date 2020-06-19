@@ -38,18 +38,18 @@ public class Bronze extends Airplane implements IjsonManagement<Bronze> {
     }
 
     @Override
-    public void addToFile(Bronze element) {
+    public void addToFile() {
         File file = new File("Bronze.json");
         ObjectMapper mapper = new ObjectMapper();
         try {
             if (file.createNewFile()) {
                 ArrayList<Bronze> bronzesArrayList = new ArrayList<>();
-                bronzesArrayList.add(element);
+                bronzesArrayList.add(this);
                 mapper.writeValue(file, bronzesArrayList);
                 System.out.println("--- Imprimiento en archivo ---\n");
             } else {
                 ArrayList<Bronze> bronzesArrayList = new ArrayList<Bronze>(readFile());
-                bronzesArrayList.add(element);
+                bronzesArrayList.add(this);
                 mapper.writeValue(file, bronzesArrayList);
             }
         }catch (IOException e) {
