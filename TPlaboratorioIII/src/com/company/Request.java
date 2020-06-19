@@ -10,19 +10,12 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class Request {
-    private TreeSet<Ticket> treeSet;
+    private List<Ticket> ticketList;
     private List<Airplane> airplanesList;
 
     public Request() {
-        treeSet = new TreeSet<>();
+        ticketList = new ArrayList<>();
         airplanesList = new ArrayList<>();
-    }
-
-
-    //Funcion Lista a TreeSet
-    public static TreeSet getSort (ArrayList list){
-        TreeSet set =new TreeSet(list);
-        return set;
     }
 
 
@@ -83,14 +76,14 @@ public class Request {
             op = enterNumber();
         }while(op<1 && op>2);
         if(op == 1){
-            this.treeSet.add(ticket);
+            this.ticketList.add(ticket);
         }else{
             System.out.println("TICKET DISCARDED");
         }
     }
 
-    public void showTreeset(){
-        treeSet.forEach(ticket ->System.out.println(ticket.toString()));
+    public void showTicketList(){
+        ticketList.forEach(ticket ->System.out.println(ticket.toString()));
     }
 
     private int choosePassengersQuantity(){
@@ -116,6 +109,7 @@ public class Request {
             System.out.println(i+":"+value);
             i++;
         }
+        System.out.println("Seleccione la ciudad de destino:");
         do{
             op = enterNumber();
             city = iterateNumberOfTimes(iterator,op);
@@ -137,6 +131,7 @@ public class Request {
             i++;
         }
         Iterator<City> iterator = enumSet.iterator();
+        System.out.println("Seleccione la ciudad de origen:");
         do{
             op = enterNumber();
             city = iterateNumberOfTimes(iterator,op);
@@ -202,6 +197,14 @@ public class Request {
             }
         }
         return city;
+    }
+
+    public void showFlightsByDate(LocalDate date){
+        for(Ticket ticket : ticketList){
+            if(ticket.getDate().equals(date)){
+                System.out.println(ticket.toString());
+            }
+        }
     }
 
 }

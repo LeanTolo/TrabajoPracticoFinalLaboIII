@@ -8,6 +8,7 @@ import com.company.user.User;
 //import org.graalvm.compiler.asm.sparc.SPARCAssembler;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,14 +55,16 @@ public class Main {
 
 */
 
-//        Gold avion = new Gold(0,0,5,0, MotorType.HELICE);
-//        Silver avion1 = new Silver(0,0,5,0, MotorType.HELICE);
-//        Bronze avion2 = new Bronze(0,0,5,0, MotorType.HELICE);
-//        Request request = new Request();
-//        request.addAirplaneToList(avion);
-//        request.addAirplaneToList(avion1);
-//        request.addAirplaneToList(avion2);
-//        request.generateTicket();
-//        request.showTreeset();
+        Gold avion = new Gold(0,0,5,0, MotorType.HELICE);
+        Silver avion1 = new Silver(0,0,5,0, MotorType.HELICE);
+        Bronze avion2 = new Bronze(0,0,5,0, MotorType.HELICE);
+        Request request = new Request();
+        request.addAirplaneToList(avion);
+        request.addAirplaneToList(avion1);
+        request.addAirplaneToList(avion2);
+        request.generateTicket();
+        request.generateTicket();
+
+        request.showFlightsByDate(LocalDate.of(2020,1,1));
     }
 }
