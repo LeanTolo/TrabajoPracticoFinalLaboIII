@@ -28,6 +28,10 @@ public abstract class Airplane{
         location = City.CORDOBA;
     }
 
+    public Airplane() {
+
+    }
+
     protected void setFixedFee(int fixedFee) {
         this.fixedFee = fixedFee;
     }

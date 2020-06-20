@@ -1,6 +1,7 @@
 package com.company.user;
 
 import com.company.IjsonManagement.IjsonManagement;
+import com.company.airplane.Airplane;
 import com.company.airplane.Bronze;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -19,6 +20,8 @@ public class User implements IjsonManagement<User> {
     private int age;
     private UUID id;
     private String password;
+    private double amountSpent;
+    private Airplane bestClass;
 
     public User(){}
 
@@ -82,14 +85,14 @@ public class User implements IjsonManagement<User> {
 
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", surName='" + surName + '\'' +
-                ", dni=" + dni +
-                ", age=" + age +
-                ", id=" + id +
-                ", password='" + password + '\'' +
-                '}';
+        return "--- User ---" +
+                "\nName:" + name +
+                "\nSurName:" + surName +
+                "\nDni:" + dni +
+                "\nAge:" + age +
+                "\nId:" + id +
+                "\nPassword:" + password+
+                "\n------------";
     }
 
 
@@ -125,7 +128,7 @@ public class User implements IjsonManagement<User> {
                 ArrayList<User> userArrayList = new ArrayList<>();
                 userArrayList.add(this);
                 mapper.writeValue(file, userArrayList);
-                System.out.println("--- Imprimiento en archivo ---\n");
+               // System.out.println("--- Imprimiento en archivo ---\n");
             } else {
                 ArrayList<User> userArrayList = new ArrayList<User>(readFile());
                 userArrayList.add(this);
@@ -142,7 +145,7 @@ public class User implements IjsonManagement<User> {
         ObjectMapper mapper = new ObjectMapper();
 
         if(file.exists()) {
-            System.out.println("--- Contenido del Archivo ---");
+            //System.out.println("--- Contenido del Archivo ---");
             try {
 
                 User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects

@@ -1,4 +1,5 @@
 package com.company;
+import com.company.tickets.Ticket;
 import com.company.user.Functions;
 import com.company.user.User;
 
@@ -6,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Menu {
     List<User> users = new ArrayList<>();
@@ -24,7 +26,10 @@ public class Menu {
                 //Switch case en Java
                 switch (option) {
                     case 1:
-                        login();
+                        User run = loginUser();
+                        if(run != null){
+                            userMenu(run);
+                        }
                         break;
                     case 2:
                         if (loginAdmin() == 0){
@@ -87,6 +92,7 @@ public class Menu {
         newUser.setPassword(data.next());
         System.out.println("\nIngrese su Edad: ");
         newUser.setAge(data.nextInt());
+        newUser.setId(UUID.randomUUID());
         System.out.println("\nLos datos Ingresados son:"+newUser.toString()+"\nIngrese 0  para cambiar los datos, o cualquier numero para continuar:");
         int input = data.nextInt();
         if (input != 0) {
@@ -124,24 +130,55 @@ public class Menu {
         return add;
     }
 
-    public void login(){
-        Scanner scan = new Scanner(System.in);
-        String contraseña;
-        boolean pass;
-        int res=0;
-        User logUser = null;
-        if (logUser == null){
-            System.out.println("Ingrese DNI:");
-            //logUser = AeroTaxiSystem.validateUser(scan.nextInt());
-        }
-        do{
-            System.out.println("Ingrese contraseña:");
-            pass = scan.nextLine().equals(logUser.getPassword());
-            if (!pass)
-                System.out.println("Contraseña Incorrecta");
-        } while(!pass);
+//    public void login(){
+//        Scanner scan = new Scanner(System.in);
+//        String contraseña;
+//        boolean pass;
+//        int res=0;
+//        User logUser = null;
+//        if (logUser == null){
+//            System.out.println("Ingrese DNI:");
+//            //logUser = AeroTaxiSystem.validateUser(scan.nextInt());
+//        }
+//        do{
+//            System.out.println("Ingrese contraseña:");
+//            pass = scan.nextLine().equals(logUser.getPassword());
+//            if (!pass)
+//                System.out.println("Contraseña Incorrecta");
+//        } while(!pass);
+//
+//       userMenu(logUser);
+//    }
 
-       userMenu(logUser);
+    public User loginUser() throws IOException {
+        Scanner data = new Scanner(System.in);
+        User newUser = new User();
+        System.out.println("\nIngrese su Usuario: ");
+        newUser.setDni(data.nextInt());
+        System.out.println("\nIngrese su contraseña: ");
+        newUser.setPassword(data.next());
+        User res = logUser(newUser);
+        if(res!= null){
+            System.out.println("Ingreso exitoso, bienvenido "+res.getName());
+        }else{
+            System.out.println("La cuenta o contraseña ingresada no es valida, por favor, intente nuevamente");
+        }
+        return res;
+    }
+
+    public User logUser (User request) throws IOException {
+        User res =  null;
+        Functions helper  = new Functions();
+        users = helper.readFile();
+        for (User element:users) {
+            if (element.getDni()==request.getDni()){
+                if (element.getPassword().equals(request.getPassword())){
+                    res = element;
+                    break;
+                }
+            }
+        }
+        return res;
     }
 
 
@@ -154,7 +191,8 @@ public class Menu {
             opt = scan.nextInt();
             switch (opt) {
                 case 1:
-                    // solicitar vuelo
+                    Request fly = new Request();
+                    fly.generateTicket();
                     break;
                 case 2:
                     //cancelar vuelo
@@ -198,7 +236,7 @@ public class Menu {
     }
 
 
-    public void adminMenu() {
+    public void adminMenu() throws IOException {
         int opt = 0;
         do {
             printAdminMenu();
@@ -206,10 +244,12 @@ public class Menu {
             opt = scan.nextInt();
             switch (opt) {
                 case 1:
+
                     //Listado de Vuelos
                     break;
                 case 2:
-                    //Listado de Clientes
+                    Functions helper = new Functions();
+                    helper.showFile();
                     break;
                 case 3:
                     //Ver Destino
