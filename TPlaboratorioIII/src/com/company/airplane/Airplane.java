@@ -25,6 +25,7 @@ public abstract class Airplane{
         this.maxVelocity = maxVelocity;
         this.motorType = motorType;
         this.dates = new HashSet<>();
+        location = City.CORDOBA;
     }
 
     protected void setFixedFee(int fixedFee) {
@@ -49,6 +50,22 @@ public abstract class Airplane{
 
     public int getFixedFee() {
         return fixedFee;
+    }
+
+    public double getFuelCapacity() {
+        return fuelCapacity;
+    }
+
+    public City getLocation() {
+        return location;
+    }
+
+    public double getMaxVelocity() {
+        return maxVelocity;
+    }
+
+    public MotorType getMotorType() {
+        return motorType;
     }
 
     @Override

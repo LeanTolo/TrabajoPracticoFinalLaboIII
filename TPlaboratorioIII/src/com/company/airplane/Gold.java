@@ -1,7 +1,9 @@
 package com.company.airplane;
 
 import com.company.IjsonManagement.IjsonManagement;
+import com.company.tickets.City;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -13,9 +15,14 @@ public class Gold extends Airplane implements IjsonManagement<Gold> {
     private boolean wifiConnection;
     public Gold(double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
         super(fuelCapacity, costPerKm, maxPassengers, maxVelocity, motorType);
+        wifiConnection = true;
         setFixedFee(6000);
     }
 
+
+    public boolean getWifiConnection(){
+        return wifiConnection;
+    }
 
     @Override
     public List<Gold> readFile () throws IOException {

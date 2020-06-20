@@ -1,13 +1,16 @@
 package com.company;
 
 import com.company.airplane.Airplane;
+import com.company.airplane.Bronze;
 import com.company.airplane.Silver;
 import com.company.tickets.City;
 import com.company.tickets.Ticket;
+import com.company.user.Functions;
 
 import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
+import java.util.function.Function;
 
 public class Request {
     private List<Ticket> ticketList;
@@ -33,27 +36,37 @@ public class Request {
         }
     } //Agrega un avion a la lista
 
-    private void showAvailableAirplanes(int passengers,LocalDate date){
+    private int showAvailableAirplanes(int passengers,LocalDate date){
         int i = 0;
+        int o = 0;
         for(Airplane plane : airplanesList){
             if(!(plane.getDates().contains(date)) && plane.getMaxPassengers() >= passengers){
                 System.out.println(i+":"+plane.toString());
+                o++;
             }
             i++;
         }
+        return o;
     } //Muestra los aviones disponibles en una fecha indicada
 
     private Airplane chooseAirplane(int passengers,LocalDate date){
-        showAvailableAirplanes(passengers,date);
+        int i = showAvailableAirplanes(passengers,date);
         int op;
-        do{
-            op = enterNumber();
-            if(op<0 && op>airplanesList.size()){
-                System.out.println("Ingrese un valor valido");
-            }
-        }while (op<0 && op>airplanesList.size()-1);
-        airplanesList.get(op).addDate(date);
-        return airplanesList.get(op);
+        Airplane plane;
+        if(i != 0){
+            do{
+                op = enterNumber();
+                if(op<0 || op>=airplanesList.size()){
+                    System.out.println("Ingrese un valor valido");
+                }
+                System.out.println(airplanesList.size());
+            }while (op<0 || op>=airplanesList.size());
+            airplanesList.get(op).addDate(date);
+            plane = airplanesList.get(op);
+        }else{
+            plane = null;
+        }
+        return plane;
     } //Se elige un avion de la lista, se le asigna la fecha y se retorna ese avion
 
     //4. Ahora el usuario debe seleccionar un avión. El sistema se encargará de
@@ -67,6 +80,9 @@ public class Request {
         City destination = chooseDestination(origin);
         int passengers = choosePassengersQuantity();
         Airplane airplane = chooseAirplane(passengers,date);
+        if(airplane == null){
+            System.out.println("No hay aviones disponibles para esa cantidad de pasajeros...");
+        }
         Ticket ticket = new Ticket(date,origin,destination,passengers,airplane);
         System.out.println(ticket.toString());
         System.out.println("GENERATE TICKET?");

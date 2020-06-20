@@ -1,23 +1,16 @@
 package com.company;
 
-import com.company.airplane.Bronze;
-import com.company.airplane.Gold;
-import com.company.airplane.MotorType;
-import com.company.airplane.Silver;
-import com.company.user.User;
+import com.company.airplane.*;
 //import org.graalvm.compiler.asm.sparc.SPARCAssembler;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Menu menu = new Menu();
-        menu.startMenu();
+        //Menu menu = new Menu();
+        //menu.startMenu();
 
 
 //        User testUSUARIO = new User("Lean", "Tolo", 111111, 22, "123456");
@@ -55,16 +48,19 @@ public class Main {
 
 */
 
-        Gold avion = new Gold(0,0,5,0, MotorType.HELICE);
-        Silver avion1 = new Silver(0,0,5,0, MotorType.HELICE);
+        Gold avion = new Gold(150,300,5,5000, MotorType.HELICE);
+        //Silver avion1 = new Silver(0,0,5,0, MotorType.HELICE);
         Bronze avion2 = new Bronze(0,0,5,0, MotorType.HELICE);
         Request request = new Request();
-        request.addAirplaneToList(avion);
-        request.addAirplaneToList(avion1);
-        request.addAirplaneToList(avion2);
-        request.generateTicket();
-        request.generateTicket();
+        //request.addAirplaneToList(avion);
+        //request.generateTicket();
+       // System.out.println(avion.toString());
+        avion.addToFile();
+        //avion.showFile();
+        //request.generateTicket();
+        //request.generateTicket();
+        //request.generateTicket();
 
-        request.showFlightsByDate(LocalDate.of(2020,1,1));
+        //request.showFlightsByDate(LocalDate.of(2020,1,1));
     }
 }
