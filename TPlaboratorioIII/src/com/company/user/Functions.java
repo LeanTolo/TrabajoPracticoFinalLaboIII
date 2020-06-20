@@ -10,6 +10,8 @@ import java.util.List;
 
 public class Functions implements IjsonManagement<Functions> {
 
+
+
     @Override
     public List readFile() throws IOException {
         List<User> usersFromJson = null;
@@ -35,7 +37,23 @@ public class Functions implements IjsonManagement<Functions> {
     }
 
     @Override
-    public void showFile() throws IOException {
+    public void showFile () throws IOException {
+        File file = new File("Users.json");
+        ObjectMapper mapper = new ObjectMapper();
 
+        if(file.exists()) {
+            System.out.println("--- Contenido del Archivo ---");
+            try {
+
+                User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
+                List<User> users = Arrays.asList(mapper.readValue(file, User[].class)); // convert JSON array to List of objects
+                users.stream().forEach(x -> System.out.println(x)); // show lists of objects
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            System.out.println("Archivo vacio");
+        }
     }
 }
