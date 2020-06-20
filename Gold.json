@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-[{"fuelCapacity":150.0,"costPerKm":300.0,"maxPassengers":5,"maxVelocity":5000.0,"motorType":"HELICE","fixedFee":6000,"location":"CORDOBA","dates":[],"wifiConnection":true}]
-=======
-[{"costPerKm":0.0,"maxPassengers":5,"fixedFee":6000,"dates":[]}]
->>>>>>> 2f52524264b01a8d087ce2aad04329ed9823d442
+[{"fuelCapacity":150.0,"costPerKm":300.0,"maxPassengers":5,"maxVelocity":5000.0,"motorType":"HELICE","fixedFee":6000,"location":"CORDOBA","dates":[],"wifiConnection":true},{"fuelCapacity":150.0,"costPerKm":300.0,"maxPassengers":5,"maxVelocity":5000.0,"motorType":"HELICE","fixedFee":6000,"location":"CORDOBA","dates":[],"wifiConnection":true},{"fuelCapacity":1550.0,"costPerKm":300.0,"maxPassengers":5,"maxVelocity":5000.0,"motorType":"HELICE","fixedFee":6000,"location":"CORDOBA","dates":[],"wifiConnection":true},{"fuelCapacity":150.0,"costPerKm":300.0,"maxPassengers":5,"maxVelocity":5000.0,"motorType":"HELICE","fixedFee":6000,"location":"CORDOBA","dates":[],"wifiConnection":true},{"fuelCapacity":1550.0,"costPerKm":300.0,"maxPassengers":5,"maxVelocity":5000.0,"motorType":"HELICE","fixedFee":6000,"location":"CORDOBA","dates":[],"wifiConnection":true}]

@@ -1,4 +1,5 @@
 package com.company;
+import com.company.airplane.Airplane;
 import com.company.tickets.Ticket;
 import com.company.user.Functions;
 import com.company.user.User;
@@ -244,8 +245,11 @@ public class Menu {
             opt = scan.nextInt();
             switch (opt) {
                 case 1:
-
-                    //Listado de Vuelos
+                    Functions loader = new Functions();
+                    List<Airplane> planes = loader.readfileAirplanes();
+                    for (Airplane a:planes) {
+                        System.out.println(a.toString());
+                    }
                     break;
                 case 2:
                     Functions helper = new Functions();

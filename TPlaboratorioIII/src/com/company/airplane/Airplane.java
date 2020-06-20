@@ -74,14 +74,15 @@ public abstract class Airplane{
 
     @Override
     public String toString() {
-        return "Airplane{" +
-                "fuelCapacity=" + fuelCapacity +
-                ", costPerKm=" + costPerKm +
-                ", maxPassengers=" + maxPassengers +
-                ", maxVelocity=" + maxVelocity +
-                ", motorType=" + motorType +
-                ", fixedFee=" + fixedFee +
-                ", location=" + location +
-                '}';
+        return "--- Airplane ---" +
+                "\nFuelCapacity:" + fuelCapacity +
+                "\nCostPerKm:" + costPerKm +
+                "\nMaxPassengers:" + maxPassengers +
+                "\nMaxVelocity:" + maxVelocity +
+                "\nMotorType:" + motorType +
+                "\nFixedFee:" + fixedFee +
+                "\nLocation:" + location +
+                "\nDates:"+dates+
+                "----------------";
     }
 }
