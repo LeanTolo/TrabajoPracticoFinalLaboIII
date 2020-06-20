@@ -27,6 +27,10 @@ public abstract class Airplane{
         this.dates = new HashSet<>();
     }
 
+    public Airplane() {
+
+    }
+
     protected void setFixedFee(int fixedFee) {
         this.fixedFee = fixedFee;
     }

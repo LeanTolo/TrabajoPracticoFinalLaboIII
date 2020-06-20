@@ -11,9 +11,15 @@ import java.util.List;
 
 public class Gold extends Airplane implements IjsonManagement<Gold> {
     private boolean wifiConnection;
+
+
     public Gold(double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
         super(fuelCapacity, costPerKm, maxPassengers, maxVelocity, motorType);
         setFixedFee(6000);
+    }
+
+    public Gold() {
+        super();
     }
 
 

@@ -1,16 +1,76 @@
 package com.company.user;
 
 import com.company.IjsonManagement.IjsonManagement;
+import com.company.airplane.Airplane;
+import com.company.airplane.Bronze;
+import com.company.airplane.Gold;
+import com.company.airplane.Silver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Functions implements IjsonManagement<Functions> {
 
+//    public List readfileAirplanes () throws IOException {
+//        List<Airplane> airplanes = new ArrayList<>();
+//        Gold gold = new Gold();
+//        Silver silver = new Silver();
+//        Bronze bronze = new Bronze();
+//        List<Gold> golds = gold.readFile();
+//        for (Gold a: golds){
+//            airplanes.add(a);
+//        }
+//        List<Silver> silvers = silver.readFile();
+//        for (Silver a: silvers){
+//            airplanes.add(a);
+//        }
+//        List<Bronze> bronzes = bronze.readFile();
+//        for (Bronze a: bronzes){
+//            airplanes.add(a);
+//        }
+//
+//        return airplanes;
+//    }
 
+    public List readfileAirplanes () throws IOException {
+        List<Airplane> airplanes = new ArrayList<>();
+        airplanes = AddGoldtoArray(airplanes);
+        airplanes = AddSilvertoArray(airplanes);
+        airplanes = AddBronzetoArray(airplanes);
+
+        return airplanes;
+    }
+
+    public List AddGoldtoArray (List<Airplane> airplanes) throws IOException {
+        Gold gold = new Gold();
+        List<Gold> golds = gold.readFile();
+        for (Gold a: golds){
+            airplanes.add(a);
+        }
+        return airplanes;
+    }
+
+    public List AddSilvertoArray (List<Airplane> airplanes) throws IOException {
+        Silver silv = new Silver();
+        List<Silver> silvers = silv.readFile();
+        for (Silver a: silvers){
+            airplanes.add(a);
+        }
+        return airplanes;
+    }
+
+    public List AddBronzetoArray (List<Airplane> airplanes) throws IOException {
+        Bronze bron = new Bronze();
+        List<Bronze> bronzes = bron.readFile();
+        for (Bronze a: bronzes){
+            airplanes.add(a);
+        }
+        return airplanes;
+    }
 
     @Override
     public List readFile() throws IOException {

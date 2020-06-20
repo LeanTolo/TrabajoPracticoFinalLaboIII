@@ -11,6 +11,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Bronze extends Airplane implements IjsonManagement<Bronze> {
+
+    public Bronze(){
+
+    }
+
     public Bronze(double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
         super(fuelCapacity, costPerKm, maxPassengers, maxVelocity, motorType);
         setFixedFee(3000);
