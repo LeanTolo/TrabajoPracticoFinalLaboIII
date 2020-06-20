@@ -67,23 +67,31 @@ public class Request {
             plane = null;
         }
         return plane;
-    } //Se elige un avion de la lista, se le asigna la fecha y se retorna ese avion
+    } //Se elige un avion de la lista, se le asigna la fecha y se retorna ese avion, si no se pudo retorna null
 
     //4. Ahora el usuario debe seleccionar un avión. El sistema se encargará de
     //mostrar los aviones disponibles para esa fecha y el usuario elige el deseado.
     //5. Por último, el sistema debe mostrar el costo total del vuelo y el usuario
     //deberá confirmar para generar el vuelo.
 
-    public void generateTicket(){
+    private Ticket createTicket(){
         LocalDate date = chooseDate();
         City origin = chooseOriginTest();
         City destination = chooseDestination(origin);
         int passengers = choosePassengersQuantity();
         Airplane airplane = chooseAirplane(passengers,date);
+        Ticket ticket;
         if(airplane == null){
             System.out.println("No hay aviones disponibles para esa cantidad de pasajeros...");
+            ticket = null;
+        }else{
+            ticket = new Ticket(date,origin,destination,passengers,airplane);
         }
-        Ticket ticket = new Ticket(date,origin,destination,passengers,airplane);
+
+        return ticket;
+    } //Genera un ticket, si no se pudo retorna null;
+
+    private void addTicketToList(Ticket ticket){
         System.out.println(ticket.toString());
         System.out.println("GENERATE TICKET?");
         System.out.println("1:YES \n2:NO");
@@ -95,6 +103,23 @@ public class Request {
             this.ticketList.add(ticket);
         }else{
             System.out.println("TICKET DISCARDED");
+        }
+    }//Nos da la opcion de agregar o no un ticket a la lista luego de mostrarnoslo
+
+    public void generateTicket(){
+        Ticket ticket = createTicket();
+        if(ticket!=null){
+            addTicketToList(ticket);
+        }else{
+            System.out.println("Desea probar otra fecha?");
+            System.out.println("1:YES \n2:NO");
+            int op;
+            do{
+                op = enterNumber();
+            }while(op<1 && op>2);
+            if(op == 1){
+                generateTicket();
+            }
         }
     }
 
