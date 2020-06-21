@@ -9,11 +9,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.HashSet;
 
 public abstract class Airplane{
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
+
+
     private HashSet<LocalDate> dates;
     private String serialNumber;
     private double fuelCapacity;
@@ -22,7 +23,6 @@ public abstract class Airplane{
     private double maxVelocity;
     private MotorType motorType;
     private int fixedFee;
-    private City location;
 
 
 
@@ -34,7 +34,6 @@ public abstract class Airplane{
         this.maxVelocity = maxVelocity;
         this.motorType = motorType;
         this.dates = new HashSet<>();
-        location = City.CORDOBA;
     }
 
     public Airplane() {
@@ -69,9 +68,6 @@ public abstract class Airplane{
         return fuelCapacity;
     }
 
-    public City getLocation() {
-        return location;
-    }
 
     public double getMaxVelocity() {
         return maxVelocity;
@@ -94,7 +90,6 @@ public abstract class Airplane{
                 "\nMaxVelocity:" + maxVelocity +
                 "\nMotorType:" + motorType +
                 "\nFixedFee:" + fixedFee +
-                "\nLocation:" + location +
                 "\nDates:"+dates+
                 "----------------";
     }
