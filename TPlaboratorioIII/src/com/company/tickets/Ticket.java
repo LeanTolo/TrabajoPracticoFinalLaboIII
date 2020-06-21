@@ -10,13 +10,11 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.*;
 
 public class Ticket implements Comparable,IjsonManagement<Ticket> {
-//    @JsonDeserialize(using = LocalDateDeserializer.class)
-//    @JsonSerialize(using = LocalDateSerializer.class)
+
     private LocalDate date;
     private City origin;
     private City destination;
