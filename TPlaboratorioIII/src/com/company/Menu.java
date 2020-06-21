@@ -195,7 +195,9 @@ public class Menu {
             switch (opt) {
                 case 1:
                     Request fly = new Request();
-                    fly.generateTicket();
+                    double amount;
+                    amount = fly.generateTicket();
+                    user.setAmountSpent(amount);
                     break;
                 case 2:
                     //cancelar vuelo
