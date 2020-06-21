@@ -1,11 +1,5 @@
 package com.company.airplane;
 
-import com.company.LocalDateJson.LocalDateDeserializer;
-import com.company.LocalDateJson.LocalDateSerializer;
-import com.company.tickets.City;
-import com.company.tickets.Ticket;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 import java.time.LocalDate;

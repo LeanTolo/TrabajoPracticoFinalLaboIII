@@ -2,11 +2,15 @@ package com.company.airplane;
 
 import com.company.IjsonManagement.IjsonManagement;
 import com.company.tickets.City;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +40,7 @@ public class Gold extends Airplane implements IjsonManagement<Gold> {
         List<Gold> goldsFromJson = null;
         File file = new File("Gold.json");
         ObjectMapper mapper = new ObjectMapper();
-
+        mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             try {
                 Gold[] goldsArray = mapper.readValue(file,Gold[].class); // convert JSON array to Array objects
@@ -54,6 +58,7 @@ public class Gold extends Airplane implements IjsonManagement<Gold> {
     public void addToFile() {
         File file = new File("Gold.json");
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
         try {
             if (file.createNewFile()) {
                 ArrayList<Gold> goldsArrayList = new ArrayList<>();

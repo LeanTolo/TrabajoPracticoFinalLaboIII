@@ -1,1 +1,1 @@
-[{"date":"2020-01-01","origin":null,"destination":null,"passengers":0,"price":0.0,"distance":1050,"airplane":null},{"date":"2020-01-01","origin":"CORDOBA","destination":"SANTIAGO","passengers":4,"price":0.0,"distance":1050,"airplane":null}]
+[{"date":[2020,1,1],"origin":"CORDOBA","destination":"SANTIAGO","passengers":4,"price":0.0,"distance":1050,"airplane":null}]

@@ -1,13 +1,12 @@
 package com.company.tickets;
 
 import com.company.IjsonManagement.IjsonManagement;
-import com.company.LocalDateJson.LocalDateDeserializer;
-import com.company.LocalDateJson.LocalDateSerializer;
+
 import com.company.airplane.Airplane;
-import com.company.airplane.Gold;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,8 +15,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Ticket implements Comparable,IjsonManagement<Ticket> {
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
+//    @JsonDeserialize(using = LocalDateDeserializer.class)
+//    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate date;
     private City origin;
     private City destination;
@@ -124,7 +123,7 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
         List<Ticket> ticketsFromJson = null;
         File file = new File("Ticket.json");
         ObjectMapper mapper = new ObjectMapper();
-
+        mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             try {
                 Ticket[] ticketsArray = mapper.readValue(file,Ticket[].class); // convert JSON array to Array objects
@@ -142,6 +141,7 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
     public void addToFile() {
         File file = new File("Ticket.json");
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
         try {
             if (file.createNewFile()) {
                 ArrayList<Ticket> ticketsArrayList = new ArrayList<>();
