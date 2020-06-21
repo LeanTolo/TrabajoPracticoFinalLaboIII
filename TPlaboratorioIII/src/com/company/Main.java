@@ -17,7 +17,8 @@ public class Main {
 
 //        Menu menu = new Menu();
 //        menu.startMenu();
-
+        Request request = new Request();
+        request.generateTicket();
 
     }
 }

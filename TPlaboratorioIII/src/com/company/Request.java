@@ -108,11 +108,13 @@ public class Request {
         }
     }//Nos da la opcion de agregar o no un ticket a la lista luego de mostrarnoslo
 
-    public void generateTicket(){
+    public double generateTicket(){
         Ticket ticket = createTicket();
+        double amountSpent = 0;
         if(ticket!=null){
             addTicketToList(ticket);
             ticket.addToFile();
+            amountSpent += ticket.getPrice();
         }else{
             System.out.println("Desea probar otra fecha?");
             System.out.println("1:YES \n2:NO");
@@ -124,6 +126,7 @@ public class Request {
                 generateTicket();
             }
         }
+        return amountSpent;
     }
 
     public void showTicketList(){

@@ -35,7 +35,7 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
         this.passengers = passengers;
         this.airplane = airplane;
         setDistance();
-        //setPrice();
+        setPrice();
     }
 
     private void setDistance() {

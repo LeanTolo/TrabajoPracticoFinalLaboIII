@@ -75,10 +75,16 @@ public class Functions implements IjsonManagement<Functions> {
     }
 
     public List readFileTickets() throws IOException {
+        List<Ticket> ticketList = new ArrayList<>();
+        ticketList = addTicketToList(ticketList);
+        return ticketList;
+    }
+
+    public List addTicketToList(List<Ticket> ticketList) throws IOException{
         Ticket ticket = new Ticket();
-        List<Ticket> ticketList = ticket.readFile();
-        if(ticketList == null){
-            ticketList = new ArrayList<>();
+        List<Ticket> tickets = ticket.readFile();
+        for (Ticket ticket1 : tickets){
+            ticketList.add(ticket1);
         }
         return ticketList;
     }
