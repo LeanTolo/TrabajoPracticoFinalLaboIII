@@ -3,6 +3,8 @@ package com.company.user;
 import com.company.IjsonManagement.IjsonManagement;
 import com.company.airplane.Airplane;
 import com.company.airplane.Bronze;
+import com.company.airplane.Gold;
+import com.company.airplane.Silver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
@@ -21,7 +23,7 @@ public class User implements IjsonManagement<User> {
     private UUID id;
     private String password;
     private double amountSpent;
-    private Airplane bestClass;
+    private String bestClass;
 
     public User(){}
 
@@ -82,17 +84,44 @@ public class User implements IjsonManagement<User> {
         return password;
     }
 
+    public void setAmountSpent(double spent){ this.amountSpent += spent;}
+
+    public Double getAmount(){return amountSpent;};
+
+    public void setBestClass(Airplane best){this.bestClass = checkClass(best);}
+
+    public String getBestClass(){return bestClass;}
+
+    public String  checkClass(Airplane best){
+        if(best instanceof Gold){
+            return "Gold";
+        }else {
+            if (best instanceof Silver) {
+                return "Silver";
+            }else {
+                if (best instanceof Bronze){
+                    return "Bronze";
+                }
+                else{
+                    return "";
+                }
+            }
+        }
+    }
+
 
 
     @Override
     public String toString() {
-        return "--- User ---" +
+        return "\n--- User ---" +
                 "\nName:" + name +
                 "\nSurName:" + surName +
                 "\nDni:" + dni +
                 "\nAge:" + age +
                 "\nId:" + id +
                 "\nPassword:" + password+
+                "\nTotal Spent:" + amountSpent+
+                "\nBest Plane:" + bestClass+
                 "\n------------";
     }
 

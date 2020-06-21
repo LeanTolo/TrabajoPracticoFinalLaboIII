@@ -246,11 +246,17 @@ public class Request {
         return city;
     }
 
-    public void showFlightsByDate(LocalDate date){
-        for(Ticket ticket : ticketList){
-            if(ticket.getDate().equals(date)){
-                System.out.println(ticket.toString());
+    public void showFlightsByDate(){
+        LocalDate date = chooseDate();
+        if(ticketList!= null) {
+            System.out.println("--- Tickets by Date: "+date+"---\n");
+            for (Ticket ticket : ticketList) {
+                if (ticket.getDate().equals(date)) {
+                    System.out.println(ticket.toString());
+                }
             }
+        }else {
+            System.out.println("Actualmente no hay tickets para mostrar");
         }
     }
 

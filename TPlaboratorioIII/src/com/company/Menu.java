@@ -4,6 +4,7 @@ import com.company.tickets.Ticket;
 import com.company.user.Functions;
 import com.company.user.User;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -245,11 +246,9 @@ public class Menu {
             opt = scan.nextInt();
             switch (opt) {
                 case 1:
-                    Functions loader = new Functions();
-                    List<Airplane> planes = loader.readfileAirplanes();
-                    for (Airplane a:planes) {
-                        System.out.println(a.toString());
-                    }
+                    Request showTick = new Request();
+                    showTick.showFlightsByDate();
+
                     break;
                 case 2:
                     Functions helper = new Functions();
@@ -258,6 +257,17 @@ public class Menu {
                 case 3:
                     //Ver Destino
                     break;
+
+                case 4:
+                    Functions loader = new Functions();
+                    List<Airplane> planes = loader.readfileAirplanes();
+                    for (Airplane a:planes) {
+                        System.out.println(a.toString());
+                    }
+                    break;
+                case 5:
+//                    Functions AddPlanes = new Functions();
+
             }
         } while(opt != 0);
     }
@@ -270,6 +280,8 @@ public class Menu {
                                                         // La categoría del mejor avión utilizado ( Gold, Silver o Bronze ).
                                                         //Total gastado de todos sus vuelos.
         System.out.println("3. Ver Destinos y Distancias");
+        System.out.println("4. Listado de Aviones");
+        System.out.println("5. Agregar Aviones");
         System.out.println("0. Exit");
         System.out.println("*************************************");
     }

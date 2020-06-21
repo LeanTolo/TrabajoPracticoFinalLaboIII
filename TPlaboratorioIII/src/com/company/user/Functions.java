@@ -1,6 +1,7 @@
 package com.company.user;
 
 import com.company.IjsonManagement.IjsonManagement;
+import com.company.Request;
 import com.company.airplane.Airplane;
 import com.company.airplane.Bronze;
 import com.company.airplane.Gold;
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -87,6 +89,22 @@ public class Functions implements IjsonManagement<Functions> {
             ticketList.add(ticket1);
         }
         return ticketList;
+    }
+
+//    Reimplementado en Request
+//    public void ShowTicketsByDate(LocalDate date){
+//        List<Ticket> ticketList = readFileTickets();
+//        System.out.println("--- Ticket  by Date "+date+"---");
+//        for (Ticket ticket : ticketList) {
+//            if (ticket.getDate().equals(date)) {
+//                System.out.println(ticket.toString()+"\n------------");
+//            }
+//        }
+//    }
+
+    public boolean AddPlane (){
+        System.out.println("Selecciona el tipo de avion a crear");
+        return true;
     }
 
     @Override

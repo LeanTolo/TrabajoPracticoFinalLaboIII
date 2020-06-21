@@ -15,10 +15,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-//        Menu menu = new Menu();
-//        menu.startMenu();
-        Request request = new Request();
-        request.generateTicket();
-
+        Menu menu = new Menu();
+        menu.startMenu();
     }
 }
