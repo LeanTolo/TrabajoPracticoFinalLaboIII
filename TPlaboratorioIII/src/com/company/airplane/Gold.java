@@ -29,6 +29,9 @@ public class Gold extends Airplane implements IjsonManagement<Gold> {
         super();
     }
 
+    public void setWifiConnection(boolean set){
+        this.wifiConnection = set;
+    }
 
     public boolean getWifiConnection(){
         return wifiConnection;

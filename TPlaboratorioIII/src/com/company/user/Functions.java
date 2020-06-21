@@ -2,20 +2,14 @@ package com.company.user;
 
 import com.company.IjsonManagement.IjsonManagement;
 import com.company.Request;
-import com.company.airplane.Airplane;
-import com.company.airplane.Bronze;
-import com.company.airplane.Gold;
-import com.company.airplane.Silver;
+import com.company.airplane.*;
 import com.company.tickets.Ticket;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Timer;
+import java.util.*;
 
 public class Functions implements IjsonManagement<Functions> {
 
@@ -96,9 +90,141 @@ public class Functions implements IjsonManagement<Functions> {
 //        }
 //    }
 
-    public boolean AddPlane (){
-        System.out.println("Selecciona el tipo de avion a crear");
-        return true;
+    public boolean AddGoldPlane (){
+        boolean res = false;
+        Scanner data = new Scanner(System.in);
+        Gold golden = new Gold();
+        System.out.println("\nIngrese SerialNumber:");
+        golden.setSerialNumber(data.nextLine());
+        System.out.println("\nIngrese capacidad de combustible: ");
+        golden.setFuelCapacity(data.nextDouble());
+        System.out.println("\nIngrese costo por kilometros: ");
+        golden.setCostPerKm(data.nextDouble());
+        System.out.println("\nIngrese cantidad maxima de pasajeros: ");
+        golden.setMaxPassengers(data.nextInt());
+        System.out.println("\nIngrese velocidad maxima:");
+        golden.setMaxVelocity(data.nextDouble());
+        System.out.println("\nIngrese Fixed Fee: ");
+        golden.setFixedFee(data.nextInt());
+        System.out.println("\nPosee WIFI? 1-SI  AnyNumber-NO:");
+        if (data.nextInt()==1){
+            golden.setWifiConnection(true);
+        }else{
+            golden.setWifiConnection(false);
+        }
+        System.out.println("\nIngrese tipo de motor\n1-REACCION\n2-HELICE\n3-PISTONES:");
+        int motor = data.nextInt();
+
+        while (optionCheck(motor) == false){
+            System.out.println("\nOpcion ingresada no valida.");
+            System.out.println("\nIngrese tipo de motor\n1-REACCION\n2-HELICE\n3PISTONES:");
+            motor = data.nextInt();
+        }
+        golden.setMotorType(getMotor(motor));
+        System.out.println("\nLos datos Ingresados son:\n"+golden.toString()+"\nIngrese 0  para cambiar los datos, o cualquier numero para continuar:");
+        int input = data.nextInt();
+        if (input != 0) {
+            golden.addToFile();
+            res = true;
+        } else {
+            AddGoldPlane();
+        }
+        return res;
+    }
+
+    public boolean AddSilverPlane (){
+        boolean res = false;
+        Scanner data = new Scanner(System.in);
+        Silver silverNew  = new Silver();
+        System.out.println("\nIngrese SerialNumber:");
+        silverNew.setSerialNumber(data.nextLine());
+        System.out.println("\nIngrese capacidad de combustible: ");
+        silverNew.setFuelCapacity(data.nextDouble());
+        System.out.println("\nIngrese costo por kilometros: ");
+        silverNew.setCostPerKm(data.nextDouble());
+        System.out.println("\nIngrese cantidad maxima de pasajeros: ");
+        silverNew.setMaxPassengers(data.nextInt());
+        System.out.println("\nIngrese velocidad maxima:");
+        silverNew.setMaxVelocity(data.nextDouble());
+        System.out.println("\nIngrese Fixed Fee: ");
+        silverNew.setFixedFee(data.nextInt());
+        System.out.println("\nIngrese tipo de motor\n1-REACCION\n2-HELICE\n3-PISTONES:");
+        int motor = data.nextInt();
+        while (optionCheck(motor) == false){
+            System.out.println("\nOpcion ingresada no valida.");
+            System.out.println("\nIngrese tipo de motor\n1-REACCION\n2-HELICE\n3PISTONES:");
+            motor = data.nextInt();
+        }
+        silverNew.setMotorType(getMotor(motor));
+        System.out.println("\nLos datos Ingresados son:\n"+silverNew.toString()+"\nIngrese 0  para cambiar los datos, o cualquier numero para continuar:");
+        int input = data.nextInt();
+        if (input != 0) {
+            silverNew.addToFile();
+            res = true;
+        } else {
+            AddSilverPlane();
+        }
+        return res;
+    }
+
+    public boolean AddBronzePlane (){
+        boolean res = false;
+        Scanner data = new Scanner(System.in);
+        Bronze bronzeNew  = new Bronze();
+        System.out.println("\nIngrese SerialNumber:");
+        bronzeNew.setSerialNumber(data.nextLine());
+        System.out.println("\nIngrese capacidad de combustible: ");
+        bronzeNew.setFuelCapacity(data.nextDouble());
+        System.out.println("\nIngrese costo por kilometros: ");
+        bronzeNew.setCostPerKm(data.nextDouble());
+        System.out.println("\nIngrese cantidad maxima de pasajeros: ");
+        bronzeNew.setMaxPassengers(data.nextInt());
+        System.out.println("\nIngrese velocidad maxima:");
+        bronzeNew.setMaxVelocity(data.nextDouble());
+        System.out.println("\nIngrese Fixed Fee: ");
+        bronzeNew.setFixedFee(data.nextInt());
+        System.out.println("\nIngrese tipo de motor\n1-REACCION\n2-HELICE\n3-PISTONES:");
+        int motor = data.nextInt();
+        while (optionCheck(motor) == false){
+            System.out.println("\nOpcion ingresada no valida.");
+            System.out.println("\nIngrese tipo de motor\n1-REACCION\n2-HELICE\n3PISTONES:");
+            motor = data.nextInt();
+        }
+        bronzeNew.setMotorType(getMotor(motor));
+        System.out.println("\nLos datos Ingresados son:\n"+bronzeNew.toString()+"\nIngrese 0  para cambiar los datos, o cualquier numero para continuar:");
+        int input = data.nextInt();
+        if (input != 0) {
+            bronzeNew.addToFile();
+            res = true;
+        } else {
+            AddBronzePlane();
+        }
+        return res;
+    }
+
+
+
+    public Boolean optionCheck (int choice){
+        if (choice == 1 || choice == 2 || choice == 3){
+            return true;
+        }
+        return false;
+    }
+
+    public MotorType getMotor(int choice){
+        MotorType res = null;
+        if (choice == 1){
+            res = MotorType.REACCION;
+        }else {
+            if (choice == 2) {
+                res = MotorType.HELICE;
+            } else {
+                if (choice == 3) {
+                    res = MotorType.PISTONES;
+                }
+            }
+        }
+        return res;
     }
 
     @Override

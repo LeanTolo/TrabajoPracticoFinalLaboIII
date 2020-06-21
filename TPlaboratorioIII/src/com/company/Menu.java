@@ -1,5 +1,6 @@
 package com.company;
 import com.company.airplane.Airplane;
+import com.company.airplane.Gold;
 import com.company.tickets.Ticket;
 import com.company.user.Functions;
 import com.company.user.User;
@@ -266,8 +267,30 @@ public class Menu {
                     }
                     break;
                 case 5:
-//                    Functions AddPlanes = new Functions();
-
+                    Functions add = new Functions();
+                    do {
+                        printFlightMenu();
+                        Scanner scanFligth = new Scanner(System.in);
+                        opt = scanFligth.nextInt();
+                        switch (opt) {
+                            case 1:
+                                if(add.AddGoldPlane() == true){
+                                    System.out.println("Avion agregado con exito");
+                                }
+                                break;
+                            case 2:
+                                if(add.AddSilverPlane() == true){
+                                    System.out.println("Avion agregado con exito");
+                                }
+                                break;
+                            case 3:
+                                if(add.AddBronzePlane() == true){
+                                    System.out.println("Avion agregado con exito");
+                                }
+                                break;
+                        }
+                    } while(opt != 0);
+                break;
             }
         } while(opt != 0);
     }
@@ -283,6 +306,16 @@ public class Menu {
         System.out.println("4. Listado de Aviones");
         System.out.println("5. Agregar Aviones");
         System.out.println("0. Exit");
+        System.out.println("*************************************");
+    }
+
+    public void printFlightMenu(){
+        clearScreen();
+        System.out.println("*************************************");
+        System.out.println("\n1. GOLD PLANE");
+        System.out.println("\n2. SILVER PLANE");
+        System.out.println("\n3. BRONZE PLANE");
+        System.out.println("\n0. Exit");
         System.out.println("*************************************");
     }
 }

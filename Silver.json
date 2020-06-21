@@ -1,1 +1,1 @@
-[{"dates":[],"fuelCapacity":15.0,"costPerKm":524.0,"maxPassengers":24,"maxVelocity":21.0,"motorType":"HELICE","fixedFee":4000}]
+[{"dates":[],"serialNumber":null,"fuelCapacity":15.0,"costPerKm":524.0,"maxPassengers":24,"maxVelocity":21.0,"motorType":"HELICE","fixedFee":4000},{"dates":null,"serialNumber":"SAL-666","fuelCapacity":75.0,"costPerKm":26.0,"maxPassengers":22,"maxVelocity":260.0,"motorType":"HELICE","fixedFee":4000}]

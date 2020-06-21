@@ -34,9 +34,31 @@ public abstract class Airplane{
 
     }
 
-    protected void setFixedFee(int fixedFee) {
+    public void setFixedFee(int fixedFee) {
         this.fixedFee = fixedFee;
     }
+
+
+    public void setFuelCapacity(double fuel){
+        this.fuelCapacity = fuel;
+    }
+
+    public void setCostPerKm (double cost){
+        this.costPerKm = cost;
+    }
+
+    public void setMaxPassengers (int max){
+        this.maxPassengers = max;
+    }
+
+    public void setMaxVelocity (double vel){
+        this.maxVelocity = vel;
+    }
+
+    public void setMotorType ( MotorType mot){
+        this.motorType = mot;
+    }
+
 
     public HashSet<LocalDate> getDates() {
         return dates;
@@ -78,6 +100,7 @@ public abstract class Airplane{
     @Override
     public String toString() {
         return "--- Airplane ---" +
+                "\nSerialNumber:" + serialNumber +
                 "\nFuelCapacity:" + fuelCapacity +
                 "\nCostPerKm:" + costPerKm +
                 "\nMaxPassengers:" + maxPassengers +
@@ -85,6 +108,14 @@ public abstract class Airplane{
                 "\nMotorType:" + motorType +
                 "\nFixedFee:" + fixedFee +
                 "\nDates:"+dates+
-                "----------------";
+                "\n----------------";
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public String getSerialNumber(){
+        return this.serialNumber;
     }
 }

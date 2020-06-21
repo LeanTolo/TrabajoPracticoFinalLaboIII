@@ -1,1 +1,1 @@
-[{"dates":[],"fuelCapacity":54.0,"costPerKm":124.0,"maxPassengers":10,"maxVelocity":2100.0,"motorType":"PISTONES","fixedFee":3000}]
+[{"dates":[],"serialNumber":null,"fuelCapacity":54.0,"costPerKm":124.0,"maxPassengers":10,"maxVelocity":2100.0,"motorType":"PISTONES","fixedFee":3000},{"dates":null,"serialNumber":"BRZ-963","fuelCapacity":66.0,"costPerKm":12.0,"maxPassengers":45,"maxVelocity":300.0,"motorType":"REACCION","fixedFee":3}]
