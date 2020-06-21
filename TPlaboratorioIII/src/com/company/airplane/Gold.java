@@ -82,7 +82,7 @@ public class Gold extends Airplane implements IjsonManagement<Gold> {
     public void showFile () throws IOException {
         File file = new File("Gold.json");
         ObjectMapper mapper = new ObjectMapper();
-
+        mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             System.out.println("--- Contenido del Archivo ---");
             try {

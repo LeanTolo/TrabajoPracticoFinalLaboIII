@@ -81,7 +81,7 @@ public class Request {
         City origin = chooseOriginTest();
         City destination = chooseDestination(origin);
         int passengers = choosePassengersQuantity();
-        Airplane airplane = chooseAirplane(passengers,date);
+        Airplane airplane = castSubClassToSuperAirplane(chooseAirplane(passengers,date));
         Ticket ticket;
         if(airplane == null){
             System.out.println("No hay aviones disponibles para esa cantidad de pasajeros...");
@@ -89,7 +89,6 @@ public class Request {
         }else{
             ticket = new Ticket(date,origin,destination,passengers,airplane);
         }
-
         return ticket;
     } //Genera un ticket, si no se pudo retorna null;
 
@@ -259,5 +258,13 @@ public class Request {
             System.out.println("Actualmente no hay tickets para mostrar");
         }
     }
+
+
+    public Airplane castSubClassToSuperAirplane(Airplane plane){
+        Airplane a = new Airplane(plane.getSerialNumber(),plane.getFuelCapacity(),
+                plane.getCostPerKm(),plane.getMaxPassengers(),plane.getMaxVelocity(),
+                plane.getMotorType());
+        return a;
+    } //Casting wasnt enough, needed this to save a regular airplane in ticket despite it being a G/S/B
 
 }

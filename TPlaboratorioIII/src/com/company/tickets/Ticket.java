@@ -160,7 +160,7 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
     public void showFile () throws IOException {
         File file = new File("Ticket.json");
         ObjectMapper mapper = new ObjectMapper();
-
+        mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             System.out.println("--- Contenido del Archivo ---");
             try {

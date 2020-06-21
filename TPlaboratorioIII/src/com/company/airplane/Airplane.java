@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 
-public  class Airplane{
+public   class Airplane{
 
 
     private HashSet<LocalDate> dates;
@@ -20,7 +20,7 @@ public  class Airplane{
 
 
 
-    protected Airplane(String serialNumber,double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
+    public Airplane(String serialNumber,double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
         this.dates = new HashSet<>();
         this.serialNumber = serialNumber;
         this.fuelCapacity = fuelCapacity;
@@ -39,6 +39,9 @@ public  class Airplane{
     }
 
 
+    public void setDatesEmpty() {
+        this.dates = new HashSet<>();
+    }
 
     public void setFuelCapacity(double fuel){
         this.fuelCapacity = fuel;
@@ -96,6 +99,8 @@ public  class Airplane{
     public void setDates() {
         this.dates.add(LocalDate.of(2020,1,1));
     } //TESTING
+
+
 
     @Override
     public String toString() {

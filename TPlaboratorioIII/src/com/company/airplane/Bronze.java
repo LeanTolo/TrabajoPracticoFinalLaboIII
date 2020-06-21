@@ -68,7 +68,7 @@ public class Bronze extends Airplane implements IjsonManagement<Bronze> {
     public void showFile () throws IOException {
         File file = new File("Bronze.json");
         ObjectMapper mapper = new ObjectMapper();
-
+        mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             System.out.println("--- Contenido del Archivo ---");
             try {

@@ -5,6 +5,7 @@ import com.company.Request;
 import com.company.airplane.*;
 import com.company.tickets.Ticket;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,8 +47,10 @@ public class Functions implements IjsonManagement<Functions> {
     public List AddGoldtoArray (List<Airplane> airplanes) throws IOException {
         Gold gold = new Gold();
         List<Gold> golds = gold.readFile();
-        for (Gold a: golds){
-            airplanes.add(a);
+        if(golds != null){
+            for (Gold a: golds){
+                airplanes.add(a);
+            }
         }
         return airplanes;
     }
@@ -55,8 +58,10 @@ public class Functions implements IjsonManagement<Functions> {
     public List AddSilvertoArray (List<Airplane> airplanes) throws IOException {
         Silver silv = new Silver();
         List<Silver> silvers = silv.readFile();
-        for (Silver a: silvers){
-            airplanes.add(a);
+        if(silvers != null){
+            for (Silver a: silvers){
+                airplanes.add(a);
+            }
         }
         return airplanes;
     }
@@ -64,8 +69,10 @@ public class Functions implements IjsonManagement<Functions> {
     public List AddBronzetoArray (List<Airplane> airplanes) throws IOException {
         Bronze bron = new Bronze();
         List<Bronze> bronzes = bron.readFile();
-        for (Bronze a: bronzes){
-            airplanes.add(a);
+        if(bronzes != null){
+            for (Bronze a: bronzes){
+                airplanes.add(a);
+            }
         }
         return airplanes;
     }
@@ -79,8 +86,10 @@ public class Functions implements IjsonManagement<Functions> {
     public List addTicketToList(List<Ticket> ticketList) throws IOException{
         Ticket ticket = new Ticket();
         List<Ticket> tickets = ticket.readFile();
-        for (Ticket ticket1 : tickets){
-            ticketList.add(ticket1);
+        if(tickets != null){
+            for (Ticket ticket1 : tickets){
+                ticketList.add(ticket1);
+            }
         }
         return ticketList;
     }
@@ -100,6 +109,9 @@ public class Functions implements IjsonManagement<Functions> {
         boolean res = false;
         Scanner data = new Scanner(System.in);
         Gold golden = new Gold();
+
+        golden.setDatesEmpty();
+
         System.out.println("\nIngrese SerialNumber:");
         golden.setSerialNumber(data.nextLine());
         System.out.println("\nIngrese capacidad de combustible: ");
@@ -142,6 +154,9 @@ public class Functions implements IjsonManagement<Functions> {
         boolean res = false;
         Scanner data = new Scanner(System.in);
         Silver silverNew  = new Silver();
+
+        silverNew.setDatesEmpty();
+
         System.out.println("\nIngrese SerialNumber:");
         silverNew.setSerialNumber(data.nextLine());
         System.out.println("\nIngrese capacidad de combustible: ");
@@ -177,6 +192,9 @@ public class Functions implements IjsonManagement<Functions> {
         boolean res = false;
         Scanner data = new Scanner(System.in);
         Bronze bronzeNew  = new Bronze();
+
+        bronzeNew.setDatesEmpty();
+
         System.out.println("\nIngrese SerialNumber:");
         bronzeNew.setSerialNumber(data.nextLine());
         System.out.println("\nIngrese capacidad de combustible: ");
@@ -238,7 +256,7 @@ public class Functions implements IjsonManagement<Functions> {
         List<User> usersFromJson = null;
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
-
+        mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             try {
                 User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
@@ -261,7 +279,7 @@ public class Functions implements IjsonManagement<Functions> {
     public void showFile () throws IOException {
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
-
+        mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             System.out.println("--- Contenido del Archivo ---");
             try {

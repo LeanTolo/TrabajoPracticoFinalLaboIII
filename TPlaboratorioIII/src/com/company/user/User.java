@@ -6,6 +6,7 @@ import com.company.airplane.Bronze;
 import com.company.airplane.Gold;
 import com.company.airplane.Silver;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -135,7 +136,7 @@ public class User implements IjsonManagement<User> {
         List<User> usersFromJson = null;
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
-
+        mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             try {
                 User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
@@ -153,6 +154,7 @@ public class User implements IjsonManagement<User> {
     public void addToFile() {
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
         try {
             if (file.createNewFile()) {
                 ArrayList<User> userArrayList = new ArrayList<>();
@@ -173,7 +175,7 @@ public class User implements IjsonManagement<User> {
     public void showFile () throws IOException {
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
-
+        mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             //System.out.println("--- Contenido del Archivo ---");
             try {
