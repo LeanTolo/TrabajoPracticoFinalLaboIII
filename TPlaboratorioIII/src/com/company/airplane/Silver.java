@@ -2,6 +2,7 @@ package com.company.airplane;
 
 import com.company.IjsonManagement.IjsonManagement;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class Silver extends Airplane implements IjsonManagement<Silver> {
         List<Silver> silversFromJson = null;
         File file = new File("Silver.json");
         ObjectMapper mapper = new ObjectMapper();
-
+        mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             try {
                 Silver[] silversArray = mapper.readValue(file,Silver[].class); // convert JSON array to Array objects
@@ -45,6 +46,7 @@ public class Silver extends Airplane implements IjsonManagement<Silver> {
     public void addToFile() {
         File file = new File("Silver.json");
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
         try {
             if (file.createNewFile()) {
                 ArrayList<Silver> silversArrayList = new ArrayList<>();

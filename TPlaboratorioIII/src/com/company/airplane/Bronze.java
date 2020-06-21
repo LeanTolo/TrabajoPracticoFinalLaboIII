@@ -3,6 +3,7 @@ package com.company.airplane;
 import com.company.IjsonManagement.IjsonManagement;
 import com.company.user.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class Bronze extends Airplane implements IjsonManagement<Bronze> {
         List<Bronze> bronzesFromJson = null;
         File file = new File("Bronze.json");
         ObjectMapper mapper = new ObjectMapper();
-
+        mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             try {
                 Bronze[] bronzesArray = mapper.readValue(file,Bronze[].class); // convert JSON array to Array objects
@@ -46,6 +47,7 @@ public class Bronze extends Airplane implements IjsonManagement<Bronze> {
     public void addToFile() {
         File file = new File("Bronze.json");
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
         try {
             if (file.createNewFile()) {
                 ArrayList<Bronze> bronzesArrayList = new ArrayList<>();
