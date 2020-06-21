@@ -5,6 +5,7 @@ import com.company.airplane.Airplane;
 import com.company.airplane.Bronze;
 import com.company.airplane.Gold;
 import com.company.airplane.Silver;
+import com.company.tickets.Ticket;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
 
 public class Functions implements IjsonManagement<Functions> {
 
@@ -70,6 +72,15 @@ public class Functions implements IjsonManagement<Functions> {
             airplanes.add(a);
         }
         return airplanes;
+    }
+
+    public List readFileTickets() throws IOException {
+        Ticket ticket = new Ticket();
+        List<Ticket> ticketList = ticket.readFile();
+        if(ticketList == null){
+            ticketList = new ArrayList<>();
+        }
+        return ticketList;
     }
 
     @Override

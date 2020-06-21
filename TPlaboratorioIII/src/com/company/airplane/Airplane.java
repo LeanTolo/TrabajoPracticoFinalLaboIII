@@ -1,14 +1,21 @@
 package com.company.airplane;
 
+import com.company.LocalDateJson.LocalDateDeserializer;
+import com.company.LocalDateJson.LocalDateSerializer;
 import com.company.tickets.City;
 import com.company.tickets.Ticket;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 
 import java.time.LocalDate;
 import java.util.HashSet;
 
 public abstract class Airplane{
-
-
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    private HashSet<LocalDate> dates;
+    private String serialNumber;
     private double fuelCapacity;
     private double costPerKm;
     private int maxPassengers;
@@ -16,9 +23,11 @@ public abstract class Airplane{
     private MotorType motorType;
     private int fixedFee;
     private City location;
-    private HashSet<LocalDate> dates;
 
-    protected Airplane(double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
+
+
+    protected Airplane(String serialNumber,double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
+        this.serialNumber = serialNumber;
         this.fuelCapacity = fuelCapacity;
         this.costPerKm = costPerKm;
         this.maxPassengers = maxPassengers;
@@ -71,6 +80,10 @@ public abstract class Airplane{
     public MotorType getMotorType() {
         return motorType;
     }
+
+    public void setDates() {
+        this.dates.add(LocalDate.of(2020,1,1));
+    } //TESTING
 
     @Override
     public String toString() {

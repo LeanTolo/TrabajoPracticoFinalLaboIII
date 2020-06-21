@@ -184,7 +184,7 @@ public class Menu {
 
 
 
-    public void userMenu(User user) {
+    public void userMenu(User user) throws IOException {
         int opt = 0;
         do {
             printUserMenu();

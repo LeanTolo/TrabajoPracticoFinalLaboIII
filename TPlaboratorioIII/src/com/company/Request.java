@@ -7,6 +7,7 @@ import com.company.tickets.City;
 import com.company.tickets.Ticket;
 import com.company.user.Functions;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -16,9 +17,10 @@ public class Request {
     private List<Ticket> ticketList;
     private List<Airplane> airplanesList;
 
-    public Request() {
-        ticketList = new ArrayList<>();
-        airplanesList = new ArrayList<>();
+    public Request() throws IOException {
+        Functions helper = new Functions();
+        ticketList = helper.readFileTickets();
+        airplanesList = helper.readfileAirplanes();
     }
 
 
@@ -110,6 +112,7 @@ public class Request {
         Ticket ticket = createTicket();
         if(ticket!=null){
             addTicketToList(ticket);
+            ticket.addToFile();
         }else{
             System.out.println("Desea probar otra fecha?");
             System.out.println("1:YES \n2:NO");

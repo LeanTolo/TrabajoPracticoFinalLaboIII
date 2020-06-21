@@ -15,8 +15,8 @@ public class Gold extends Airplane implements IjsonManagement<Gold> {
     private boolean wifiConnection;
 
 
-    public Gold(double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
-        super(fuelCapacity, costPerKm, maxPassengers, maxVelocity, motorType);
+    public Gold(String serialNumber,double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
+        super(serialNumber,fuelCapacity, costPerKm, maxPassengers, maxVelocity, motorType);
         wifiConnection = true;
         setFixedFee(6000);
     }

@@ -1,9 +1,13 @@
 package com.company.tickets;
 
 import com.company.IjsonManagement.IjsonManagement;
+import com.company.LocalDateJson.LocalDateDeserializer;
+import com.company.LocalDateJson.LocalDateSerializer;
 import com.company.airplane.Airplane;
 import com.company.airplane.Gold;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +16,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Ticket implements Comparable,IjsonManagement<Ticket> {
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate date;
     private City origin;
     private City destination;
@@ -30,7 +36,7 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
         this.passengers = passengers;
         this.airplane = airplane;
         setDistance();
-        setPrice();
+        //setPrice();
     }
 
     private void setDistance() {
@@ -78,6 +84,18 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
 
     public Airplane getAirplane() {
         return airplane;
+    }
+
+    public City getDestination() {
+        return destination;
+    }
+
+    public City getOrigin() {
+        return origin;
+    }
+
+    public int getPassengers() {
+        return passengers;
     }
 
     @Override

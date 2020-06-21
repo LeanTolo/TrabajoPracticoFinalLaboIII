@@ -15,8 +15,8 @@ public class Silver extends Airplane implements IjsonManagement<Silver> {
 
     }
 
-    public Silver(double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
-        super(fuelCapacity, costPerKm, maxPassengers, maxVelocity, motorType);
+    public Silver(String serialNumber,double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
+        super(serialNumber,fuelCapacity, costPerKm, maxPassengers, maxVelocity, motorType);
         setFixedFee(4000);
     }
 
