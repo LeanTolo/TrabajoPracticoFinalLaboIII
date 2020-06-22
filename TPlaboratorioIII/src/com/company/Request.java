@@ -264,6 +264,11 @@ public class Request {
         Airplane a = new Airplane(plane.getSerialNumber(),plane.getFuelCapacity(),
                 plane.getCostPerKm(),plane.getMaxPassengers(),plane.getMaxVelocity(),
                 plane.getMotorType());
+        if(!plane.getDates().isEmpty()){
+            for(LocalDate date : plane.getDates()){
+                a.addDate(date);
+            }
+        }
         return a;
     } //Casting wasnt enough, needed this to save a regular airplane in ticket despite it being a G/S/B
 
