@@ -2,10 +2,12 @@ package com.company;
 
 import com.company.airplane.Airplane;
 import com.company.airplane.Bronze;
+import com.company.airplane.Gold;
 import com.company.airplane.Silver;
 import com.company.tickets.City;
 import com.company.tickets.Ticket;
 import com.company.user.Functions;
+//import jdk.vm.ci.meta.Local;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -107,12 +109,26 @@ public class Request {
         }
     }//Nos da la opcion de agregar o no un ticket a la lista luego de mostrarnoslo
 
+
+
+    private void updatePlaneList(String serialNumber, LocalDate date){
+        Functions helper = new Functions();
+        for(Airplane plane : airplanesList){
+            if(serialNumber == plane.getSerialNumber()){
+                plane.addDate(date);
+                helper.updateGold((Gold)plane);
+            }
+        }
+    }
+
+
     public double generateTicket(int userDni) throws IOException {
         Ticket ticket = createTicket(userDni);
         double amountSpent = 0;
         if(ticket!=null){
             addTicketToList(ticket);
             ticket.addToFile();
+            updatePlaneList(ticket.getAirplaneSerialNumber(),ticket.getDate());
             amountSpent += ticket.getPrice();
         }else{
             System.out.println("Desea probar otra fecha?");

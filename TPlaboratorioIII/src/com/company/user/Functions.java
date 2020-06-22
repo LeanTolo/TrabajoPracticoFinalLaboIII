@@ -125,6 +125,29 @@ public class Functions implements IjsonManagement<Functions> {
         }
     }
 
+    public void updateGold (Gold toupdate){
+        File file = new File("Gold.json");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        try {
+            Gold aux = new Gold();
+            ArrayList<Gold> goldArrayList = new ArrayList<Gold>(aux.readFile());
+            int i = 0;
+            for (Gold a:goldArrayList) {
+                if(a.equals(toupdate)){
+                    goldArrayList.set(i,toupdate);
+                }
+                i++;
+            }
+            for (Gold a:goldArrayList) {
+                System.out.println(a.toString());
+            }
+            mapper.writeValue(file, goldArrayList);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 //    Reimplementado en Request
 //    public void ShowTicketsByDate(LocalDate date){
 //        List<Ticket> ticketList = readFileTickets();
