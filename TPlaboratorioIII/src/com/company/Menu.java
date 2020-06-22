@@ -1,7 +1,5 @@
 package com.company;
 import com.company.airplane.Airplane;
-import com.company.airplane.Gold;
-import com.company.tickets.Ticket;
 import com.company.user.Functions;
 import com.company.user.User;
 
@@ -102,7 +100,6 @@ public class Menu {
         if (input != 0) {
             if (AddNewUSer(newUser)) {
                 clearScreen();
-                printMenuOptions();
             }
         } else {
             register();
