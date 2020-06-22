@@ -276,12 +276,13 @@ public class Menu {
                     }
                     break;
                 case 5:
+                    int option;
                     Functions add = new Functions();
                     do {
                         printFlightMenu();
                         Scanner scanFligth = new Scanner(System.in);
-                        opt = scanFligth.nextInt();
-                        switch (opt) {
+                        option = scanFligth.nextInt();
+                        switch (option) {
                             case 1:
                                 if(add.AddGoldPlane() == true){
                                     System.out.println("Avion agregado con exito");
@@ -298,7 +299,7 @@ public class Menu {
                                 }
                                 break;
                         }
-                    } while(opt != 0);
+                    } while(option != 0);
                 break;
             }
         } while(opt != 0);

@@ -1,1 +1,1 @@
-[{"dates":[[2020,4,2]],"serialNumber":"bd12","fuelCapacity":150.0,"costPerKm":150.0,"maxPassengers":5,"maxVelocity":1500.0,"motorType":"REACCION","fixedFee":150,"wifiConnection":true}]
+[{"dates":[[2020,4,2]],"serialNumber":"bd12","fuelCapacity":150.0,"costPerKm":150.0,"maxPassengers":5,"maxVelocity":1500.0,"motorType":"REACCION","fixedFee":150,"wifiConnection":true},{"dates":[],"serialNumber":"LAS-456","fuelCapacity":250.0,"costPerKm":26.0,"maxPassengers":44,"maxVelocity":260.0,"motorType":"REACCION","fixedFee":3,"wifiConnection":true}]
