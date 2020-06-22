@@ -95,4 +95,9 @@ public class Gold extends Airplane implements IjsonManagement<Gold>{
                 System.out.println("File is Empty");
             }
         }
+
+    @Override
+    public String toString() {
+        return super.toString()+"\nWifiConnection:"+this.getWifiConnection()+"\nClass: Gold"+"\n----------------";
     }
+}

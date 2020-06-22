@@ -86,4 +86,8 @@ public class Silver extends Airplane implements IjsonManagement<Silver>{
             }
         }
 
+    @Override
+    public String toString() {
+        return super.toString()+"\nClass: Silver"+"\n----------------";
     }
+}

@@ -84,7 +84,7 @@ public class Request {
         Airplane airplane = chooseAirplane(passengers,date);
         Ticket ticket;
         if(airplane == null){
-            System.out.println("No hay aviones disponibles para esa cantidad de pasajeros...");
+            System.out.println("No tenemos aviones disponibles con esa capacidad de pasajeros");
             ticket = null;
         }else{
             ticket = new Ticket(date,origin,destination,passengers,userDni,airplane.getSerialNumber());
@@ -178,7 +178,7 @@ public class Request {
                 iterator = enumSet.iterator();
             }
         }while(city == null) ;
-        System.out.println(city);
+        System.out.println("Usted desea ir a "+city+"\n_________________");
         return city;
     }
     private City chooseOriginTest(){
@@ -200,7 +200,7 @@ public class Request {
                 iterator = enumSet.iterator();
             }
         }while(city == null);
-        System.out.println(city.name());
+        System.out.println("Usted esta saliendo de "+city.name()+"\n__________________");
         return city;
     } //Evolucion de un codigo horrible a algo hermoso y escalable
 

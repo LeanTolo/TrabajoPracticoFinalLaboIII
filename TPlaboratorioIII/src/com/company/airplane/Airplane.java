@@ -113,8 +113,7 @@ public   class Airplane{
                 "\nMaxVelocity:" + maxVelocity +
                 "\nMotorType:" + motorType +
                 "\nFixedFee:" + fixedFee +
-                "\nDates:"+dates+
-                "\n----------------";
+                "\nDates:"+dates;
     }
 
     public void setSerialNumber(String serialNumber) {

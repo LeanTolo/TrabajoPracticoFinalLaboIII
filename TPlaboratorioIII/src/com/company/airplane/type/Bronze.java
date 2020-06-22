@@ -86,4 +86,9 @@ public class Bronze extends Airplane implements IjsonManagement<Bronze>{
             }
         }
 
+        @Override
+        public String toString() {
+            return super.toString()+"\nClass: Bronze"+"\n----------------";
+        }
+
     }

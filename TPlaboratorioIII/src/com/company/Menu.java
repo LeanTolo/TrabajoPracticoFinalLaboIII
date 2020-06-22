@@ -80,6 +80,7 @@ public class Menu {
                 "0.- EXIT\n************************");
     }
 
+    //Formulario para el registro de usuarios
     public void register() throws IOException {
         Scanner data = new Scanner(System.in);
         User newUser = new User();
@@ -106,6 +107,7 @@ public class Menu {
         }
     }
 
+    //validacion del id ingresado, se chequea el dni no esta en la db
     public boolean validateNewUser (User tovalidate) throws IOException {
         boolean res= true;
         Functions helper  = new Functions();
@@ -123,7 +125,7 @@ public class Menu {
         return res;
     }
 
-
+    // Se agrega el user a User.json
     public boolean AddNewUSer (User toadd) throws IOException {
       boolean add = false;
       if(validateNewUser(toadd)){
@@ -156,6 +158,7 @@ public class Menu {
 //       userMenu(logUser);
 //    }
 
+    //Logueo de usuario
     public User loginUser() throws IOException {
         Scanner data = new Scanner(System.in);
         User newUser = new User();
@@ -172,6 +175,7 @@ public class Menu {
         return res;
     }
 
+    //chequeo de usuario ingresado, con los datos de la db
     public User logUser (User request) throws IOException {
         User res =  null;
         Functions helper  = new Functions();
@@ -188,7 +192,7 @@ public class Menu {
     }
 
 
-
+    //Funcion de menu para usuario
     public void userMenu(User user) throws IOException {
         int opt = 0;
         do {
@@ -213,7 +217,7 @@ public class Menu {
             }
         } while(opt != 0);
     }
-
+    //printeo de opciones
     public void printUserMenu(){
         clearScreen();
         System.out.println("*************************************");
@@ -244,7 +248,7 @@ public class Menu {
         return res;
     }
 
-
+    //funcion del menu admin
     public void adminMenu() throws IOException {
         int opt = 0;
         do {
