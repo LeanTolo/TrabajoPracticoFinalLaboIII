@@ -94,6 +94,28 @@ public class Functions implements IjsonManagement<Functions> {
         return ticketList;
     }
 
+    public void updateUser (User toupdate){
+        File file = new File("Users.json");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        try {
+            ArrayList<User> userArrayList = new ArrayList<User>(readFile());
+            int i = 0;
+            for (User a:userArrayList) {
+                if(a.getDni()==toupdate.getDni()){
+                    userArrayList.set(i,toupdate);
+                }
+                i++;
+            }
+            for (User a:userArrayList) {
+                System.out.println(a.toString());
+            }
+            mapper.writeValue(file, userArrayList);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 //    Reimplementado en Request
 //    public void ShowTicketsByDate(LocalDate date){
 //        List<Ticket> ticketList = readFileTickets();

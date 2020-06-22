@@ -96,6 +96,7 @@ public class Menu {
         System.out.println("\nIngrese su Edad: ");
         newUser.setAge(data.nextInt());
         newUser.setId(UUID.randomUUID());
+        newUser.setAmountSpent(0);
         System.out.println("\nLos datos Ingresados son:"+newUser.toString()+"\nIngrese 0  para cambiar los datos, o cualquier numero para continuar:");
         int input = data.nextInt();
         if (input != 0) {
@@ -112,14 +113,19 @@ public class Menu {
         boolean res= true;
         Functions helper  = new Functions();
         users = helper.readFile();
-        for (User element:users) {
-            if (element.getDni()==tovalidate.getDni()){
-                res=false;
-                break;
+        if (users != null) {
+            for (User element : users) {
+                if (element.getDni() == tovalidate.getDni()) {
+                    res = false;
+                    break;
+                }
             }
+        }else{
+            res = true;
         }
         return res;
     }
+
 
     public boolean AddNewUSer (User toadd) throws IOException {
       boolean add = false;
@@ -194,10 +200,12 @@ public class Menu {
             opt = scan.nextInt();
             switch (opt) {
                 case 1:
+                    Functions updater = new Functions();
                     Request fly = new Request();
                     double amount;
                     amount = fly.generateTicket();
                     user.setAmountSpent(amount);
+                    updater.updateUser(user);
                     break;
                 case 2:
                     //cancelar vuelo

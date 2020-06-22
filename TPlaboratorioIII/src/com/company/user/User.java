@@ -87,9 +87,9 @@ public class User implements IjsonManagement<User> {
 
     public void setAmountSpent(double spent){ this.amountSpent += spent;}
 
-    public Double getAmount(){return amountSpent;};
+    public Double getAmountSpent(){return amountSpent;}
 
-    public void setBestClass(Airplane best){this.bestClass = checkClass(best);}
+    public void setBestClass(String best){this.bestClass = best;}
 
     public String getBestClass(){return bestClass;}
 
