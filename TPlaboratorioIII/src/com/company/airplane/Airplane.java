@@ -5,6 +5,7 @@ package com.company.airplane;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 
 public   class Airplane{
 
@@ -122,5 +123,18 @@ public   class Airplane{
 
     public String getSerialNumber(){
         return this.serialNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Airplane airplane = (Airplane) o;
+        return serialNumber.equals(airplane.serialNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(serialNumber);
     }
 }
