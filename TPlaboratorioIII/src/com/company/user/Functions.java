@@ -35,6 +35,15 @@ public class Functions implements IjsonManagement<Functions> {
 //        return airplanes;
 //    }
 
+    public void showUserTickets(int userDni) throws IOException {
+        List<Ticket> ticketList = readFileTickets();
+        for(Ticket ticket : ticketList){
+            if(ticket.getUserDni() == userDni){
+                System.out.println(ticket.toString());
+            }
+        }
+    }
+
     public List readfileAirplanes () throws IOException {
         List<Airplane> airplanes = new ArrayList<>();
         airplanes = AddGoldtoArray(airplanes);

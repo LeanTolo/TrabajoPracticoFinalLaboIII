@@ -196,14 +196,14 @@ public class Menu {
         int opt = 0;
         do {
             printUserMenu();
+            Functions updater = new Functions();
             Scanner scan = new Scanner(System.in);
             opt = scan.nextInt();
             switch (opt) {
                 case 1:
-                    Functions updater = new Functions();
                     Request fly = new Request();
                     double amount;
-                    amount = fly.generateTicket();
+                    amount = fly.generateTicket(user.getDni());
                     user.setAmountSpent(amount);
                     updater.updateUser(user);
                     break;
@@ -211,6 +211,7 @@ public class Menu {
                     //cancelar vuelo
                     break;
                 case 3:
+                    updater.showUserTickets(user.getDni());
                     // ver reservas
                     break;
             }

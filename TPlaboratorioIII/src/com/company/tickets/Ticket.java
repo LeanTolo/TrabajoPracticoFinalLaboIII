@@ -21,17 +21,19 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
     private int passengers;
     private double price;
     private int distance;
+    private int userDni;
     private Airplane airplane;
 
 
     public Ticket(){};
 
-    public Ticket(LocalDate date, City origin, City destination, int passengers, Airplane airplane) {
+    public Ticket(LocalDate date, City origin, City destination, int passengers,int userDni, Airplane airplane) {
         this.date = date;
         this.origin = origin;
         this.destination = destination;
         this.passengers = passengers;
         this.airplane = airplane;
+        this.userDni = userDni;
         setDistance();
         setPrice();
     }
@@ -94,6 +96,11 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
     public int getPassengers() {
         return passengers;
     }
+
+    public int getUserDni() {
+        return userDni;
+    }
+
 
     @Override
     public int compareTo(Object o) {
