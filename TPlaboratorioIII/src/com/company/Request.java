@@ -1,9 +1,9 @@
 package com.company;
 
 import com.company.airplane.Airplane;
-import com.company.airplane.Bronze;
-import com.company.airplane.Gold;
-import com.company.airplane.Silver;
+import com.company.airplane.type.Gold;
+import com.company.airplane.type.Silver;
+import com.company.airplane.type.Bronze;
 import com.company.tickets.City;
 import com.company.tickets.Ticket;
 import com.company.user.Functions;
@@ -12,8 +12,6 @@ import com.company.user.Functions;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
-import java.util.function.Function;
 
 public class Request {
     private List<Ticket> ticketList;

@@ -2,20 +2,20 @@ package com.company.user;
 
 import com.company.IjsonManagement.IjsonManagement;
 import com.company.airplane.Airplane;
-import com.company.airplane.Bronze;
-import com.company.airplane.Gold;
-import com.company.airplane.Silver;
+import com.company.airplane.type.Bronze;
+import com.company.airplane.type.Gold;
+import com.company.airplane.type.Silver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-public class User implements IjsonManagement<User> {
+import static com.company.user.Functions.getList;
 
+public class User implements IjsonManagement<User> {
 
     private String name;
     private String surName;
@@ -110,8 +110,6 @@ public class User implements IjsonManagement<User> {
         }
     }
 
-
-
     @Override
     public String toString() {
         return "\n--- User ---" +
@@ -126,28 +124,9 @@ public class User implements IjsonManagement<User> {
                 "\n------------";
     }
 
-
-
-
-
     @Override
     public List<User> readFile () throws IOException {
-
-        List<User> usersFromJson = null;
-        File file = new File("Users.json");
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-        if(file.exists()) {
-            try {
-                User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
-                usersFromJson = Arrays.asList(mapper.readValue(file, User[].class)); // convert JSON array to List of objects
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }else{
-            System.out.println("File is Empty");
-        }
-        return usersFromJson;
+        return getList();
     }
 
     @Override
@@ -178,15 +157,7 @@ public class User implements IjsonManagement<User> {
         mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             //System.out.println("--- Contenido del Archivo ---");
-            try {
-
-                User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
-                List<User> users = Arrays.asList(mapper.readValue(file, User[].class)); // convert JSON array to List of objects
-                users.stream().forEach(x -> System.out.println(x)); // show lists of objects
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Functions.showFileDoubleCode(file, mapper);
         }else{
             System.out.println("Archivo vacio");
         }

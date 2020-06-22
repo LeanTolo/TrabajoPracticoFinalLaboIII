@@ -1,39 +1,19 @@
 package com.company.user;
 
 import com.company.IjsonManagement.IjsonManagement;
-import com.company.Request;
 import com.company.airplane.*;
+import com.company.airplane.type.Silver;
+import com.company.airplane.type.Gold;
+import com.company.airplane.type.Bronze;
 import com.company.tickets.Ticket;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.*;
 
 public class Functions implements IjsonManagement<Functions> {
-
-//    public List readfileAirplanes () throws IOException {
-//        List<Airplane> airplanes = new ArrayList<>();
-//        Gold gold = new Gold();
-//        Silver silver = new Silver();
-//        Bronze bronze = new Bronze();
-//        List<Gold> golds = gold.readFile();
-//        for (Gold a: golds){
-//            airplanes.add(a);
-//        }
-//        List<Silver> silvers = silver.readFile();
-//        for (Silver a: silvers){
-//            airplanes.add(a);
-//        }
-//        List<Bronze> bronzes = bronze.readFile();
-//        for (Bronze a: bronzes){
-//            airplanes.add(a);
-//        }
-//
-//        return airplanes;
-//    }
 
     public void showUserTickets(int userDni) throws IOException {
         List<Ticket> ticketList = readFileTickets();
@@ -57,9 +37,7 @@ public class Functions implements IjsonManagement<Functions> {
         Gold gold = new Gold();
         List<Gold> golds = gold.readFile();
         if(golds != null){
-            for (Gold a: golds){
-                airplanes.add(a);
-            }
+            airplanes.addAll(golds);
         }
         return airplanes;
     }
@@ -68,9 +46,7 @@ public class Functions implements IjsonManagement<Functions> {
         Silver silv = new Silver();
         List<Silver> silvers = silv.readFile();
         if(silvers != null){
-            for (Silver a: silvers){
-                airplanes.add(a);
-            }
+            airplanes.addAll(silvers);
         }
         return airplanes;
     }
@@ -79,9 +55,7 @@ public class Functions implements IjsonManagement<Functions> {
         Bronze bron = new Bronze();
         List<Bronze> bronzes = bron.readFile();
         if(bronzes != null){
-            for (Bronze a: bronzes){
-                airplanes.add(a);
-            }
+            airplanes.addAll(bronzes);
         }
         return airplanes;
     }
@@ -96,9 +70,7 @@ public class Functions implements IjsonManagement<Functions> {
         Ticket ticket = new Ticket();
         List<Ticket> tickets = ticket.readFile();
         if(tickets != null){
-            for (Ticket ticket1 : tickets){
-                ticketList.add(ticket1);
-            }
+            ticketList.addAll(tickets);
         }
         return ticketList;
     }
@@ -125,7 +97,7 @@ public class Functions implements IjsonManagement<Functions> {
         }
     }
 
-    public void updateGold (Gold toupdate){
+    public void updateGold (Gold toUpdate){
         File file = new File("Gold.json");
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
@@ -134,8 +106,8 @@ public class Functions implements IjsonManagement<Functions> {
             ArrayList<Gold> goldArrayList = new ArrayList<Gold>(aux.readFile());
             int i = 0;
             for (Gold a:goldArrayList) {
-                if(a.equals(toupdate)){
-                    goldArrayList.set(i,toupdate);
+                if(a.equals(toUpdate)){
+                    goldArrayList.set(i,toUpdate);
                 }
                 i++;
             }
@@ -148,16 +120,51 @@ public class Functions implements IjsonManagement<Functions> {
         }
     }
 
-//    Reimplementado en Request
-//    public void ShowTicketsByDate(LocalDate date){
-//        List<Ticket> ticketList = readFileTickets();
-//        System.out.println("--- Ticket  by Date "+date+"---");
-//        for (Ticket ticket : ticketList) {
-//            if (ticket.getDate().equals(date)) {
-//                System.out.println(ticket.toString()+"\n------------");
-//            }
-//        }
-//    }
+    public void updateSilver (Silver toUpdate){
+        File file = new File("Silver.json");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        try {
+            Silver aux = new Silver();
+            ArrayList<Silver> silverArrayList = new ArrayList<Silver>(aux.readFile());
+            int i = 0;
+            for (Silver a:silverArrayList) {
+                if(a.equals(toUpdate)){
+                    silverArrayList.set(i,toUpdate);
+                }
+                i++;
+            }
+            for (Silver a:silverArrayList) {
+                System.out.println(a.toString());
+            }
+            mapper.writeValue(file, silverArrayList);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateBronze (Bronze toUpdate){
+        File file = new File("Bronze.json");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        try {
+            Bronze aux = new Bronze();
+            ArrayList<Bronze> bronzeArrayList = new ArrayList<Bronze>(aux.readFile());
+            int i = 0;
+            for (Bronze a:bronzeArrayList) {
+                if(a.equals(toUpdate)){
+                    bronzeArrayList.set(i,toUpdate);
+                }
+                i++;
+            }
+            for (Bronze a:bronzeArrayList) {
+                System.out.println(a.toString());
+            }
+            mapper.writeValue(file, bronzeArrayList);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public boolean AddGoldPlane (){
         boolean res = false;
@@ -227,7 +234,7 @@ public class Functions implements IjsonManagement<Functions> {
         toAdd.setFixedFee(data.nextInt());
         System.out.println("\nIngrese tipo de motor\n1-REACCION\n2-HELICE\n3-PISTONES:");
         int motor = data.nextInt();
-        while (optionCheck(motor) == false){
+        while (!optionCheck(motor)){
             System.out.println("\nOpcion ingresada no valida.");
             System.out.println("\nIngrese tipo de motor\n1-REACCION\n2-HELICE\n3PISTONES:");
             motor = data.nextInt();
@@ -269,6 +276,10 @@ public class Functions implements IjsonManagement<Functions> {
 
     @Override
     public List readFile() throws IOException {
+        return getList();
+    }
+
+    static List getList() {
         List<User> usersFromJson = null;
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
@@ -298,17 +309,19 @@ public class Functions implements IjsonManagement<Functions> {
         mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             System.out.println("--- Contenido del Archivo ---");
-            try {
-
-                User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
-                List<User> users = Arrays.asList(mapper.readValue(file, User[].class)); // convert JSON array to List of objects
-                users.stream().forEach(x -> System.out.println(x)); // show lists of objects
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            showFileDoubleCode(file, mapper);
         }else{
             System.out.println("Archivo vacio");
+        }
+    }
+
+    static void showFileDoubleCode(File file, ObjectMapper mapper) {
+        try{
+            User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
+            List<User> users = Arrays.asList(mapper.readValue(file, User[].class)); // convert JSON array to List of objects
+            users.stream().forEach(x -> System.out.println(x)); // show lists of objects
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
