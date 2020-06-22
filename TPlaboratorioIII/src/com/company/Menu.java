@@ -212,7 +212,6 @@ public class Menu {
                     break;
                 case 3:
                     updater.showUserTickets(user.getDni());
-                    // ver reservas
                     break;
             }
         } while(opt != 0);
@@ -224,7 +223,6 @@ public class Menu {
         System.out.println("\n1. Solicitar Vuelo");
         System.out.println("2. Cancelar Vuelo");
         System.out.println("3. Ver Reservas");
-        System.out.println("100. Pedro fijate si van mas cosas");
         System.out.println("0. Salir");
         System.out.println("*************************************");
     }

@@ -76,18 +76,18 @@ public class Request {
     //5. Por último, el sistema debe mostrar el costo total del vuelo y el usuario
     //deberá confirmar para generar el vuelo.
 
-    private Ticket createTicket(int userDni){
+    private Ticket createTicket(int userDni) throws IOException {
         LocalDate date = chooseDate();
         City origin = chooseOriginTest();
         City destination = chooseDestination(origin);
         int passengers = choosePassengersQuantity();
-        Airplane airplane = castSubClassToSuperAirplane(chooseAirplane(passengers,date));
+        Airplane airplane = chooseAirplane(passengers,date);
         Ticket ticket;
         if(airplane == null){
             System.out.println("No hay aviones disponibles para esa cantidad de pasajeros...");
             ticket = null;
         }else{
-            ticket = new Ticket(date,origin,destination,passengers,userDni,airplane);
+            ticket = new Ticket(date,origin,destination,passengers,userDni,airplane.getSerialNumber());
         }
         return ticket;
     } //Genera un ticket, si no se pudo retorna null;
@@ -107,7 +107,7 @@ public class Request {
         }
     }//Nos da la opcion de agregar o no un ticket a la lista luego de mostrarnoslo
 
-    public double generateTicket(int userDni){
+    public double generateTicket(int userDni) throws IOException {
         Ticket ticket = createTicket(userDni);
         double amountSpent = 0;
         if(ticket!=null){

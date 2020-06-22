@@ -4,6 +4,7 @@ import com.company.IjsonManagement.IjsonManagement;
 
 import com.company.airplane.Airplane;
 
+import com.company.user.Functions;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -22,20 +23,26 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
     private double price;
     private int distance;
     private int userDni;
-    private Airplane airplane;
+
+    private String airplaneSerialNumber;
+    //private Airplane airplane;
 
 
     public Ticket(){};
 
-    public Ticket(LocalDate date, City origin, City destination, int passengers,int userDni, Airplane airplane) {
+    public Ticket(LocalDate date, City origin, City destination, int passengers,int userDni, String airplaneSerialNumber) throws IOException {
         this.date = date;
         this.origin = origin;
         this.destination = destination;
         this.passengers = passengers;
-        this.airplane = airplane;
+        this.airplaneSerialNumber = airplaneSerialNumber;
         this.userDni = userDni;
         setDistance();
         setPrice();
+    }
+
+    public String getAirplaneSerialNumber() {
+        return airplaneSerialNumber;
     }
 
     private void setDistance() {
@@ -65,8 +72,17 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
     //
     //de avión)
 
-    private void setPrice() {
-        this.price = distance*airplane.getCostPerKm()+passengers*3500+airplane.getFixedFee();
+    private void setPrice() throws IOException {
+        Functions helper = new Functions();
+        List<Airplane> airplanes = helper.readfileAirplanes();
+        Airplane plane = new Airplane();
+        plane.setSerialNumber(airplaneSerialNumber);
+        for(Airplane airplane : airplanes){
+            if(airplane.equals(plane)){
+                plane = airplane;
+            }
+        }
+        this.price = distance*plane.getCostPerKm()+passengers*3500+plane.getFixedFee();
     }
 
     public double getPrice() {
@@ -81,9 +97,9 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
         return date;
     }
 
-    public Airplane getAirplane() {
-        return airplane;
-    }
+//    public Airplane getAirplane() {
+//        return airplane;
+//    }
 
     public City getDestination() {
         return destination;
@@ -117,7 +133,7 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
                 ", passengers=" + passengers +
                 ", price=" + price +
                 ", distance=" + distance +
-                ", airplane=" + airplane +
+                ", airplane=" + airplaneSerialNumber +
                 '}';
     }
 
