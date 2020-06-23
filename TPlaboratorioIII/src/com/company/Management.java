@@ -264,6 +264,7 @@ public class Management implements IjsonManagement<Management> {
         Gold golden = new Gold();
         golden = (Gold) formPlanes(golden);
         golden.setDatesEmpty();
+        golden.setCatering(true);
         System.out.println("\nLos datos Ingresados son:\n"+golden.toString()+"\nIngrese 0  para cambiar los datos, o cualquier numero para continuar:");
         int input = data.nextInt();
         if (input != 0) {
@@ -281,6 +282,7 @@ public class Management implements IjsonManagement<Management> {
         Silver silverNew  = new Silver();
         silverNew = (Silver) formPlanes(silverNew);
         silverNew.setDatesEmpty();
+        silverNew.setCatering(true);
         System.out.println("\nLos datos Ingresados son:\n"+silverNew.toString()+"\nIngrese 0  para cambiar los datos, o cualquier numero para continuar:");
         int input = data.nextInt();
         if (input != 0) {
@@ -336,8 +338,7 @@ public class Management implements IjsonManagement<Management> {
         toAdd.setMaxPassengers(data.nextInt());
         System.out.println("\nIngrese velocidad maxima:");
         toAdd.setMaxVelocity(data.nextDouble());
-        System.out.println("\nIngrese Fixed Fee: ");
-        toAdd.setFixedFee(data.nextInt());
+        addFixedFee(toAdd);
         System.out.println("\nIngrese tipo de motor\n1-REACCION\n2-HELICE\n3-PISTONES:");
         int motor = data.nextInt();
         while (!optionCheck(motor)){
@@ -355,6 +356,18 @@ public class Management implements IjsonManagement<Management> {
             }
         }
         return toAdd;
+    }
+
+    public void addFixedFee (Airplane toAdd){
+        if (toAdd instanceof Gold){
+            toAdd.setFixedFee(6000);
+        }else{
+            if (toAdd instanceof Silver){
+                toAdd.setFixedFee(4000);
+            }else{
+                toAdd.setFixedFee(3000);
+            }
+        }
     }
 
     public Boolean optionCheck (int choice){

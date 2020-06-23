@@ -169,7 +169,6 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
                 ArrayList<Ticket> ticketsArrayList = new ArrayList<>();
                 ticketsArrayList.add(this);
                 mapper.writeValue(file, ticketsArrayList);
-                System.out.println("--- Imprimiento en archivo ---\n");
             } else {
                 ArrayList<Ticket> ticketsArrayList = new ArrayList<Ticket>(readFile());
                 ticketsArrayList.add(this);

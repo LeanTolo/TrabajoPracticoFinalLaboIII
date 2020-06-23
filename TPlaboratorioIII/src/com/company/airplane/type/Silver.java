@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Silver extends Airplane implements IjsonManagement<Silver>{
+        private boolean catering;
 
         public Silver(){
 
@@ -21,6 +22,7 @@ public class Silver extends Airplane implements IjsonManagement<Silver>{
         public Silver(String serialNumber,double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
             super(serialNumber,fuelCapacity, costPerKm, maxPassengers, maxVelocity, motorType);
             setFixedFee(4000);
+            catering = true;
         }
 
 
@@ -54,7 +56,6 @@ public class Silver extends Airplane implements IjsonManagement<Silver>{
                     ArrayList<Silver> silversArrayList = new ArrayList<>();
                     silversArrayList.add(this);
                     mapper.writeValue(file, silversArrayList);
-                    System.out.println("--- Imprimiento en archivo ---\n");
                 } else {
                     ArrayList<Silver> silversArrayList = new ArrayList<Silver>(readFile());
                     silversArrayList.add(this);
@@ -88,6 +89,17 @@ public class Silver extends Airplane implements IjsonManagement<Silver>{
 
     @Override
     public String toString() {
-        return super.toString()+"\nClass: Silver"+"\n----------------";
+        return super.toString()+"\nCatering:"+this.getCatering()+"\nClass: Silver"+"\n----------------";
+    }
+
+    public boolean isCatering() {
+        return catering;
+    }
+    public boolean getCatering(){
+            return catering;
+    }
+
+    public void setCatering(boolean catering) {
+        this.catering = catering;
     }
 }

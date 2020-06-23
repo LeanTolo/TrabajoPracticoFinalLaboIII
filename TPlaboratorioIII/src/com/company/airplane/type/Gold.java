@@ -14,11 +14,14 @@ import java.util.List;
 
 public class Gold extends Airplane implements IjsonManagement<Gold>{
         private boolean wifiConnection;
+        private boolean catering;
+
 
 
         public Gold(String serialNumber,double fuelCapacity, double costPerKm, int maxPassengers, double maxVelocity, MotorType motorType) {
             super(serialNumber,fuelCapacity, costPerKm, maxPassengers, maxVelocity, motorType);
             wifiConnection = true;
+            catering = true;
             setFixedFee(6000);
         }
 
@@ -64,7 +67,7 @@ public class Gold extends Airplane implements IjsonManagement<Gold>{
                     ArrayList<Gold> goldsArrayList = new ArrayList<>();
                     goldsArrayList.add(this);
                     mapper.writeValue(file, goldsArrayList);
-                    System.out.println("--- Imprimiento en archivo ---\n");
+//                    System.out.println("--- Imprimiento en archivo ---\n");
                 } else {
                     ArrayList<Gold> goldsArrayList = new ArrayList<Gold>(readFile());
                     goldsArrayList.add(this);
@@ -98,6 +101,19 @@ public class Gold extends Airplane implements IjsonManagement<Gold>{
 
     @Override
     public String toString() {
-        return super.toString()+"\nWifiConnection:"+this.getWifiConnection()+"\nClass: Gold"+"\n----------------";
+        return super.toString()+"\nCatering:"+this.getCatering()+"\nWifiConnection:"+this.getWifiConnection()+"\nClass: Gold"+"\n----------------";
+    }
+
+
+    public boolean isCatering() {
+        return catering;
+    }
+
+    public boolean getCatering() {
+        return catering;
+    }
+
+    public void setCatering(boolean catering) {
+        this.catering = catering;
     }
 }
