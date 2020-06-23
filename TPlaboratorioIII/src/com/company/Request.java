@@ -96,10 +96,10 @@ public class Request {
         System.out.println(ticket.toString());
         System.out.println("GENERATE TICKET?");
         System.out.println("1:YES \n2:NO");
-        int op;
-        do{
+        int op = 0;
+        while((op<1) || (op>2)){
             op = enterNumber();
-        }while(op<1 && op>2);
+        }
         if(op == 1){
             this.ticketList.add(ticket);
         }else{
@@ -112,9 +112,15 @@ public class Request {
     private void updatePlaneList(String serialNumber, LocalDate date){
         Functions helper = new Functions();
         for(Airplane plane : airplanesList){
-            if(serialNumber == plane.getSerialNumber()){
+            if(serialNumber.equals(plane.getSerialNumber())){
                 plane.addDate(date);
-                helper.updateGold((Gold)plane);
+                if (plane instanceof Gold) {
+                    helper.updateGold((Gold) plane);
+                }else if(plane instanceof Silver){
+                    helper.updateSilver((Silver) plane);
+                }else if(plane instanceof Bronze){
+                    helper.updateBronze((Bronze) plane);
+                }
             }
         }
     }
@@ -131,10 +137,10 @@ public class Request {
         }else{
             System.out.println("Desea probar otra fecha?");
             System.out.println("1:YES \n2:NO");
-            int op;
-            do{
+            int op = 0;
+            while((op<1) || (op>2)){
                 op = enterNumber();
-            }while(op<1 && op>2);
+            }
             if(op == 1){
                 generateTicket(userDni);
             }
@@ -242,7 +248,7 @@ public class Request {
     private int enterNumber(){
         int option;
         Scanner scanner = new Scanner(System.in);
-        option = Integer.parseInt(scanner.nextLine());
+        option = scanner.nextInt();
         return option;
     }
 

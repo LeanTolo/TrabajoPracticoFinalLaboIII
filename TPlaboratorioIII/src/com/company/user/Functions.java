@@ -88,9 +88,9 @@ public class Functions implements IjsonManagement<Functions> {
                 }
                 i++;
             }
-            for (User a:userArrayList) {
-                System.out.println(a.toString());
-            }
+         //   for (User a:userArrayList) {
+           //     System.out.println(a.toString());
+            //}
             mapper.writeValue(file, userArrayList);
         }catch (IOException e) {
             e.printStackTrace();

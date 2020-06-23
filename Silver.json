@@ -1,2 +1,1 @@
-
-[{"dates":[],"serialNumber":"LOS-456","fuelCapacity":26.0,"costPerKm":26.0,"maxPassengers":26,"maxVelocity":26.0,"motorType":"HELICE","fixedFee":26},{"dates":[],"serialNumber":"LUC-666","fuelCapacity":56.0,"costPerKm":56.0,"maxPassengers":56,"maxVelocity":56.0,"motorType":"HELICE","fixedFee":56}]
+[{"dates":[[2020,2,20]],"serialNumber":"LOS-456","fuelCapacity":26.0,"costPerKm":26.0,"maxPassengers":26,"maxVelocity":26.0,"motorType":"HELICE","fixedFee":26},{"dates":[],"serialNumber":"LUC-666","fuelCapacity":56.0,"costPerKm":56.0,"maxPassengers":56,"maxVelocity":56.0,"motorType":"HELICE","fixedFee":56}]

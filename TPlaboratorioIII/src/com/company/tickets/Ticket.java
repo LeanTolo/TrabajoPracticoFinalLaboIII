@@ -68,10 +68,6 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
         }
     }
 
-    //(Cantidad de kms * Costo del km) + (cantidad de pasajeros * 3500) + (Tarifa del tipo
-    //
-    //de avión)
-
     private void setPrice() throws IOException {
         Functions helper = new Functions();
         List<Airplane> airplanes = helper.readfileAirplanes();
