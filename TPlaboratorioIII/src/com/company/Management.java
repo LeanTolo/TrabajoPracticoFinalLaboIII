@@ -12,6 +12,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Management implements IjsonManagement<Management> {
@@ -37,9 +38,35 @@ public class Management implements IjsonManagement<Management> {
             }
         }while(!o.contains(op));
         Ticket ticket = ticketList.get(op);
-        ticket.setCanceled(true);
-        updateTicket(ticket);
+        if(checkDate(ticket.getDate())){
+            ticket.setCanceled(true);
+            updateTicket(ticket);
+        }
     }
+
+    private boolean checkDate(LocalDate date1){
+        LocalDate date = LocalDate.now();
+        int i = date1.compareTo(date);
+        boolean rta = false;
+        switch (i){
+            case 0:
+                System.out.println("No puedes cancelar el mismo dia del vuelo");
+                break;
+            case 1:
+                if (date.getYear() == date1.getYear()) {
+                    if (date.getMonth() == date1.getMonth()) {
+                        if (date.getDayOfMonth()+1 == date1.getDayOfMonth()) {
+                            System.out.println("No puedes cancelar solo con un dia de anticipacion");
+                        }
+                    }
+                }
+                break;
+            default:
+                rta = true;
+                break;
+        }
+       return rta;
+    }//Chequea que haya mas de un dia de anticipacion para cancelar, retorna true si se puede.
 
     private int enterNumber(){
         int option;
