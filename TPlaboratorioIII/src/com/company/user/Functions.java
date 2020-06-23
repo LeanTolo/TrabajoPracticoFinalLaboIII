@@ -88,13 +88,21 @@ public class Functions implements IjsonManagement<Functions> {
                 }
                 i++;
             }
-         //   for (User a:userArrayList) {
-           //     System.out.println(a.toString());
-            //}
             mapper.writeValue(file, userArrayList);
         }catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public User refresh(User toRefresh) throws IOException {
+        User res = null;
+        List<User> users = readFile();
+        for ( User element:users) {
+            if (element.getDni()==toRefresh.getDni()){
+             res = element;
+            }
+        }
+        return res;
     }
 
     public void updateGold (Gold toUpdate){
@@ -273,6 +281,47 @@ public class Functions implements IjsonManagement<Functions> {
         }
         return res;
     }
+
+   public void updateUserCategory(String SerialPlane, int dni) throws IOException {
+        User toupdate = new User();
+        List<Airplane> planes = readfileAirplanes();
+       for (Airplane element: planes) {
+           if (element.getSerialNumber().equals(SerialPlane)){
+               String claseToAdd = toupdate.checkClass(element);
+               addBestClass(claseToAdd,dni);
+           }
+       }
+   }
+
+    public void addBestClass (String bestClass, int dni) throws IOException {
+        List<User> users = readFile();
+        for (User element:users) {
+            if (element.getDni()==dni){
+                SetClass(bestClass,element.getBestClass(),element);
+            }
+        }
+    }
+
+    public void SetClass(String toAdd, String toCompare, User toUpdate){
+        Functions updater = new Functions();
+        if (toCompare.equals("Empty")){
+            toUpdate.setBestClass(toAdd);
+        }else {
+            if(toCompare.equals("Bronze")){
+                if(toAdd.equals("Gold")||toAdd.equals("Silver")){
+                    toUpdate.setBestClass(toAdd);
+                }
+            }else{
+                if (toCompare.equals("Silver")){
+                    if (toAdd.equals("Gold")){
+                        toUpdate.setBestClass(toAdd);
+                    }
+                }
+            }
+        }
+        updater.updateUser(toUpdate);
+    }
+
 
     @Override
     public List readFile() throws IOException {

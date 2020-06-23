@@ -127,12 +127,14 @@ public class Request {
 
 
     public double generateTicket(int userDni) throws IOException {
+        Functions updater = new Functions();
         Ticket ticket = createTicket(userDni);
         double amountSpent = 0;
         if(ticket!=null){
             addTicketToList(ticket);
             ticket.addToFile();
             updatePlaneList(ticket.getAirplaneSerialNumber(),ticket.getDate());
+            updater.updateUserCategory(ticket.getAirplaneSerialNumber(),userDni);
             amountSpent += ticket.getPrice();
         }else{
             System.out.println("Desea probar otra fecha?");

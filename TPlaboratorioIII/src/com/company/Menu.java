@@ -96,6 +96,7 @@ public class Menu {
         newUser.setAge(data.nextInt());
         newUser.setId(UUID.randomUUID());
         newUser.setAmountSpent(0);
+        newUser.setBestClass("Empty");
         System.out.println("\nLos datos Ingresados son:"+newUser.toString()+"\nIngrese 0  para cambiar los datos, o cualquier numero para continuar:");
         int input = data.nextInt();
         if (input != 0) {
@@ -205,7 +206,9 @@ public class Menu {
                     Request fly = new Request();
                     double amount;
                     amount = fly.generateTicket(user.getDni());
+                    user = updater.refresh(user);
                     user.setAmountSpent(amount);
+                    System.out.println(user.toString());
                     updater.updateUser(user);
                     break;
                 case 2:
@@ -266,17 +269,13 @@ public class Menu {
                     helper.showFile();
                     break;
                 case 3:
-                    //Ver Destino
-                    break;
-
-                case 4:
                     Functions loader = new Functions();
                     List<Airplane> planes = loader.readfileAirplanes();
                     for (Airplane a:planes) {
                         System.out.println(a.toString());
                     }
                     break;
-                case 5:
+                case 4:
                     int option;
                     Functions add = new Functions();
                     do {
@@ -313,9 +312,8 @@ public class Menu {
         System.out.println("2. Listado de Clientes");   //(Todos los datos personales.
                                                         // La categoría del mejor avión utilizado ( Gold, Silver o Bronze ).
                                                         //Total gastado de todos sus vuelos.
-        System.out.println("3. Ver Destinos y Distancias");
-        System.out.println("4. Listado de Aviones");
-        System.out.println("5. Agregar Aviones");
+        System.out.println("3. Listado de Aviones");
+        System.out.println("4. Agregar Aviones");
         System.out.println("0. Exit");
         System.out.println("*************************************");
     }
