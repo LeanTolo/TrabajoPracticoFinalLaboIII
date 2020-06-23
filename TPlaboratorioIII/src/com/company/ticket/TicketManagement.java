@@ -35,13 +35,13 @@ public class TicketManagement {
         }
     } //Agrega un avion a la lista
 
-    private int showAvailableAirplanes(int passengers,LocalDate date){
+    private HashSet showAvailableAirplanes(int passengers,LocalDate date){
         int i = 0;
-        int o = 0;
+        HashSet<Integer> o = new HashSet<>();
         for(Airplane plane : airplanesList){
             if(!(plane.getDates().contains(date)) && plane.getMaxPassengers() >= passengers){
                 System.out.println(i+":"+plane.toString());
-                o++;
+                o.add(i);
             }
             i++;
         }
@@ -49,17 +49,16 @@ public class TicketManagement {
     } //Muestra los aviones disponibles en una fecha indicada
 
     private Airplane chooseAirplane(int passengers,LocalDate date){
-        int i = showAvailableAirplanes(passengers,date);
+        HashSet<Integer> o = showAvailableAirplanes(passengers,date);
         int op;
         Airplane plane;
-        if(i != 0){
+        if(!o.isEmpty()){
             do{
                 op = enterNumber();
-                if(op<0 || op>=airplanesList.size()){
+                if(!o.contains(op)){
                     System.out.println("Ingrese un valor valido");
                 }
-                System.out.println(airplanesList.size());
-            }while (op<0 || op>=airplanesList.size());
+            }while (!o.contains(op));
             airplanesList.get(op).addDate(date);
             plane = airplanesList.get(op);
         }else{
@@ -115,6 +114,21 @@ public class TicketManagement {
         }
     }
 
+    public void removeDatePlane(String serialNumber, LocalDate date){
+        Management helper = new Management();
+        for(Airplane plane : airplanesList){
+            if(serialNumber.equals(plane.getSerialNumber())){
+                plane.removeDate(date);
+                if (plane instanceof Gold) {
+                    helper.updateGold((Gold) plane);
+                }else if(plane instanceof Silver){
+                    helper.updateSilver((Silver) plane);
+                }else if(plane instanceof Bronze){
+                    helper.updateBronze((Bronze) plane);
+                }
+            }
+        }
+    }
 
     public double generateTicket(int userDni) throws IOException {
         Management updater = new Management();
@@ -262,7 +276,7 @@ public class TicketManagement {
         if(ticketList!= null) {
             System.out.println("--- Tickets by Date: "+date+"---\n");
             for (Ticket ticket : ticketList) {
-                if (ticket.getDate().equals(date)) {
+                if (ticket.getDate().equals(date) && !ticket.getCanceled()) {
                     System.out.println(ticket.toString());
                 }
             }

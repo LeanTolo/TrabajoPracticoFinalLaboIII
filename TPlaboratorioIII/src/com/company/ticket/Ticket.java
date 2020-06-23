@@ -24,9 +24,8 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
     private int distance;
     private int userDni;
     private boolean canceled;
-
     private String airplaneSerialNumber;
-    //private Airplane airplane;
+
 
 
     public Ticket(){};

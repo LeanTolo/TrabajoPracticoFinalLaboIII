@@ -77,6 +77,10 @@ public   class Airplane{
         dates.add(date);
     }
 
+    public void removeDate(LocalDate date){
+        dates.remove(date);
+    }
+
     public double getCostPerKm() {
         return costPerKm;
     }

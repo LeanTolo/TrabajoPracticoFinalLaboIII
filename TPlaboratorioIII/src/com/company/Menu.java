@@ -188,11 +188,12 @@ public class Menu {
                     amount = fly.generateTicket(user.getDni());
                     user = updater.refresh(user);
                     user.setAmountSpent(amount);
-                    System.out.println(user.toString());
                     updater.updateUser(user);
                     break;
                 case 2:
-                    updater.cancelTicket(user.getDni());
+                    amount = updater.cancelTicket(user.getDni())*-1;
+                    user.setAmountSpent(amount);
+                    updater.updateUser(user);
                     break;
                 case 3:
                     updater.showUserTickets(user.getDni());

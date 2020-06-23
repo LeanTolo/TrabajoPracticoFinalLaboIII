@@ -6,6 +6,7 @@ import com.company.airplane.type.Silver;
 import com.company.airplane.type.Gold;
 import com.company.airplane.type.Bronze;
 import com.company.ticket.Ticket;
+import com.company.ticket.TicketManagement;
 import com.company.user.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -17,9 +18,12 @@ import java.util.*;
 
 public class Management implements IjsonManagement<Management> {
 
-    public void cancelTicket(int userDni) throws IOException {
+    public double cancelTicket(int userDni) throws IOException {
         List<Ticket> ticketList = readFileTickets();
+        TicketManagement helper = new TicketManagement();
+        String serialNumber;
         ticketList.sort(Ticket::compareTo);
+        double amountSpent = 0;
         int i = 0;
         int op;
         HashSet<Integer> o = new HashSet<>();
@@ -41,7 +45,11 @@ public class Management implements IjsonManagement<Management> {
         if(checkDate(ticket.getDate())){
             ticket.setCanceled(true);
             updateTicket(ticket);
+            amountSpent = ticket.getPrice();
+            serialNumber = ticket.getAirplaneSerialNumber();
+            helper.removeDatePlane(serialNumber,ticket.getDate());
         }
+        return amountSpent;
     }
 
     private boolean checkDate(LocalDate date1){
@@ -204,9 +212,6 @@ public class Management implements IjsonManagement<Management> {
                 }
                 i++;
             }
-            for (Gold a:goldArrayList) {
-                System.out.println(a.toString());
-            }
             mapper.writeValue(file, goldArrayList);
         }catch (IOException e) {
             e.printStackTrace();
@@ -227,9 +232,6 @@ public class Management implements IjsonManagement<Management> {
                 }
                 i++;
             }
-            for (Silver a:silverArrayList) {
-                System.out.println(a.toString());
-            }
             mapper.writeValue(file, silverArrayList);
         }catch (IOException e) {
             e.printStackTrace();
@@ -249,9 +251,6 @@ public class Management implements IjsonManagement<Management> {
                     bronzeArrayList.set(i,toUpdate);
                 }
                 i++;
-            }
-            for (Bronze a:bronzeArrayList) {
-                System.out.println(a.toString());
             }
             mapper.writeValue(file, bronzeArrayList);
         }catch (IOException e) {
@@ -309,7 +308,6 @@ public class Management implements IjsonManagement<Management> {
         }
         return res;
     }
-
 
     public Airplane formPlanes (Airplane toAdd){
         Scanner data = new Scanner(System.in);
@@ -407,7 +405,6 @@ public class Management implements IjsonManagement<Management> {
         updater.updateUser(toUpdate);
     }
 
-
     @Override
     public List readFile() throws IOException {
         return getList();
@@ -430,7 +427,6 @@ public class Management implements IjsonManagement<Management> {
         }
         return usersFromJson;
     }
-
 
     @Override
     public void addToFile() {
