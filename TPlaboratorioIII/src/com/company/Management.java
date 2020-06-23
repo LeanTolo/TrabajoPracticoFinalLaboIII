@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Management implements IjsonManagement<Management> {
-
+    //funcion para "cancelacion" de ticket
     public double cancelTicket(int userDni) throws IOException {
         List<Ticket> ticketList = readFileTickets();
         TicketManagement helper = new TicketManagement();
@@ -52,6 +52,7 @@ public class Management implements IjsonManagement<Management> {
         return amountSpent;
     }
 
+    //validacion de fecha
     private boolean checkDate(LocalDate date1){
         LocalDate date = LocalDate.now();
         int i = date1.compareTo(date);
@@ -83,6 +84,7 @@ public class Management implements IjsonManagement<Management> {
         return option;
     }
 
+    //mustrar archivo de tickets en base a un dni
     public void showUserTickets(int userDni) throws IOException {
         List<Ticket> ticketList = readFileTickets();
         ticketList.sort(Ticket::compareTo);
@@ -98,6 +100,7 @@ public class Management implements IjsonManagement<Management> {
         }
     }
 
+    //carga de aviones en archivo
     public List readfileAirplanes () throws IOException {
         List<Airplane> airplanes = new ArrayList<>();
         airplanes = addGoldToArray(airplanes);
@@ -107,6 +110,7 @@ public class Management implements IjsonManagement<Management> {
         return airplanes;
     }
 
+    //Cargar aviones de oro de archivo a array
     public List addGoldToArray(List<Airplane> airplanes) throws IOException {
         Gold gold = new Gold();
         List<Gold> golds = gold.readFile();
@@ -116,6 +120,7 @@ public class Management implements IjsonManagement<Management> {
         return airplanes;
     }
 
+    //Cargar aviones de plata de archivo a array
     public List addSilverToArray(List<Airplane> airplanes) throws IOException {
         Silver silv = new Silver();
         List<Silver> silvers = silv.readFile();
@@ -125,6 +130,7 @@ public class Management implements IjsonManagement<Management> {
         return airplanes;
     }
 
+    //Cargar aviones de bronce de archivo a array
     public List addBronzeToArray(List<Airplane> airplanes) throws IOException {
         Bronze bron = new Bronze();
         List<Bronze> bronzes = bron.readFile();
@@ -134,12 +140,14 @@ public class Management implements IjsonManagement<Management> {
         return airplanes;
     }
 
+    //levantar tocket de archivo a lista
     public List readFileTickets() throws IOException {
         List<Ticket> ticketList = new ArrayList<>();
         ticketList = addTicketToList(ticketList);
         return ticketList;
     }
 
+    //agregar elemento ticket a lista
     public List addTicketToList(List<Ticket> ticketList) throws IOException{
         Ticket ticket = new Ticket();
         List<Ticket> tickets = ticket.readFile();
@@ -149,6 +157,7 @@ public class Management implements IjsonManagement<Management> {
         return ticketList;
     }
 
+    //actualizar usuario en base de datos
     public void updateUser (User toUpdate){
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
@@ -168,6 +177,7 @@ public class Management implements IjsonManagement<Management> {
         }
     }
 
+    //actualizar ticket en base d edatos
     public void updateTicket (Ticket toUpdate){
         File file = new File("Ticket.json");
         ObjectMapper mapper = new ObjectMapper();
@@ -187,6 +197,7 @@ public class Management implements IjsonManagement<Management> {
         }
     }
 
+    //refrescar un usuario en sistema
     public User refresh(User toRefresh) throws IOException {
         User res = null;
         List<User> users = readFile();
@@ -198,6 +209,7 @@ public class Management implements IjsonManagement<Management> {
         return res;
     }
 
+    //actualizar avion Oro en base de datos
     public void updateGold (Gold toUpdate){
         File file = new File("Gold.json");
         ObjectMapper mapper = new ObjectMapper();
@@ -218,6 +230,7 @@ public class Management implements IjsonManagement<Management> {
         }
     }
 
+    //actualizar avion Plata en base de datos
     public void updateSilver (Silver toUpdate){
         File file = new File("Silver.json");
         ObjectMapper mapper = new ObjectMapper();
@@ -238,6 +251,7 @@ public class Management implements IjsonManagement<Management> {
         }
     }
 
+    //actualizar avion Bronze en base de datos
     public void updateBronze (Bronze toUpdate){
         File file = new File("Bronze.json");
         ObjectMapper mapper = new ObjectMapper();
@@ -258,6 +272,7 @@ public class Management implements IjsonManagement<Management> {
         }
     }
 
+    //Agregar avion ORO al archivo
     public boolean addGoldPlane(){
         boolean res = false;
         Scanner data = new Scanner(System.in);
@@ -276,6 +291,7 @@ public class Management implements IjsonManagement<Management> {
         return res;
     }
 
+    //Agregar avion PLATA al archivo
     public boolean addSilverPlane(){
         boolean res = false;
         Scanner data = new Scanner(System.in);
@@ -294,6 +310,7 @@ public class Management implements IjsonManagement<Management> {
         return res;
     }
 
+    //Agregar avion BRONCE al archivo
     public boolean addBronzePlane(){
         boolean res = false;
         Scanner data = new Scanner(System.in);
@@ -311,6 +328,7 @@ public class Management implements IjsonManagement<Management> {
         return res;
     }
 
+    //validacion costo por kilometro
     public boolean checkCost(double cost){
         boolean res = false;
         if(cost>=150 && cost<=300){
@@ -319,6 +337,7 @@ public class Management implements IjsonManagement<Management> {
         return res;
     }
 
+    //formulario para carga de aviones
     public Airplane formPlanes (Airplane toAdd){
         Scanner data = new Scanner(System.in);
         System.out.println("\nIngrese SerialNumber:");
@@ -358,6 +377,7 @@ public class Management implements IjsonManagement<Management> {
         return toAdd;
     }
 
+    //setteo fixed fee segun clase
     public void addFixedFee (Airplane toAdd){
         if (toAdd instanceof Gold){
             toAdd.setFixedFee(6000);
@@ -370,6 +390,7 @@ public class Management implements IjsonManagement<Management> {
         }
     }
 
+    //validacion opciones motor
     public Boolean optionCheck (int choice){
         if (choice == 1 || choice == 2 || choice == 3){
             return true;
@@ -377,6 +398,7 @@ public class Management implements IjsonManagement<Management> {
         return false;
     }
 
+    //retorno motor como enum
     public MotorType getMotor(int choice){
         MotorType res = null;
         if (choice == 1){
@@ -393,6 +415,7 @@ public class Management implements IjsonManagement<Management> {
         return res;
     }
 
+    //actualizar Mejor clase de avion en usuario
    public void updateUserCategory(String SerialPlane, int dni) throws IOException {
         User toupdate = new User();
         List<Airplane> planes = readfileAirplanes();
@@ -404,6 +427,7 @@ public class Management implements IjsonManagement<Management> {
        }
    }
 
+   //settear mejor clase de avion en usuario
     public void addBestClass (String bestClass, int dni) throws IOException {
         List<User> users = readFile();
         for (User element:users) {
@@ -413,6 +437,7 @@ public class Management implements IjsonManagement<Management> {
         }
     }
 
+    //validacion para seteo de clase de avion en usuario
     public void setClass(String toAdd, String toCompare, User toUpdate){
         Management updater = new Management();
         if (toCompare.equals("Empty")){
@@ -433,11 +458,13 @@ public class Management implements IjsonManagement<Management> {
         updater.updateUser(toUpdate);
     }
 
+    //lectura de archivo de user
     @Override
     public List readFile() throws IOException {
         return getList();
     }
 
+    //funcion de lectura
     public static List getList() {
         List<User> usersFromJson = null;
         File file = new File("Users.json");
@@ -461,6 +488,7 @@ public class Management implements IjsonManagement<Management> {
 
     }
 
+    //printeo de archivo de usuarios
     @Override
     public void showFile () throws IOException {
         File file = new File("Users.json");
@@ -474,6 +502,7 @@ public class Management implements IjsonManagement<Management> {
         }
     }
 
+    //funcion usada para eliminar codigo duplicado
     public static void showFileDoubleCode(File file, ObjectMapper mapper) {
         try{
             User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
