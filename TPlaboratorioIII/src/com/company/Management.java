@@ -309,6 +309,14 @@ public class Management implements IjsonManagement<Management> {
         return res;
     }
 
+    public boolean checkCost(double cost){
+        boolean res = false;
+        if(cost>=150 && cost<=300){
+            res = true;
+        }
+        return res;
+    }
+
     public Airplane formPlanes (Airplane toAdd){
         Scanner data = new Scanner(System.in);
         System.out.println("\nIngrese SerialNumber:");
@@ -316,7 +324,14 @@ public class Management implements IjsonManagement<Management> {
         System.out.println("\nIngrese capacidad de combustible: ");
         toAdd.setFuelCapacity(data.nextDouble());
         System.out.println("\nIngrese costo por kilometros: ");
-        toAdd.setCostPerKm(data.nextDouble());
+        Double value = data.nextDouble();
+        Boolean cost = checkCost(value);
+        while (!cost){
+            System.out.println("El valor debe estar entre 150 y 300, ingrese un valor valido:");
+            value = data.nextDouble();
+            cost = checkCost(value);
+        }
+        toAdd.setCostPerKm(value);
         System.out.println("\nIngrese cantidad maxima de pasajeros: ");
         toAdd.setMaxPassengers(data.nextInt());
         System.out.println("\nIngrese velocidad maxima:");
