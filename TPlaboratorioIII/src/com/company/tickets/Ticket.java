@@ -23,6 +23,7 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
     private double price;
     private int distance;
     private int userDni;
+    private boolean canceled;
 
     private String airplaneSerialNumber;
     //private Airplane airplane;
@@ -39,6 +40,15 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
         this.userDni = userDni;
         setDistance();
         setPrice();
+        canceled = false;
+    }
+
+    public boolean getCanceled(){
+        return canceled;
+    }
+
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
     }
 
     public String getAirplaneSerialNumber() {
@@ -196,7 +206,20 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ticket ticket = (Ticket) o;
+        return userDni == ticket.userDni &&
+                date.equals(ticket.date) &&
+                airplaneSerialNumber.equals(ticket.airplaneSerialNumber);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(date, userDni, airplaneSerialNumber);
+    }
 }
 
 

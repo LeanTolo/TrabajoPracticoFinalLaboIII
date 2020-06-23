@@ -212,7 +212,7 @@ public class Menu {
                     updater.updateUser(user);
                     break;
                 case 2:
-                    //cancelar vuelo
+                    updater.cancelTicket(user.getDni());
                     break;
                 case 3:
                     updater.showUserTickets(user.getDni());

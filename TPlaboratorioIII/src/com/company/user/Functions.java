@@ -15,12 +15,50 @@ import java.util.*;
 
 public class Functions implements IjsonManagement<Functions> {
 
-    public void showUserTickets(int userDni) throws IOException {
+    public void cancelTicket(int userDni) throws IOException {
         List<Ticket> ticketList = readFileTickets();
+        ticketList.sort(Ticket::compareTo);
+        int i = 0;
+        int op;
+        HashSet<Integer> o = new HashSet<>();
         for(Ticket ticket : ticketList){
             if(ticket.getUserDni() == userDni){
+                System.out.println(i+":"+ticket.toString());
+                o.add(i);
+            }
+            i++;
+        }
+        System.out.println("Ingrese ticket a cancelar");
+        do{
+            op = enterNumber();
+            if(!o.contains(op)){
+                System.out.println("Ingrese un valor valido");
+            }
+        }while(!o.contains(op));
+        Ticket ticket = ticketList.get(op);
+        ticket.setCanceled(true);
+        updateTicket(ticket);
+    }
+
+    private int enterNumber(){
+        int option;
+        Scanner scanner = new Scanner(System.in);
+        option = scanner.nextInt();
+        return option;
+    }
+
+    public void showUserTickets(int userDni) throws IOException {
+        List<Ticket> ticketList = readFileTickets();
+        ticketList.sort(Ticket::compareTo);
+        int i=0;
+        for(Ticket ticket : ticketList){
+            if(ticket.getUserDni() == userDni && ticket.getCanceled() == false){
+                i++;
                 System.out.println(ticket.toString());
             }
+        }
+        if(i == 0){
+            System.out.println("Usted no tiene reservas");
         }
     }
 
@@ -89,6 +127,25 @@ public class Functions implements IjsonManagement<Functions> {
                 i++;
             }
             mapper.writeValue(file, userArrayList);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateTicket (Ticket toupdate){
+        File file = new File("Ticket.json");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        try {
+            ArrayList<Ticket> ticketArrayList = new ArrayList<Ticket>(readFileTickets());
+            int i = 0;
+            for (Ticket a:ticketArrayList) {
+                if(a.equals(toupdate)){
+                    ticketArrayList.set(i,toupdate);
+                }
+                i++;
+            }
+            mapper.writeValue(file, ticketArrayList);
         }catch (IOException e) {
             e.printStackTrace();
         }
