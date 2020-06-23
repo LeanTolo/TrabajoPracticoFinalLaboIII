@@ -1,11 +1,12 @@
-package com.company.user;
+package com.company;
 
 import com.company.IjsonManagement.IjsonManagement;
 import com.company.airplane.*;
 import com.company.airplane.type.Silver;
 import com.company.airplane.type.Gold;
 import com.company.airplane.type.Bronze;
-import com.company.tickets.Ticket;
+import com.company.ticket.Ticket;
+import com.company.user.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -13,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class Functions implements IjsonManagement<Functions> {
+public class Management implements IjsonManagement<Management> {
 
     public void cancelTicket(int userDni) throws IOException {
         List<Ticket> ticketList = readFileTickets();
@@ -64,14 +65,14 @@ public class Functions implements IjsonManagement<Functions> {
 
     public List readfileAirplanes () throws IOException {
         List<Airplane> airplanes = new ArrayList<>();
-        airplanes = AddGoldtoArray(airplanes);
-        airplanes = AddSilvertoArray(airplanes);
-        airplanes = AddBronzetoArray(airplanes);
+        airplanes = addGoldToArray(airplanes);
+        airplanes = addSilverToArray(airplanes);
+        airplanes = addBronzeToArray(airplanes);
 
         return airplanes;
     }
 
-    public List AddGoldtoArray (List<Airplane> airplanes) throws IOException {
+    public List addGoldToArray(List<Airplane> airplanes) throws IOException {
         Gold gold = new Gold();
         List<Gold> golds = gold.readFile();
         if(golds != null){
@@ -80,7 +81,7 @@ public class Functions implements IjsonManagement<Functions> {
         return airplanes;
     }
 
-    public List AddSilvertoArray (List<Airplane> airplanes) throws IOException {
+    public List addSilverToArray(List<Airplane> airplanes) throws IOException {
         Silver silv = new Silver();
         List<Silver> silvers = silv.readFile();
         if(silvers != null){
@@ -89,7 +90,7 @@ public class Functions implements IjsonManagement<Functions> {
         return airplanes;
     }
 
-    public List AddBronzetoArray (List<Airplane> airplanes) throws IOException {
+    public List addBronzeToArray(List<Airplane> airplanes) throws IOException {
         Bronze bron = new Bronze();
         List<Bronze> bronzes = bron.readFile();
         if(bronzes != null){
@@ -113,7 +114,7 @@ public class Functions implements IjsonManagement<Functions> {
         return ticketList;
     }
 
-    public void updateUser (User toupdate){
+    public void updateUser (User toUpdate){
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
@@ -121,8 +122,8 @@ public class Functions implements IjsonManagement<Functions> {
             ArrayList<User> userArrayList = new ArrayList<User>(readFile());
             int i = 0;
             for (User a:userArrayList) {
-                if(a.getDni()==toupdate.getDni()){
-                    userArrayList.set(i,toupdate);
+                if(a.getDni()==toUpdate.getDni()){
+                    userArrayList.set(i,toUpdate);
                 }
                 i++;
             }
@@ -132,7 +133,7 @@ public class Functions implements IjsonManagement<Functions> {
         }
     }
 
-    public void updateTicket (Ticket toupdate){
+    public void updateTicket (Ticket toUpdate){
         File file = new File("Ticket.json");
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
@@ -140,8 +141,8 @@ public class Functions implements IjsonManagement<Functions> {
             ArrayList<Ticket> ticketArrayList = new ArrayList<Ticket>(readFileTickets());
             int i = 0;
             for (Ticket a:ticketArrayList) {
-                if(a.equals(toupdate)){
-                    ticketArrayList.set(i,toupdate);
+                if(a.equals(toUpdate)){
+                    ticketArrayList.set(i,toUpdate);
                 }
                 i++;
             }
@@ -231,7 +232,7 @@ public class Functions implements IjsonManagement<Functions> {
         }
     }
 
-    public boolean AddGoldPlane (){
+    public boolean addGoldPlane(){
         boolean res = false;
         Scanner data = new Scanner(System.in);
         Gold golden = new Gold();
@@ -243,12 +244,12 @@ public class Functions implements IjsonManagement<Functions> {
             golden.addToFile();
             res = true;
         } else {
-            AddGoldPlane();
+            addGoldPlane();
         }
         return res;
     }
 
-    public boolean AddSilverPlane (){
+    public boolean addSilverPlane(){
         boolean res = false;
         Scanner data = new Scanner(System.in);
         Silver silverNew  = new Silver();
@@ -260,12 +261,12 @@ public class Functions implements IjsonManagement<Functions> {
             silverNew.addToFile();
             res = true;
         } else {
-            AddSilverPlane();
+            addSilverPlane();
         }
         return res;
     }
 
-    public boolean AddBronzePlane (){
+    public boolean addBronzePlane(){
         boolean res = false;
         Scanner data = new Scanner(System.in);
         Bronze bronzeNew  = new Bronze();
@@ -277,7 +278,7 @@ public class Functions implements IjsonManagement<Functions> {
             bronzeNew.addToFile();
             res = true;
         } else {
-            AddBronzePlane();
+            addBronzePlane();
         }
         return res;
     }
@@ -354,13 +355,13 @@ public class Functions implements IjsonManagement<Functions> {
         List<User> users = readFile();
         for (User element:users) {
             if (element.getDni()==dni){
-                SetClass(bestClass,element.getBestClass(),element);
+                setClass(bestClass,element.getBestClass(),element);
             }
         }
     }
 
-    public void SetClass(String toAdd, String toCompare, User toUpdate){
-        Functions updater = new Functions();
+    public void setClass(String toAdd, String toCompare, User toUpdate){
+        Management updater = new Management();
         if (toCompare.equals("Empty")){
             toUpdate.setBestClass(toAdd);
         }else {
@@ -385,7 +386,7 @@ public class Functions implements IjsonManagement<Functions> {
         return getList();
     }
 
-    static List getList() {
+    public static List getList() {
         List<User> usersFromJson = null;
         File file = new File("Users.json");
         ObjectMapper mapper = new ObjectMapper();
@@ -422,7 +423,7 @@ public class Functions implements IjsonManagement<Functions> {
         }
     }
 
-    static void showFileDoubleCode(File file, ObjectMapper mapper) {
+    public static void showFileDoubleCode(File file, ObjectMapper mapper) {
         try{
             User[] userArray = mapper.readValue(file,User[].class); // convert JSON array to Array objects
             List<User> users = Arrays.asList(mapper.readValue(file, User[].class)); // convert JSON array to List of objects

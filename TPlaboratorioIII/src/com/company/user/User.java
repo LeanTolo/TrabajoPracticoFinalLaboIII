@@ -1,5 +1,6 @@
 package com.company.user;
 
+import com.company.Management;
 import com.company.IjsonManagement.IjsonManagement;
 import com.company.airplane.Airplane;
 import com.company.airplane.type.Bronze;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static com.company.user.Functions.getList;
+import static com.company.Management.getList;
 
 public class User implements IjsonManagement<User> {
 
@@ -110,8 +111,6 @@ public class User implements IjsonManagement<User> {
         }
     }
 
-
-
     @Override
     public String toString() {
         return "\n--- User ---" +
@@ -159,7 +158,7 @@ public class User implements IjsonManagement<User> {
         mapper.registerModule(new JavaTimeModule());
         if(file.exists()) {
             //System.out.println("--- Contenido del Archivo ---");
-            Functions.showFileDoubleCode(file, mapper);
+            Management.showFileDoubleCode(file, mapper);
         }else{
             System.out.println("Archivo vacio");
         }

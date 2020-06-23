@@ -1,6 +1,6 @@
 package com.company;
 import com.company.airplane.Airplane;
-import com.company.user.Functions;
+import com.company.ticket.TicketManagement;
 import com.company.user.User;
 
 
@@ -100,7 +100,7 @@ public class Menu {
         System.out.println("\nLos datos Ingresados son:"+newUser.toString()+"\nIngrese 0  para cambiar los datos, o cualquier numero para continuar:");
         int input = data.nextInt();
         if (input != 0) {
-            if (AddNewUSer(newUser)) {
+            if (addNewUser(newUser)) {
                 clearScreen();
             }
         } else {
@@ -111,7 +111,7 @@ public class Menu {
     //validacion del id ingresado, se chequea el dni no esta en la db
     public boolean validateNewUser (User tovalidate) throws IOException {
         boolean res= true;
-        Functions helper  = new Functions();
+        Management helper  = new Management();
         users = helper.readFile();
         if (users != null) {
             for (User element : users) {
@@ -127,7 +127,7 @@ public class Menu {
     }
 
     // Se agrega el user a User.json
-    public boolean AddNewUSer (User toadd) throws IOException {
+    public boolean addNewUser(User toadd) throws IOException {
       boolean add = false;
       if(validateNewUser(toadd)){
               toadd.addToFile();
@@ -138,26 +138,6 @@ public class Menu {
       }
         return add;
     }
-
-//    public void login(){
-//        Scanner scan = new Scanner(System.in);
-//        String contraseña;
-//        boolean pass;
-//        int res=0;
-//        User logUser = null;
-//        if (logUser == null){
-//            System.out.println("Ingrese DNI:");
-//            //logUser = AeroTaxiSystem.validateUser(scan.nextInt());
-//        }
-//        do{
-//            System.out.println("Ingrese contraseña:");
-//            pass = scan.nextLine().equals(logUser.getPassword());
-//            if (!pass)
-//                System.out.println("Contraseña Incorrecta");
-//        } while(!pass);
-//
-//       userMenu(logUser);
-//    }
 
     //Logueo de usuario
     public User loginUser() throws IOException {
@@ -179,7 +159,7 @@ public class Menu {
     //chequeo de usuario ingresado, con los datos de la db
     public User logUser (User request) throws IOException {
         User res =  null;
-        Functions helper  = new Functions();
+        Management helper  = new Management();
         users = helper.readFile();
         for (User element:users) {
             if (element.getDni()==request.getDni()){
@@ -198,12 +178,12 @@ public class Menu {
         int opt = 0;
         do {
             printUserMenu();
-            Functions updater = new Functions();
+            Management updater = new Management();
             Scanner scan = new Scanner(System.in);
             opt = scan.nextInt();
             switch (opt) {
                 case 1:
-                    Request fly = new Request();
+                    TicketManagement fly = new TicketManagement();
                     double amount;
                     amount = fly.generateTicket(user.getDni());
                     user = updater.refresh(user);
@@ -260,16 +240,16 @@ public class Menu {
             opt = scan.nextInt();
             switch (opt) {
                 case 1:
-                    Request showTick = new Request();
+                    TicketManagement showTick = new TicketManagement();
                     showTick.showFlightsByDate();
 
                     break;
                 case 2:
-                    Functions helper = new Functions();
+                    Management helper = new Management();
                     helper.showFile();
                     break;
                 case 3:
-                    Functions loader = new Functions();
+                    Management loader = new Management();
                     List<Airplane> planes = loader.readfileAirplanes();
                     for (Airplane a:planes) {
                         System.out.println(a.toString());
@@ -277,24 +257,24 @@ public class Menu {
                     break;
                 case 4:
                     int option;
-                    Functions add = new Functions();
+                    Management add = new Management();
                     do {
                         printFlightMenu();
                         Scanner scanFligth = new Scanner(System.in);
                         option = scanFligth.nextInt();
                         switch (option) {
                             case 1:
-                                if(add.AddGoldPlane() == true){
+                                if(add.addGoldPlane() == true){
                                     System.out.println("Avion agregado con exito");
                                 }
                                 break;
                             case 2:
-                                if(add.AddSilverPlane() == true){
+                                if(add.addSilverPlane() == true){
                                     System.out.println("Avion agregado con exito");
                                 }
                                 break;
                             case 3:
-                                if(add.AddBronzePlane() == true){
+                                if(add.addBronzePlane() == true){
                                     System.out.println("Avion agregado con exito");
                                 }
                                 break;
@@ -309,9 +289,7 @@ public class Menu {
         clearScreen();
         System.out.println("*************************************");
         System.out.println("\n1. Listado de Vuelos En Fecha Especifica");
-        System.out.println("2. Listado de Clientes");   //(Todos los datos personales.
-                                                        // La categoría del mejor avión utilizado ( Gold, Silver o Bronze ).
-                                                        //Total gastado de todos sus vuelos.
+        System.out.println("2. Listado de Clientes");
         System.out.println("3. Listado de Aviones");
         System.out.println("4. Agregar Aviones");
         System.out.println("0. Exit");

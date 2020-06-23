@@ -1,28 +1,25 @@
-package com.company;
+package com.company.ticket;
 
 import com.company.airplane.Airplane;
 import com.company.airplane.type.Gold;
 import com.company.airplane.type.Silver;
 import com.company.airplane.type.Bronze;
-import com.company.tickets.City;
-import com.company.tickets.Ticket;
-import com.company.user.Functions;
+import com.company.Management;
 //import jdk.vm.ci.meta.Local;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
-public class Request {
+public class TicketManagement {
     private List<Ticket> ticketList;
     private List<Airplane> airplanesList;
 
-    public Request() throws IOException {
-        Functions helper = new Functions();
+    public TicketManagement() throws IOException {
+        Management helper = new Management();
         ticketList = helper.readFileTickets();
         airplanesList = helper.readfileAirplanes();
     }
-
 
     public void addAirplaneToList(Airplane airplane){
         boolean flag = true;
@@ -71,11 +68,6 @@ public class Request {
         return plane;
     } //Se elige un avion de la lista, se le asigna la fecha y se retorna ese avion, si no se pudo retorna null
 
-    //4. Ahora el usuario debe seleccionar un avión. El sistema se encargará de
-    //mostrar los aviones disponibles para esa fecha y el usuario elige el deseado.
-    //5. Por último, el sistema debe mostrar el costo total del vuelo y el usuario
-    //deberá confirmar para generar el vuelo.
-
     private Ticket createTicket(int userDni) throws IOException {
         LocalDate date = chooseDate();
         City origin = chooseOriginTest();
@@ -107,10 +99,8 @@ public class Request {
         }
     }//Nos da la opcion de agregar o no un ticket a la lista luego de mostrarnoslo
 
-
-
     private void updatePlaneList(String serialNumber, LocalDate date){
-        Functions helper = new Functions();
+        Management helper = new Management();
         for(Airplane plane : airplanesList){
             if(serialNumber.equals(plane.getSerialNumber())){
                 plane.addDate(date);
@@ -127,7 +117,7 @@ public class Request {
 
 
     public double generateTicket(int userDni) throws IOException {
-        Functions updater = new Functions();
+        Management updater = new Management();
         Ticket ticket = createTicket(userDni);
         double amountSpent = 0;
         if(ticket!=null){
@@ -280,18 +270,5 @@ public class Request {
             System.out.println("Actualmente no hay tickets para mostrar");
         }
     }
-
-
-    public Airplane castSubClassToSuperAirplane(Airplane plane){
-        Airplane a = new Airplane(plane.getSerialNumber(),plane.getFuelCapacity(),
-                plane.getCostPerKm(),plane.getMaxPassengers(),plane.getMaxVelocity(),
-                plane.getMotorType());
-        if(!plane.getDates().isEmpty()){
-            for(LocalDate date : plane.getDates()){
-                a.addDate(date);
-            }
-        }
-        return a;
-    } //Casting wasnt enough, needed this to save a regular airplane in ticket despite it being a G/S/B
 
 }

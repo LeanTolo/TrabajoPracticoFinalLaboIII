@@ -1,10 +1,10 @@
-package com.company.tickets;
+package com.company.ticket;
 
 import com.company.IjsonManagement.IjsonManagement;
 
 import com.company.airplane.Airplane;
 
-import com.company.user.Functions;
+import com.company.Management;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -79,7 +79,7 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
     }
 
     private void setPrice() throws IOException {
-        Functions helper = new Functions();
+        Management helper = new Management();
         List<Airplane> airplanes = helper.readfileAirplanes();
         Airplane plane = new Airplane();
         plane.setSerialNumber(airplaneSerialNumber);
@@ -102,10 +102,6 @@ public class Ticket implements Comparable,IjsonManagement<Ticket> {
     public LocalDate getDate() {
         return date;
     }
-
-//    public Airplane getAirplane() {
-//        return airplane;
-//    }
 
     public City getDestination() {
         return destination;

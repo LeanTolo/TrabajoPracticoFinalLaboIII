@@ -1,7 +1,5 @@
 package com.company.IjsonManagement;
 
-import com.company.tickets.Ticket;
-
 import java.io.IOException;
 import java.util.List;
 
